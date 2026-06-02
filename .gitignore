@@ -1,0 +1,5 @@
+node_modules/
+.env
+output/
+google_token.json
+google_client_secret.json

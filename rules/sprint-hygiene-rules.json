@@ -1,0 +1,141 @@
+{
+  "rules": [
+    {
+      "id": "WIP_LIMIT",
+      "category": "execution",
+      "name": "Work In Progress Limit",
+      "description": "Team should not have too many tasks in Active state simultaneously",
+      "check": "active_tasks_per_person",
+      "warning_threshold": 2,
+      "critical_threshold": 3,
+      "severity": "WARNING"
+    },
+    {
+      "id": "TASK_STALENESS",
+      "category": "execution",
+      "name": "Task Staleness",
+      "description": "Tasks should progress regularly — stale tasks indicate blockers or neglect",
+      "check": "days_since_last_change",
+      "warning_threshold": 3,
+      "critical_threshold": 5,
+      "severity": "WARNING"
+    },
+    {
+      "id": "UNASSIGNED_TASKS",
+      "category": "execution",
+      "name": "Unassigned Tasks",
+      "description": "All active/new tasks MUST have an owner — no exceptions",
+      "check": "unassigned_active_percentage",
+      "warning_threshold": 0,
+      "critical_threshold": 10,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "SPRINT_COMPLETION_RATE",
+      "category": "completion",
+      "name": "Sprint Completion Rate",
+      "description": "Sprint should show meaningful progress — high % of new/active means poor execution",
+      "check": "closed_percentage",
+      "warning_threshold": 40,
+      "critical_threshold": 20,
+      "severity": "WARNING"
+    },
+    {
+      "id": "NEW_TASK_RATIO",
+      "category": "execution",
+      "name": "Excessive New/Unstarted Tasks",
+      "description": "Sprint should not have majority of tasks still in New state",
+      "check": "new_task_percentage",
+      "warning_threshold": 50,
+      "critical_threshold": 70,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "WORKLOAD_BALANCE",
+      "category": "team_health",
+      "name": "Workload Balance",
+      "description": "Work must be distributed — overloaded or idle members are both problems",
+      "check": "workload_deviation",
+      "warning_threshold_multiplier": 2.0,
+      "underutilized_threshold_multiplier": 0.4,
+      "severity": "WARNING"
+    },
+    {
+      "id": "TASK_AGING_NEW",
+      "category": "execution",
+      "name": "Task Aging (New State)",
+      "description": "New tasks must be picked up quickly — sitting in New is unacceptable",
+      "check": "average_days_in_new_state",
+      "warning_threshold": 3,
+      "critical_threshold": 7,
+      "severity": "WARNING"
+    },
+    {
+      "id": "TASK_AGING_ACTIVE",
+      "category": "execution",
+      "name": "Task Aging (Active State)",
+      "description": "Active tasks must complete — lingering Active = stalled work",
+      "check": "average_days_in_active_state",
+      "warning_threshold": 5,
+      "critical_threshold": 10,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "UNCLEAR_TITLES",
+      "category": "planning",
+      "name": "Unclear Task Titles",
+      "description": "Every task must have a clear, actionable title — vague titles signal poor planning",
+      "check": "unclear_title_percentage",
+      "warning_threshold": 5,
+      "critical_threshold": 15,
+      "severity": "WARNING",
+      "unclear_patterns": ["TBD", "TODO", "Fix bugs", "Update", "Change", "WIP", "Misc", "Other", "Stuff", "Things"]
+    },
+    {
+      "id": "ZERO_ACTIVITY_PERSONS",
+      "category": "team_health",
+      "name": "Inactive Team Members",
+      "description": "Team members with zero tasks in active sprints indicate resource waste",
+      "check": "zero_task_members",
+      "warning_threshold": 1,
+      "severity": "WARNING"
+    },
+    {
+      "id": "SPRINT_SCOPE_CREEP",
+      "category": "risk",
+      "name": "Scope Creep",
+      "description": "Tasks created after sprint start indicate poor planning or scope creep",
+      "check": "mid_sprint_task_additions_percentage",
+      "warning_threshold": 10,
+      "critical_threshold": 25,
+      "severity": "WARNING"
+    },
+    {
+      "id": "CARRY_OVER",
+      "category": "planning",
+      "name": "Carry-Over from Previous Sprint",
+      "description": "Excessive carry-over means the previous sprint failed to complete",
+      "check": "carry_over_percentage",
+      "warning_threshold": 15,
+      "critical_threshold": 30,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "SINGLE_PERSON_DEPENDENCY",
+      "category": "risk",
+      "name": "Single Person Dependency",
+      "description": "One person carrying >50% of sprint tasks is a bus factor risk",
+      "check": "max_person_task_share_percentage",
+      "warning_threshold": 40,
+      "critical_threshold": 55,
+      "severity": "WARNING"
+    }
+  ],
+  "health_grades": {
+    "A": { "label": "A — Excellent", "description": "Sprint is healthy, on track, well-executed", "max_warnings": 1, "max_criticals": 0 },
+    "B": { "label": "B — Good", "description": "Minor issues, overall healthy", "max_warnings": 3, "max_criticals": 0 },
+    "C": { "label": "C — Needs Improvement", "description": "Several issues requiring attention", "max_warnings": 5, "max_criticals": 1 },
+    "D": { "label": "D — Poor", "description": "Multiple issues, sprint at risk", "max_warnings": 10, "max_criticals": 2 },
+    "F": { "label": "F — Failing", "description": "Sprint health is critically compromised", "min_criticals": 3 }
+  }
+}
