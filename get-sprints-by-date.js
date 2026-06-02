@@ -5,7 +5,7 @@ async function getSprintsByDate() {
   const orgUrl = process.env.AZURE_DEVOPS_ORG_URL || "https://dev.azure.com/HelpablesOrg";
   const project = process.env.AZURE_DEVOPS_PROJECT || "aidapp";
   // Personal Access Token with at least Work Items (Read) and Wiki (Read) scopes
-  const token = process.env.AZURE_DEVOPS_PAT || "REDACTED_PAT";
+  const token = process.env.AZURE_DEVOPS_PAT || "";
 
   // Authentication
   const authHandler = getPersonalAccessTokenHandler(token);

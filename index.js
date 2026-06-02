@@ -3,7 +3,7 @@ const { WebApi, getPersonalAccessTokenHandler } = require("azure-devops-node-api
 async function main() {
   const orgUrl = "https://dev.azure.com/HelpablesOrg";
   const project = "aidapp";
-  const token = "REDACTED_PAT";
+  const token = "";
 
   const authHandler = getPersonalAccessTokenHandler(token);
   const webApi = new WebApi(orgUrl, authHandler);
