@@ -16,7 +16,7 @@ async function getCurrentAndLastSprint(): Promise<void> {
     const witApi = await webApi.getWorkItemTrackingApi();
 
     console.log(`Fetching iterations classification node...`);
-    const iterationsRoot = await witApi.getClassificationNode(project, "Iterations" as any, false);
+    const iterationsRoot = await (witApi as any).getClassificationNode(project, "Iterations" as any, false);
 
     if (!iterationsRoot) {
       console.log("Could not get iterations root node");
@@ -95,24 +95,24 @@ async function getCurrentAndLastSprint(): Promise<void> {
     const iterationActivity = new Map<string, IterationActivity>();
 
     allWorkItems.forEach(wi => {
-      const iterPath: string = wi.fields["System.IterationPath"];
+      const iterPath: string = ((wi.fields ?? {}))["System.IterationPath"];
       if (!iterPath) return;
 
-      const changedDateStr: string | undefined = wi.fields["System.ChangedDate"];
+      const changedDateStr: string | undefined = ((wi.fields ?? {}))["System.ChangedDate"];
       const changedDate = changedDateStr ? new Date(changedDateStr) : null;
 
       const current = iterationActivity.get(iterPath) ?? {
         count: 0,
         latestChangedDate: null,
-        sampleTitle: wi.fields["System.Title"],
-        sampleState: wi.fields["System.State"],
+        sampleTitle: ((wi.fields ?? {}))["System.Title"],
+        sampleState: ((wi.fields ?? {}))["System.State"],
       };
 
       current.count++;
       if (changedDate && (!current.latestChangedDate || changedDate > current.latestChangedDate)) {
         current.latestChangedDate = changedDate;
-        current.sampleTitle = wi.fields["System.Title"];
-        current.sampleState = wi.fields["System.State"];
+        current.sampleTitle = ((wi.fields ?? {}))["System.Title"];
+        current.sampleState = ((wi.fields ?? {}))["System.State"];
       }
 
       iterationActivity.set(iterPath, current);

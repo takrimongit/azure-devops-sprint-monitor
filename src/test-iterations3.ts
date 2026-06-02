@@ -17,7 +17,7 @@ async function testIterations(): Promise<void> {
 
     console.log(`Fetching classification nodes (iterations) for project "${project}"...`);
 
-    const iterationsNode = await witApi.getClassificationNode(project, "Iterations" as any, true);
+    const iterationsNode = await (witApi as any).getClassificationNode(project, "Iterations" as any, true);
 
     console.log("Raw iterations node:");
     console.log(JSON.stringify(iterationsNode, null, 2));

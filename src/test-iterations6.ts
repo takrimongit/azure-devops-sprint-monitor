@@ -35,8 +35,8 @@ async function testIterations(): Promise<void> {
 
       workItems?.forEach(wi => {
         console.log(`  ID: ${wi.id}`);
-        console.log(`    Title: ${wi.fields["System.Title"]}`);
-        console.log(`    Iteration Path: ${wi.fields["System.IterationPath"] ?? "Not set"}`);
+        console.log(`    Title: ${((wi.fields ?? {}))["System.Title"]}`);
+        console.log(`    Iteration Path: ${((wi.fields ?? {}))["System.IterationPath"] ?? "Not set"}`);
         console.log();
       });
     }

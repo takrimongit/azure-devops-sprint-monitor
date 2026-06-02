@@ -43,7 +43,7 @@ async function exploreAPI(): Promise<void> {
       console.log(`getClassificationNode error:`, (e as Error).message);
 
       try {
-        const result2 = await witApi.getClassificationNode(project, "Iterations" as any, false);
+        const result2 = await (witApi as any).getClassificationNode(project, "Iterations", false);
         console.log(`getClassificationNode(project, 'Iterations', false):`, JSON.stringify(result2, null, 2));
       } catch (e2) {
         console.log(`getClassificationNode(project, 'Iterations', false) error:`, (e2 as Error).message);
@@ -68,8 +68,8 @@ async function exploreAPI(): Promise<void> {
 
       workItems?.forEach(wi => {
         console.log(`  ID: ${wi.id}`);
-        console.log(`    Title: ${wi.fields["System.Title"]}`);
-        console.log(`    Iteration Path: ${wi.fields["System.IterationPath"] ?? "Not set"}`);
+        console.log(`    Title: ${(wi.fields ?? {})["System.Title"]}`);
+        console.log(`    Iteration Path: ${(wi.fields ?? {})["System.IterationPath"] ?? "Not set"}`);
         console.log();
       });
     }

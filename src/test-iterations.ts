@@ -15,10 +15,10 @@ async function testIterations(): Promise<void> {
   try {
     console.log(`Fetching team iterations for project "${project}"...`);
 
-    const teamApi = await webApi.getTeamApi();
+    const teamApi = await (webApi as any).getTeamApi();
     const teams = await teamApi.getTeams(project);
     console.log(`Found ${teams.length} team(s):`);
-    teams.forEach(team => console.log(`  - ${team.name} (${team.id})`));
+    teams.forEach((team: any) => console.log(`  - ${team.name} (${team.id})`));
 
     if (teams.length === 0) {
       console.log("No teams found in project");
@@ -27,7 +27,7 @@ async function testIterations(): Promise<void> {
 
     console.log(`Using team: ${teams[0].name}`);
 
-    const iterations = await witApi.getClassificationNode(project, "Iterations" as any, false);
+    const iterations = await (witApi as any).getClassificationNode(project, "Iterations" as any, false);
 
     function printIteration(node: any, indent = 0): void {
       const prefix = "  ".repeat(indent);

@@ -17,7 +17,7 @@ async function testIterations(): Promise<void> {
 
     console.log(`Fetching classification nodes (iterations) for project "${project}"...`);
 
-    const iterationsNode = await witApi.getClassificationNode(project, "Iterations" as any, true);
+    const iterationsNode = await (witApi as any).getClassificationNode(project, "Iterations" as any, true);
 
     function printIteration(node: any, indent = 0): void {
       const prefix = "  ".repeat(indent);
@@ -35,10 +35,10 @@ async function testIterations(): Promise<void> {
 
     console.log(`\nTrying to get team settings...`);
     try {
-      const teamApi = await webApi.getTeamApi();
+      const teamApi = await (webApi as any).getTeamApi();
       const teams = await teamApi.getTeams(project);
       console.log(`Found ${teams.length} team(s):`);
-      teams.forEach(team => console.log(`  - ${team.name} (${team.id})`));
+      teams.forEach((team: any) => console.log(`  - ${team.name} (${team.id})`));
     } catch (teamErr) {
       console.log(`Could not get teams via teamApi: ${(teamErr as Error).message}`);
 

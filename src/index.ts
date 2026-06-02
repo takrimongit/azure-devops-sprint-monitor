@@ -1,6 +1,4 @@
 import { WebApi, getPersonalAccessTokenHandler } from "azure-devops-node-api";
-import { getWorkItemTrackingApi } from "azure-devops-node-api/WorkItemTrackingApi";
-import { getWikiApi } from "azure-devops-node-api/WikiApi";
 
 async function main() {
   // Configuration - you can also use environment variables
@@ -38,18 +36,18 @@ async function main() {
     console.log(`Found ${wiqlResult.workItems.length} task(s) in WIQL result. Fetching details...\n`);
     
     // Extract IDs
-    const ids = wiqlResult.workItems.map(item => item.id);
+    const ids = wiqlResult.workItems.map(item => item.id).filter((id): id is number => id !== undefined);
     
     // Get detailed work items
     // Fields: we already selected them in WIQL, but we can also specify fields array
-    const workItems = await witApi.getWorkItems(ids, undefined, undefined, undefined, undefined, project);
+    const workItems = await witApi.getWorkItems(ids, undefined, undefined, undefined);
     
     console.log(`=== Active Tasks (${workItems.length}) ===\n`);
     
     // Group by state for summary
     const stateCounts: { [key: string]: number } = {};
     workItems.forEach(wi => {
-      const state = wi.fields["System.State"] || "Unknown";
+      const state = (wi.fields ?? {})["System.State"] || "Unknown";
       stateCounts[state] = (stateCounts[state] || 0) + 1;
     });
     
@@ -61,7 +59,7 @@ async function main() {
     
     // List each task
     workItems.forEach(wi => {
-      const fields = wi.fields;
+      const fields = wi.fields ?? {};
       console.log(`ID: ${wi.id}`);
       console.log(`  Title: ${fields["System.Title"] || "N/A"}`);
       console.log(`  State: ${fields["System.State"] || "N/A"}`);
@@ -82,7 +80,7 @@ async function main() {
       for (const wiki of wikis) {
         console.log(`ID: ${wiki.id}`);
         console.log(`  Name: ${wiki.name}`);
-        console.log(`  State: ${wiki.state}`);
+        console.log(`  State: ${(wiki as any).state}`);
         console.log(`  Type: ${wiki.type}`);
         console.log(`  URL: ${wiki.url || "N/A"}`);
         console.log("");
@@ -90,7 +88,7 @@ async function main() {
         // Optionally fetch pages for the first wiki
         if (wiki.id) {
           try {
-            const pages = await wikiApi.getPages(wiki.id, undefined, undefined, undefined, project);
+            const pages = await (wikiApi as any).getPages(wiki.id, undefined, undefined, undefined, project);
             if (pages && pages.length > 0) {
               console.log(`    Pages in wiki "${wiki.name}" (${pages.length}):`);
               for (const page of pages) {

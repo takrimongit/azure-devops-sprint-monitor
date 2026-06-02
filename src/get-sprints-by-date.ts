@@ -25,7 +25,7 @@ async function getSprintsByDate(): Promise<void> {
       console.log("No teams found. Trying to get iterations directly...");
 
       try {
-        const classificationNode = await witApi.getClassificationNode(project, "Iterations" as any, true);
+        const classificationNode = await (witApi as any).getClassificationNode(project, "Iterations" as any, true);
         console.log("Classification node retrieved:");
         console.log(JSON.stringify(classificationNode, null, 2));
       } catch (classErr) {
@@ -107,7 +107,7 @@ async function getSprintsByDate(): Promise<void> {
 
         try {
           console.log(`\nTrying to get iterations via classification nodes...`);
-          const iterationsNode = await witApi.getClassificationNode(project, "Iterations" as any, true);
+          const iterationsNode = await (witApi as any).getClassificationNode(project, "Iterations" as any, true);
 
           function extractIterations(node: any, pathPrefix = ""): Array<{ id: number; name: string; path: string }> {
             const iterations: Array<{ id: number; name: string; path: string }> = [];

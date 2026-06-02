@@ -88,7 +88,7 @@ async function main(): Promise<void> {
       for (const wiki of wikis) {
         console.log(`ID: ${wiki.id}`);
         console.log(`  Name: ${wiki.name}`);
-        console.log(`  State: ${wiki.state}`);
+        console.log(`  State: ${(wiki as any).state}`);
         console.log(`  Type: ${wiki.type}`);
         console.log(`  URL: ${wiki.url ?? "N/A"}`);
         console.log("");

@@ -13,20 +13,20 @@ async function test(): Promise<void> {
   const witApi = await webApi.getWorkItemTrackingApi();
 
   try {
-    const item = await witApi.getWorkItem(5, undefined, undefined, undefined, undefined, project);
+    const item = await witApi.getWorkItem(5, undefined, undefined, undefined, project as any);
     console.log("getWorkItem(5):", item ? "success" : "failed");
     if (item) {
-      console.log("  Title:", item.fields["System.Title"]);
+      console.log("  Title:", (item.fields ?? {})["System.Title"]);
     }
   } catch (e) {
     console.error("getWorkItem error:", e);
   }
 
   try {
-    const items = await witApi.getWorkItems([5], undefined, undefined, undefined, undefined, project);
+    const items = await witApi.getWorkItems([5], undefined, undefined, undefined, project as any);
     console.log("getWorkItems([5]):", items ? `length ${items.length}` : "null");
     if (items?.length > 0) {
-      console.log("  Title:", items[0].fields["System.Title"]);
+      console.log("  Title:", (items[0].fields ?? {})["System.Title"]);
     }
   } catch (e) {
     console.error("getWorkItems error:", e);

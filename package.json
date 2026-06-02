@@ -2,13 +2,13 @@
   "name": "azure-devops-monitor",
   "version": "1.0.0",
   "description": "Monitors Azure DevOps for sprint tasks and wiki updates",
-  "main": "src/sprint-analyzer.js",
+  "main": "dist/sprint-analyzer.js",
   "scripts": {
     "build": "tsc",
-    "start": "node src/sprint-analyzer.js",
-    "dev": "node src/sprint-analyzer.js",
-    "monitor": "node monitor.js",
-    "analyze": "node src/sprint-analyzer.js"
+    "start": "node dist/sprint-analyzer.js",
+    "dev": "ts-node src/sprint-analyzer.ts",
+    "monitor": "ts-node src/monitor.ts",
+    "analyze": "ts-node src/analyze-sprints.ts"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.14.2",
+    "@types/nodemailer": "^8.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }

@@ -18,7 +18,7 @@ async function testClassification(): Promise<void> {
     console.log(`\n--- Testing getClassificationNode ---`);
 
     try {
-      const node1 = await witApi.getClassificationNode(project, "Iterations" as any);
+      const node1 = await (witApi as any).getClassificationNode(project, "Iterations" as any);
       console.log(`getClassificationNode(project, 'Iterations'):`, node1 ? `Found object with keys: ${Object.keys(node1)}` : "null");
       if (node1) console.log(JSON.stringify(node1, null, 2));
     } catch (e) {
@@ -26,7 +26,7 @@ async function testClassification(): Promise<void> {
     }
 
     try {
-      const node2 = await witApi.getClassificationNode(project, "Iterations" as any, false);
+      const node2 = await (witApi as any).getClassificationNode(project, "Iterations" as any, false);
       console.log(`getClassificationNode(project, 'Iterations', false):`, node2 ? `Found object with keys: ${Object.keys(node2)}` : "null");
       if (node2) console.log(JSON.stringify(node2, null, 2));
     } catch (e) {
@@ -34,7 +34,7 @@ async function testClassification(): Promise<void> {
     }
 
     try {
-      const node3 = await witApi.getClassificationNode(project, "Iterations" as any, true);
+      const node3 = await (witApi as any).getClassificationNode(project, "Iterations" as any, true);
       console.log(`getClassificationNode(project, 'Iterations', true):`, node3 ? `Found object with keys: ${Object.keys(node3)}` : "null");
       if (node3) console.log(JSON.stringify(node3, null, 2));
     } catch (e) {
@@ -42,7 +42,7 @@ async function testClassification(): Promise<void> {
     }
 
     try {
-      const node4 = await witApi.getClassificationNode(project, "Iterations" as any, true, 2);
+      const node4 = await (witApi as any).getClassificationNode(project, "Iterations" as any, true, 2);
       console.log(`getClassificationNode(project, 'Iterations', true, 2):`, node4 ? `Found object with keys: ${Object.keys(node4)}` : "null");
       if (node4) console.log(JSON.stringify(node4, null, 2));
     } catch (e) {
@@ -59,7 +59,7 @@ async function testClassification(): Promise<void> {
 
     console.log(`\n--- Trying to get team via webApi.getTeamApi() ---`);
     try {
-      const teamApi = await webApi.getTeamApi();
+      const teamApi = await (webApi as any).getTeamApi();
       console.log(`teamApi available`);
       const teams = await teamApi.getTeams(project);
       console.log(`Found ${teams.length} teams via teamApi`);
@@ -119,24 +119,24 @@ async function testClassification(): Promise<void> {
       const iterationInfo = new Map<string, IterInfo>();
 
       allWorkItems.forEach(wi => {
-        const iterPath: string = wi.fields["System.IterationPath"];
+        const iterPath: string = ((wi.fields ?? {}))["System.IterationPath"];
         if (!iterPath) return;
 
-        const changedDateStr: string | undefined = wi.fields["System.ChangedDate"];
+        const changedDateStr: string | undefined = ((wi.fields ?? {}))["System.ChangedDate"];
         const changedDate = changedDateStr ? new Date(changedDateStr) : null;
 
         const current = iterationInfo.get(iterPath) ?? {
           count: 0,
           latestChangedDate: null,
-          sampleTitle: wi.fields["System.Title"],
-          sampleState: wi.fields["System.State"],
+          sampleTitle: ((wi.fields ?? {}))["System.Title"],
+          sampleState: ((wi.fields ?? {}))["System.State"],
         };
 
         current.count++;
         if (changedDate && (!current.latestChangedDate || changedDate > current.latestChangedDate)) {
           current.latestChangedDate = changedDate;
-          current.sampleTitle = wi.fields["System.Title"];
-          current.sampleState = wi.fields["System.State"];
+          current.sampleTitle = ((wi.fields ?? {}))["System.Title"];
+          current.sampleState = ((wi.fields ?? {}))["System.State"];
         }
 
         iterationInfo.set(iterPath, current);

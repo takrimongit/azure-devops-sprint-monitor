@@ -35,8 +35,8 @@ async function testIterations(): Promise<void> {
 
       workItems?.forEach(wi => {
         console.log(`  ID: ${wi.id}`);
-        console.log(`    Title: ${wi.fields["System.Title"]}`);
-        console.log(`    Iteration Path: ${wi.fields["System.IterationPath"] ?? "Not set"}`);
+        console.log(`    Title: ${((wi.fields ?? {}))["System.Title"]}`);
+        console.log(`    Iteration Path: ${((wi.fields ?? {}))["System.IterationPath"] ?? "Not set"}`);
         console.log();
       });
     }
@@ -50,7 +50,7 @@ async function testIterations(): Promise<void> {
       for (const team of teams) {
         console.log(`  Team: ${team.name} (${team.id})`);
 
-        await coreApi.getTeamSettings(project, team.id);
+        await (coreApi as any).getTeamSettings(project, team.id);
         console.log(`    Team settings retrieved`);
 
         try {
@@ -75,7 +75,7 @@ async function testIterations(): Promise<void> {
 
       console.log(`\nTrying to get classification nodes directly...`);
       try {
-        const rootNode = await witApi.getClassificationNode(project, "Iterations" as any, false);
+        const rootNode = await (witApi as any).getClassificationNode(project, "Iterations" as any, false);
         console.log("Root iterations node:");
         console.log(JSON.stringify(rootNode, null, 2));
       } catch (classErr) {
