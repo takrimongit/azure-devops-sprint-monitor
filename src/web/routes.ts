@@ -46,6 +46,8 @@ function getArtifacts(): Artifact[] {
 function getLatestSummary(): Record<string, any> | null {
   const artifacts = getArtifacts().filter(a => a.name.startsWith("sprint-summary-") && a.type === "json");
   if (artifacts.length === 0) return null;
+  // Sort by filename (encodes date) descending — most recent first
+  artifacts.sort((a, b) => b.name.localeCompare(a.name));
   try {
     return JSON.parse(fs.readFileSync(artifacts[0].path, "utf-8"));
   } catch {
@@ -55,6 +57,8 @@ function getLatestSummary(): Record<string, any> | null {
 
 function getAllSummaries(): Array<{ date: string; data: Record<string, any> }> {
   const artifacts = getArtifacts().filter(a => a.name.startsWith("sprint-summary-") && a.type === "json");
+  // Sort by filename (encodes date) descending
+  artifacts.sort((a, b) => b.name.localeCompare(a.name));
   return artifacts.map(a => {
     try {
       return { date: a.date, data: JSON.parse(fs.readFileSync(a.path, "utf-8")) };
