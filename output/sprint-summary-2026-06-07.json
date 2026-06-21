@@ -1,0 +1,238 @@
+{
+  "generatedAt": "2026-06-07T09:56:15.328Z",
+  "grade": "F",
+  "gradeLabel": "F — Failing",
+  "semanticAnalysis": {
+    "sprintSummary": "This sprint is overwhelmingly focused on content creation, marketing, and sales support activities, not software engineering. The primary goals appear to be producing a demo video, learning YouTube channel management, and building a simple automation to support video creation. Core product development is minimal.",
+    "taskQuality": "poor",
+    "problematicTasks": [
+      {
+        "id": 2166,
+        "title": "Save Assets to Google Drive",
+        "issues": [
+          "This is a trivial administrative action, not a unit of engineering work.",
+          "Logging such tasks inflates velocity metrics and obscures real engineering progress."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2130,
+        "title": "Write Video Script",
+        "issues": [
+          "This is a content creation/marketing task, not a software engineering task.",
+          "The entire sequence from #2130 to #2134 represents a non-technical workflow that should be tracked outside of an engineering sprint."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2139,
+        "title": "Learn YouTube Studio",
+        "issues": [
+          "This is a training task, not a development task that delivers sprint value.",
+          "While learning is important, it should not be tracked as a primary deliverable with the same weight as feature development."
+        ],
+        "severity": "warning"
+      },
+      {
+        "id": 2163,
+        "title": "Generate Real-World Use Case from Approved Proposal",
+        "issues": [
+          "This is a business analysis or product management function, not an engineering implementation task.",
+          "This duplicates effort seen in the previous sprint (e.g., #2128, #2121)."
+        ],
+        "severity": "warning"
+      }
+    ],
+    "duplicateOrOverlapping": [
+      {
+        "ids": [
+          2130,
+          2131,
+          2132,
+          2133,
+          2134
+        ],
+        "reason": "These are all sequential, micro-managed steps for a single deliverable: 'Produce and publish a demo video'. They should be consolidated into one, or at most two, non-engineering tasks."
+      },
+      {
+        "ids": [
+          2139,
+          2140,
+          2141,
+          2142
+        ],
+        "reason": "These are all sub-tasks of a single learning objective: 'Research and learn YouTube channel management'. They are too granular and represent a single effort."
+      }
+    ],
+    "unclearWork": [
+      {
+        "id": 2165,
+        "title": "Generate AI Video Using Avatar Character",
+        "problem": "It is unclear if this involves engineering work (e.g., building a tool or API integration) or simply using an off-the-shelf video creation product. If it's the latter, it's a content creation task, not engineering."
+      },
+      {
+        "id": 2168,
+        "title": "Merge AI-Generated Video Segments into a Single Final Video within n8n",
+        "problem": "While this appears to be a valid automation task, its value is entirely dependent on a non-engineering content creation process. The engineering effort should be clearly separated from the content it's processing to evaluate its standalone technical merit."
+      }
+    ],
+    "strengths": [
+      "#2167: 'Add Workflow Tracking, Logging, and Error Handling' is a well-defined, valuable engineering task that improves system robustness.",
+      "#2162: 'Create Proposal Submission and Confirmation Workflow' describes a clear, user-facing feature and represents valid engineering work.",
+      "The technical work assigned to Anam Saleem (e.g., #2162, #2167, #2168) is generally better defined as engineering effort compared to the other tasks in the sprint."
+    ]
+  },
+  "summary": {
+    "currentSprint": "aidapp\\Sprint 24",
+    "currentSprintMetrics": {
+      "totalTasks": 17,
+      "activeTasks": 4,
+      "newTasks": 5,
+      "closedTasks": 8,
+      "removedTasks": 0,
+      "completionPct": 47.05882352941176,
+      "newTaskPct": 29.411764705882355,
+      "avgDaysInNew": 9.2,
+      "avgDaysInActive": 1.5,
+      "personBreakdown": {
+        "Sheza Aejaz": 5,
+        "Aejaz Ali": 5,
+        "Anam Saleem": 7
+      }
+    },
+    "lastSprint": "aidapp\\Sprint 23",
+    "lastSprintMetrics": {
+      "totalTasks": 17,
+      "activeTasks": 0,
+      "newTasks": 0,
+      "closedTasks": 17,
+      "removedTasks": 0,
+      "completionPct": 100,
+      "newTaskPct": 0,
+      "avgDaysInNew": 0,
+      "avgDaysInActive": 0,
+      "personBreakdown": {
+        "Sheza Aejaz": 8,
+        "Aejaz Ali": 5,
+        "Anam Saleem": 4
+      }
+    },
+    "totalTasksCurrent": 17,
+    "activeTasksCurrent": 4,
+    "newTasksCurrent": 5,
+    "closedTasksCurrent": 8,
+    "criticalIssues": 8,
+    "warnings": 9,
+    "teamMembers": 3,
+    "personBreakdown": {
+      "Sheza Aejaz": 5,
+      "Aejaz Ali": 5,
+      "Anam Saleem": 7
+    }
+  },
+  "findings": [
+    {
+      "ruleId": "WIP_LIMIT",
+      "severity": "WARNING",
+      "message": "Anam Saleem has 2 active tasks (Current Sprint)",
+      "details": "Exceeds warning threshold of 2 active tasks per person."
+    },
+    {
+      "ruleId": "TASK_STALENESS",
+      "severity": "WARNING",
+      "message": "6 tasks untouched for >3 days (Current Sprint)",
+      "details": "#2133: Video Editing (5 days, New)\n#2134: Upload & Publish Video (5 days, New)\n#2162: Create Proposal Submission and Confirmation Workflow (4 days, Closed)\n#2163: Generate Real-World Use Case from Approved Proposal (4 days, Closed)\n#2164: Generate Video Script from Proposal and Use Case (4 days, Closed)\n#2166: Save Assets to Google Drive (4 days, Active)"
+    },
+    {
+      "ruleId": "TASK_AGING_NEW",
+      "severity": "CRITICAL",
+      "message": "Tasks sitting in New state average 9.2 days (Current Sprint)",
+      "details": "Tasks are not being picked up. Current average: 9.2 days (threshold: 7 days)."
+    },
+    {
+      "ruleId": "SPRINT_SCOPE_CREEP",
+      "severity": "CRITICAL",
+      "message": "70.6% of tasks added mid-sprint (Current Sprint)",
+      "details": "12/17 tasks created after sprint started (2026-05-24). This indicates poor sprint planning and scope creep."
+    },
+    {
+      "ruleId": "SINGLE_PERSON_DEPENDENCY",
+      "severity": "WARNING",
+      "message": "Anam Saleem carries 41.2% of sprint tasks (Current Sprint)",
+      "details": "7/17 tasks. Consider redistributing work."
+    },
+    {
+      "ruleId": "TASK_STALENESS",
+      "severity": "CRITICAL",
+      "message": "8 tasks untouched for >5 days (Last Sprint)",
+      "details": "#2094: Design / Select New Logo (19 days, Closed)\n#2095: Update App Icon & Splash Screen (19 days, Closed)\n#2096: Update In-App Branding (19 days, Closed)\n#2099: Regression Testing (19 days, Closed)\n#2101: Prepare for Release (14 days, Closed)\n#2119: Review Proposal, Use Case, and Script for Technical Accuracy (6 days, Closed)\n#2120: Create a Demo Video Based on the Upwork Job Use Case and script (6 days, Closed)\n#2123: Create a Real-World Workflow, Demonstrate Its Execution, and Use It in the Video (6 days, Closed)"
+    },
+    {
+      "ruleId": "UNCLEAR_TITLES",
+      "severity": "WARNING",
+      "message": "11.8% of tasks have unclear titles (Last Sprint)",
+      "details": "2/17 tasks: #2095: \"Update App Icon & Splash Screen\", #2096: \"Update In-App Branding\""
+    },
+    {
+      "ruleId": "SPRINT_SCOPE_CREEP",
+      "severity": "CRITICAL",
+      "message": "70.6% of tasks added mid-sprint (Last Sprint)",
+      "details": "12/17 tasks created after sprint started (2026-04-30). This indicates poor sprint planning and scope creep."
+    },
+    {
+      "ruleId": "SINGLE_PERSON_DEPENDENCY",
+      "severity": "WARNING",
+      "message": "Sheza Aejaz carries 47.1% of sprint tasks (Last Sprint)",
+      "details": "8/17 tasks. Consider redistributing work."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2166 \"Save Assets to Google Drive\" — This is a trivial administrative action, not a unit of engineering work.",
+      "details": "This is a trivial administrative action, not a unit of engineering work.. Logging such tasks inflates velocity metrics and obscures real engineering progress."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2130 \"Write Video Script\" — This is a content creation/marketing task, not a software engineering task.",
+      "details": "This is a content creation/marketing task, not a software engineering task.. The entire sequence from #2130 to #2134 represents a non-technical workflow that should be tracked outside of an engineering sprint."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "WARNING",
+      "message": "Task #2139 \"Learn YouTube Studio\" — This is a training task, not a development task that delivers sprint value.",
+      "details": "This is a training task, not a development task that delivers sprint value.. While learning is important, it should not be tracked as a primary deliverable with the same weight as feature development."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "WARNING",
+      "message": "Task #2163 \"Generate Real-World Use Case from Approved Proposal\" — This is a business analysis or product management function, not an engineering implementation task.",
+      "details": "This is a business analysis or product management function, not an engineering implementation task.. This duplicates effort seen in the previous sprint (e.g., #2128, #2121)."
+    },
+    {
+      "ruleId": "SEMANTIC_UNCLEAR_WORK",
+      "severity": "WARNING",
+      "message": "Task #2165 \"Generate AI Video Using Avatar Character\" — work is unclear",
+      "details": "It is unclear if this involves engineering work (e.g., building a tool or API integration) or simply using an off-the-shelf video creation product. If it's the latter, it's a content creation task, not engineering."
+    },
+    {
+      "ruleId": "SEMANTIC_UNCLEAR_WORK",
+      "severity": "WARNING",
+      "message": "Task #2168 \"Merge AI-Generated Video Segments into a Single Final Video within n8n\" — work is unclear",
+      "details": "While this appears to be a valid automation task, its value is entirely dependent on a non-engineering content creation process. The engineering effort should be clearly separated from the content it's processing to evaluate its standalone technical merit."
+    },
+    {
+      "ruleId": "SEMANTIC_DUPLICATE",
+      "severity": "CRITICAL",
+      "message": "Potential overlap detected: tasks 2130, 2131, 2132, 2133, 2134",
+      "details": "These are all sequential, micro-managed steps for a single deliverable: 'Produce and publish a demo video'. They should be consolidated into one, or at most two, non-engineering tasks."
+    },
+    {
+      "ruleId": "SEMANTIC_DUPLICATE",
+      "severity": "CRITICAL",
+      "message": "Potential overlap detected: tasks 2139, 2140, 2141, 2142",
+      "details": "These are all sub-tasks of a single learning objective: 'Research and learn YouTube channel management'. They are too granular and represent a single effort."
+    }
+  ],
+  "deliveryStatus": "sent"
+}

@@ -1,0 +1,287 @@
+{
+  "generatedAt": "2026-06-10T10:07:15.315Z",
+  "grade": "F",
+  "gradeLabel": "F — Failing",
+  "semanticAnalysis": {
+    "sprintSummary": "This sprint appears to have two distinct, parallel workstreams. The first is a legitimate software engineering effort to build a content and proposal review application, including API integration and specific UI screens. The second is a non-engineering workstream focused on content creation, including video production, scriptwriting, and learning YouTube best practices.",
+    "taskQuality": "poor",
+    "problematicTasks": [
+      {
+        "id": 2130,
+        "title": "Write Video Script",
+        "issues": [
+          "This is a content creation or marketing task, not a software engineering task."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2131,
+        "title": "Record Demo Walkthrough",
+        "issues": [
+          "This is a marketing or sales support task, not a software engineering task."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2132,
+        "title": "Record Voiceover / Face Recording",
+        "issues": [
+          "This is a video production task, not a software engineering task."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2133,
+        "title": "Video Editing",
+        "issues": [
+          "This is a video production task, not a software engineering task."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2139,
+        "title": "Learn YouTube Studio",
+        "issues": [
+          "Learning should be part of a larger implementation task, not a standalone task. It produces no deliverable value on its own and inflates ticket counts."
+        ],
+        "severity": "warning"
+      },
+      {
+        "id": 2140,
+        "title": "Learn Video Quality Review Process",
+        "issues": [
+          "Learning is not a deliverable. This should be an implicit part of a task that requires this knowledge."
+        ],
+        "severity": "warning"
+      },
+      {
+        "id": 2141,
+        "title": "Learn YouTube SEO Fundamentals. Learn Thumbnail Review Best Practices",
+        "issues": [
+          "Learning is not a deliverable. This also combines two separate learning topics into one task."
+        ],
+        "severity": "warning"
+      },
+      {
+        "id": 2166,
+        "title": "Save Assets to Google Drive",
+        "issues": [
+          "This is a trivial administrative step, not a unit of engineering work. It should be part of the definition of done for the task that creates the assets."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2188,
+        "title": "Enhance and Optimize LinkedIn Post Generation Prompt for Weekly",
+        "issues": [
+          "Lacks objective acceptance criteria. 'Enhance' and 'Optimize' are subjective and not measurable without specific KPIs."
+        ],
+        "severity": "warning"
+      }
+    ],
+    "duplicateOrOverlapping": [
+      {
+        "ids": [
+          2189,
+          2173,
+          2183
+        ],
+        "reason": "Task #2189 ('Analyze Automation Workflows, Define Application Requirements, and Review Generated App Designs') is a high-level summary task that appears to encompass the more specific design and definition work being done in #2173 and #2183."
+      }
+    ],
+    "unclearWork": [
+      {
+        "id": 2143,
+        "title": "Document Issues and Recommendations",
+        "problem": "The scope is completely undefined. It is unclear what system or process is being analyzed, what 'issues' refers to, or for whom the recommendations are intended."
+      },
+      {
+        "id": 2189,
+        "title": "Analyze Automation Workflows, Define Application Requirements, and Review Generated App Designs",
+        "problem": "This task is far too broad, combining analysis, requirements definition, and design review for multiple features into a single item. The actual work and deliverable are ambiguous."
+      }
+    ],
+    "strengths": [
+      "The breakdown of the 'Content Review' feature into specific, actionable tasks (#2174 - #2179) is a good example of vertical slicing, covering integration, data fetching, UI screens, and business logic.",
+      "The similar breakdown for the 'Proposal Review' feature (#2184 - #2187) demonstrates a consistent and effective pattern for planning feature development.",
+      "Task #2167 ('Add Workflow Tracking, Logging, and Error Handling') is a well-defined, valuable non-functional requirement that improves system robustness."
+    ]
+  },
+  "summary": {
+    "currentSprint": "aidapp\\Sprint 24",
+    "currentSprintMetrics": {
+      "totalTasks": 31,
+      "activeTasks": 4,
+      "newTasks": 12,
+      "closedTasks": 15,
+      "removedTasks": 0,
+      "completionPct": 48.38709677419355,
+      "newTaskPct": 38.70967741935484,
+      "avgDaysInNew": 2.8333333333333335,
+      "avgDaysInActive": 0.25,
+      "personBreakdown": {
+        "Sheza Aejaz": 17,
+        "Aejaz Ali": 5,
+        "Anam Saleem": 9
+      }
+    },
+    "lastSprint": "aidapp\\Sprint 23",
+    "lastSprintMetrics": {
+      "totalTasks": 17,
+      "activeTasks": 0,
+      "newTasks": 0,
+      "closedTasks": 17,
+      "removedTasks": 0,
+      "completionPct": 100,
+      "newTaskPct": 0,
+      "avgDaysInNew": 0,
+      "avgDaysInActive": 0,
+      "personBreakdown": {
+        "Sheza Aejaz": 8,
+        "Aejaz Ali": 5,
+        "Anam Saleem": 4
+      }
+    },
+    "totalTasksCurrent": 31,
+    "activeTasksCurrent": 4,
+    "newTasksCurrent": 12,
+    "closedTasksCurrent": 15,
+    "criticalIssues": 10,
+    "warnings": 11,
+    "teamMembers": 3,
+    "personBreakdown": {
+      "Sheza Aejaz": 17,
+      "Aejaz Ali": 5,
+      "Anam Saleem": 9
+    }
+  },
+  "findings": [
+    {
+      "ruleId": "WIP_LIMIT",
+      "severity": "WARNING",
+      "message": "Anam Saleem has 2 active tasks (Current Sprint)",
+      "details": "Exceeds warning threshold of 2 active tasks per person."
+    },
+    {
+      "ruleId": "WIP_LIMIT",
+      "severity": "WARNING",
+      "message": "Sheza Aejaz has 2 active tasks (Current Sprint)",
+      "details": "Exceeds warning threshold of 2 active tasks per person."
+    },
+    {
+      "ruleId": "TASK_STALENESS",
+      "severity": "CRITICAL",
+      "message": "5 tasks untouched for >5 days (Current Sprint)",
+      "details": "#2134: Upload & Publish Video (8 days, New)\n#2162: Create Proposal Submission and Confirmation Workflow (7 days, Closed)\n#2163: Generate Real-World Use Case from Approved Proposal (7 days, Closed)\n#2164: Generate Video Script from Proposal and Use Case (7 days, Closed)\n#2165: Generate AI Video Using Avatar Character (6 days, Closed)"
+    },
+    {
+      "ruleId": "SPRINT_SCOPE_CREEP",
+      "severity": "CRITICAL",
+      "message": "83.9% of tasks added mid-sprint (Current Sprint)",
+      "details": "26/31 tasks created after sprint started (2026-05-24). This indicates poor sprint planning and scope creep."
+    },
+    {
+      "ruleId": "SINGLE_PERSON_DEPENDENCY",
+      "severity": "WARNING",
+      "message": "Sheza Aejaz carries 54.8% of sprint tasks (Current Sprint)",
+      "details": "17/31 tasks. Consider redistributing work."
+    },
+    {
+      "ruleId": "TASK_STALENESS",
+      "severity": "CRITICAL",
+      "message": "17 tasks untouched for >5 days (Last Sprint)",
+      "details": "#2094: Design / Select New Logo (22 days, Closed)\n#2095: Update App Icon & Splash Screen (22 days, Closed)\n#2096: Update In-App Branding (22 days, Closed)\n#2099: Regression Testing (22 days, Closed)\n#2101: Prepare for Release (17 days, Closed)\n#2111: Review description and Client Requirements for upwork (8 days, Closed)\n#2112: Draft Customized Proposal (8 days, Closed)\n#2113: Align Proposal with Client Pain Points (8 days, Closed)\n#2114: Refine Proposal for Clarity and Professionalism (8 days, Closed)\n#2119: Review Proposal, Use Case, and Script for Technical Accuracy (9 days, Closed)"
+    },
+    {
+      "ruleId": "UNCLEAR_TITLES",
+      "severity": "WARNING",
+      "message": "11.8% of tasks have unclear titles (Last Sprint)",
+      "details": "2/17 tasks: #2095: \"Update App Icon & Splash Screen\", #2096: \"Update In-App Branding\""
+    },
+    {
+      "ruleId": "SPRINT_SCOPE_CREEP",
+      "severity": "CRITICAL",
+      "message": "70.6% of tasks added mid-sprint (Last Sprint)",
+      "details": "12/17 tasks created after sprint started (2026-04-30). This indicates poor sprint planning and scope creep."
+    },
+    {
+      "ruleId": "SINGLE_PERSON_DEPENDENCY",
+      "severity": "WARNING",
+      "message": "Sheza Aejaz carries 47.1% of sprint tasks (Last Sprint)",
+      "details": "8/17 tasks. Consider redistributing work."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2130 \"Write Video Script\" — This is a content creation or marketing task, not a software engineering task.",
+      "details": "This is a content creation or marketing task, not a software engineering task."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2131 \"Record Demo Walkthrough\" — This is a marketing or sales support task, not a software engineering task.",
+      "details": "This is a marketing or sales support task, not a software engineering task."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2132 \"Record Voiceover / Face Recording\" — This is a video production task, not a software engineering task.",
+      "details": "This is a video production task, not a software engineering task."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2133 \"Video Editing\" — This is a video production task, not a software engineering task.",
+      "details": "This is a video production task, not a software engineering task."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "WARNING",
+      "message": "Task #2139 \"Learn YouTube Studio\" — Learning should be part of a larger implementation task, not a standalone task. It produces no deliverable value on its own and inflates ticket counts.",
+      "details": "Learning should be part of a larger implementation task, not a standalone task. It produces no deliverable value on its own and inflates ticket counts."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "WARNING",
+      "message": "Task #2140 \"Learn Video Quality Review Process\" — Learning is not a deliverable. This should be an implicit part of a task that requires this knowledge.",
+      "details": "Learning is not a deliverable. This should be an implicit part of a task that requires this knowledge."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "WARNING",
+      "message": "Task #2141 \"Learn YouTube SEO Fundamentals. Learn Thumbnail Review Best Practices\" — Learning is not a deliverable. This also combines two separate learning topics into one task.",
+      "details": "Learning is not a deliverable. This also combines two separate learning topics into one task."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2166 \"Save Assets to Google Drive\" — This is a trivial administrative step, not a unit of engineering work. It should be part of the definition of done for the task that creates the assets.",
+      "details": "This is a trivial administrative step, not a unit of engineering work. It should be part of the definition of done for the task that creates the assets."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "WARNING",
+      "message": "Task #2188 \"Enhance and Optimize LinkedIn Post Generation Prompt for Weekly\" — Lacks objective acceptance criteria. 'Enhance' and 'Optimize' are subjective and not measurable without specific KPIs.",
+      "details": "Lacks objective acceptance criteria. 'Enhance' and 'Optimize' are subjective and not measurable without specific KPIs."
+    },
+    {
+      "ruleId": "SEMANTIC_UNCLEAR_WORK",
+      "severity": "WARNING",
+      "message": "Task #2143 \"Document Issues and Recommendations\" — work is unclear",
+      "details": "The scope is completely undefined. It is unclear what system or process is being analyzed, what 'issues' refers to, or for whom the recommendations are intended."
+    },
+    {
+      "ruleId": "SEMANTIC_UNCLEAR_WORK",
+      "severity": "WARNING",
+      "message": "Task #2189 \"Analyze Automation Workflows, Define Application Requirements, and Review Generated App Designs\" — work is unclear",
+      "details": "This task is far too broad, combining analysis, requirements definition, and design review for multiple features into a single item. The actual work and deliverable are ambiguous."
+    },
+    {
+      "ruleId": "SEMANTIC_DUPLICATE",
+      "severity": "CRITICAL",
+      "message": "Potential overlap detected: tasks 2189, 2173, 2183",
+      "details": "Task #2189 ('Analyze Automation Workflows, Define Application Requirements, and Review Generated App Designs') is a high-level summary task that appears to encompass the more specific design and definition work being done in #2173 and #2183."
+    }
+  ],
+  "deliveryStatus": "sent"
+}

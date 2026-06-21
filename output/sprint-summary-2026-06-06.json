@@ -1,0 +1,117 @@
+{
+  "generatedAt": "2026-06-06T09:56:14.206Z",
+  "grade": "F",
+  "gradeLabel": "F — Failing",
+  "semanticAnalysis": {},
+  "summary": {
+    "currentSprint": "aidapp\\Sprint 24",
+    "currentSprintMetrics": {
+      "totalTasks": 17,
+      "activeTasks": 4,
+      "newTasks": 7,
+      "closedTasks": 6,
+      "removedTasks": 0,
+      "completionPct": 35.294117647058826,
+      "newTaskPct": 41.17647058823529,
+      "avgDaysInNew": 8.428571428571429,
+      "avgDaysInActive": 1.75,
+      "personBreakdown": {
+        "Sheza Aejaz": 5,
+        "Aejaz Ali": 5,
+        "Anam Saleem": 7
+      }
+    },
+    "lastSprint": "aidapp\\Sprint 23",
+    "lastSprintMetrics": {
+      "totalTasks": 17,
+      "activeTasks": 0,
+      "newTasks": 0,
+      "closedTasks": 17,
+      "removedTasks": 0,
+      "completionPct": 100,
+      "newTaskPct": 0,
+      "avgDaysInNew": 0,
+      "avgDaysInActive": 0,
+      "personBreakdown": {
+        "Sheza Aejaz": 8,
+        "Aejaz Ali": 5,
+        "Anam Saleem": 4
+      }
+    },
+    "totalTasksCurrent": 17,
+    "activeTasksCurrent": 4,
+    "newTasksCurrent": 7,
+    "closedTasksCurrent": 6,
+    "criticalIssues": 4,
+    "warnings": 6,
+    "teamMembers": 3,
+    "personBreakdown": {
+      "Sheza Aejaz": 5,
+      "Aejaz Ali": 5,
+      "Anam Saleem": 7
+    }
+  },
+  "findings": [
+    {
+      "ruleId": "WIP_LIMIT",
+      "severity": "WARNING",
+      "message": "Anam Saleem has 2 active tasks (Current Sprint)",
+      "details": "Exceeds warning threshold of 2 active tasks per person."
+    },
+    {
+      "ruleId": "TASK_STALENESS",
+      "severity": "WARNING",
+      "message": "3 tasks untouched for >3 days (Current Sprint)",
+      "details": "#2132: Record Voiceover / Face Recording (4 days, New)\n#2133: Video Editing (4 days, New)\n#2134: Upload & Publish Video (4 days, New)"
+    },
+    {
+      "ruleId": "SPRINT_COMPLETION_RATE",
+      "severity": "WARNING",
+      "message": "Only 35.3% of tasks completed (Current Sprint)",
+      "details": "6/17 tasks closed. Sprint is at risk of not meeting goals."
+    },
+    {
+      "ruleId": "TASK_AGING_NEW",
+      "severity": "CRITICAL",
+      "message": "Tasks sitting in New state average 8.4 days (Current Sprint)",
+      "details": "Tasks are not being picked up. Current average: 8.4 days (threshold: 7 days)."
+    },
+    {
+      "ruleId": "SPRINT_SCOPE_CREEP",
+      "severity": "CRITICAL",
+      "message": "70.6% of tasks added mid-sprint (Current Sprint)",
+      "details": "12/17 tasks created after sprint started (2026-05-24). This indicates poor sprint planning and scope creep."
+    },
+    {
+      "ruleId": "SINGLE_PERSON_DEPENDENCY",
+      "severity": "WARNING",
+      "message": "Anam Saleem carries 41.2% of sprint tasks (Current Sprint)",
+      "details": "7/17 tasks. Consider redistributing work."
+    },
+    {
+      "ruleId": "TASK_STALENESS",
+      "severity": "CRITICAL",
+      "message": "5 tasks untouched for >5 days (Last Sprint)",
+      "details": "#2094: Design / Select New Logo (18 days, Closed)\n#2095: Update App Icon & Splash Screen (18 days, Closed)\n#2096: Update In-App Branding (18 days, Closed)\n#2099: Regression Testing (18 days, Closed)\n#2101: Prepare for Release (13 days, Closed)"
+    },
+    {
+      "ruleId": "UNCLEAR_TITLES",
+      "severity": "WARNING",
+      "message": "11.8% of tasks have unclear titles (Last Sprint)",
+      "details": "2/17 tasks: #2095: \"Update App Icon & Splash Screen\", #2096: \"Update In-App Branding\""
+    },
+    {
+      "ruleId": "SPRINT_SCOPE_CREEP",
+      "severity": "CRITICAL",
+      "message": "70.6% of tasks added mid-sprint (Last Sprint)",
+      "details": "12/17 tasks created after sprint started (2026-04-30). This indicates poor sprint planning and scope creep."
+    },
+    {
+      "ruleId": "SINGLE_PERSON_DEPENDENCY",
+      "severity": "WARNING",
+      "message": "Sheza Aejaz carries 47.1% of sprint tasks (Last Sprint)",
+      "details": "8/17 tasks. Consider redistributing work."
+    }
+  ],
+  "deliveryStatus": "sent"
+}

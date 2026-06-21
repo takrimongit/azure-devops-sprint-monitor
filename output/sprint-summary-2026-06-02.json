@@ -1,0 +1,261 @@
+{
+  "generatedAt": "2026-06-02T17:59:49.962Z",
+  "grade": "F",
+  "gradeLabel": "F — Failing",
+  "semanticAnalysis": {
+    "sprintSummary": "This sprint appears to be focused on producing a marketing or demo video, with an excessive number of granular tasks dedicated to its creation, review, and publication. A minor, parallel effort by one engineer involves building a proposal workflow and exploring AI video generation.",
+    "taskQuality": "poor",
+    "problematicTasks": [
+      {
+        "id": 2130,
+        "title": "Write Video Script",
+        "issues": [
+          "This is a content creation or marketing task, not a software engineering task.",
+          "Misallocation of engineering resources."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2166,
+        "title": "Save Assets to Google Drive",
+        "issues": [
+          "This is an administrative step, not a unit of work for a sprint.",
+          "Should be part of the 'Definition of Done' for a larger creation task, not tracked separately."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2153,
+        "title": "Validate Tags",
+        "issues": [
+          "Task is excessively granular and represents micromanagement.",
+          "This should be a sub-point on a checklist for a single 'Review Video Metadata' task, not a standalone engineering task."
+        ],
+        "severity": "warning"
+      },
+      {
+        "id": 2149,
+        "title": "Report and Track Issues",
+        "issues": [
+          "This is a process, not a task.",
+          "Reporting and tracking issues is an inherent part of any review or testing process, not a deliverable to be estimated and completed."
+        ],
+        "severity": "critical"
+      }
+    ],
+    "duplicateOrOverlapping": [
+      {
+        "ids": [
+          2145,
+          2139,
+          2140,
+          2141,
+          2142,
+          2146,
+          2147,
+          2148
+        ],
+        "reason": "Task #2145 'Review Published Videos' is a parent epic that encompasses all the other granular review tasks. These should be consolidated into a single, comprehensive review task with a checklist."
+      },
+      {
+        "ids": [
+          2156,
+          2158,
+          2148,
+          2159
+        ],
+        "reason": "'Review Thumbnail Design', 'Verify Text Readability', 'Verify Thumbnail Display', and 'Approve Thumbnail' are all micro-steps of a single activity: 'Review and Approve Video Thumbnail'. They should be a single task."
+      },
+      {
+        "ids": [
+          2151,
+          2152,
+          2153,
+          2154
+        ],
+        "reason": "Reviewing the title, description, tags, and hashtags are all part of one activity: 'Review Video SEO and Metadata'. They should not be broken into individual tasks."
+      }
+    ],
+    "unclearWork": [
+      {
+        "id": 2129,
+        "title": "Validate Solution Approach",
+        "problem": "The 'solution' is not defined. It is unclear if this refers to the video's content, the technical approach for a demo, or the production process. The scope and acceptance criteria are missing."
+      },
+      {
+        "id": 2165,
+        "title": "Generate AI Video Using Avatar Character",
+        "problem": "The task lacks specific requirements. It's unclear what the inputs are (script, voice?), what tools are to be used, and what the acceptance criteria for the generated video are."
+      }
+    ],
+    "strengths": [
+      "Task #2162 'Create Proposal Submission and Confirmation Workflow' is a well-defined, value-driven engineering task that describes a clear feature.",
+      "Task #2167 'Add Workflow Tracking, Logging, and Error Handling' represents a clear and important engineering responsibility that improves system robustness."
+    ]
+  },
+  "summary": {
+    "currentSprint": "aidapp\\Sprint 24",
+    "currentSprintMetrics": {
+      "totalTasks": 30,
+      "activeTasks": 4,
+      "newTasks": 23,
+      "closedTasks": 3,
+      "removedTasks": 0,
+      "completionPct": 10,
+      "newTaskPct": 76.66666666666667,
+      "avgDaysInNew": 3.130434782608696,
+      "avgDaysInActive": 0,
+      "personBreakdown": {
+        "Sheza Aejaz": 6,
+        "Aejaz Ali": 18,
+        "Anam Saleem": 6
+      }
+    },
+    "lastSprint": "aidapp\\Sprint 23",
+    "lastSprintMetrics": {
+      "totalTasks": 17,
+      "activeTasks": 0,
+      "newTasks": 0,
+      "closedTasks": 17,
+      "removedTasks": 0,
+      "completionPct": 100,
+      "newTaskPct": 0,
+      "avgDaysInNew": 0,
+      "avgDaysInActive": 0,
+      "personBreakdown": {
+        "Sheza Aejaz": 8,
+        "Aejaz Ali": 5,
+        "Anam Saleem": 4
+      }
+    },
+    "totalTasksCurrent": 30,
+    "activeTasksCurrent": 4,
+    "newTasksCurrent": 23,
+    "closedTasksCurrent": 3,
+    "criticalIssues": 12,
+    "warnings": 7,
+    "teamMembers": 3,
+    "personBreakdown": {
+      "Sheza Aejaz": 6,
+      "Aejaz Ali": 18,
+      "Anam Saleem": 6
+    }
+  },
+  "findings": [
+    {
+      "ruleId": "WIP_LIMIT",
+      "severity": "WARNING",
+      "message": "Sheza Aejaz has 2 active tasks (Current Sprint)",
+      "details": "Exceeds warning threshold of 2 active tasks per person."
+    },
+    {
+      "ruleId": "SPRINT_COMPLETION_RATE",
+      "severity": "CRITICAL",
+      "message": "Only 10.0% of tasks completed (Current Sprint)",
+      "details": "3/30 tasks closed. Sprint execution is severely behind schedule."
+    },
+    {
+      "ruleId": "NEW_TASK_RATIO",
+      "severity": "CRITICAL",
+      "message": "76.7% of tasks still in New state (Current Sprint)",
+      "details": "23/30 tasks haven't been started. This indicates poor sprint execution and lack of momentum."
+    },
+    {
+      "ruleId": "TASK_AGING_NEW",
+      "severity": "WARNING",
+      "message": "Tasks sitting in New state average 3.1 days (Current Sprint)",
+      "details": "Tasks should be picked up faster. Current average: 3.1 days (threshold: 3 days)."
+    },
+    {
+      "ruleId": "SPRINT_SCOPE_CREEP",
+      "severity": "CRITICAL",
+      "message": "80.0% of tasks added mid-sprint (Current Sprint)",
+      "details": "24/30 tasks created after sprint started (2026-05-24). This indicates poor sprint planning and scope creep."
+    },
+    {
+      "ruleId": "SINGLE_PERSON_DEPENDENCY",
+      "severity": "CRITICAL",
+      "message": "Aejaz Ali carries 60.0% of sprint tasks (Current Sprint)",
+      "details": "18/30 tasks. This is a bus factor risk. Sprint is overly dependent on one person."
+    },
+    {
+      "ruleId": "TASK_STALENESS",
+      "severity": "CRITICAL",
+      "message": "5 tasks untouched for >5 days (Last Sprint)",
+      "details": "#2094: Design / Select New Logo (14 days, Closed)\n#2095: Update App Icon & Splash Screen (14 days, Closed)\n#2096: Update In-App Branding (14 days, Closed)\n#2099: Regression Testing (14 days, Closed)\n#2101: Prepare for Release (9 days, Closed)"
+    },
+    {
+      "ruleId": "UNCLEAR_TITLES",
+      "severity": "WARNING",
+      "message": "11.8% of tasks have unclear titles (Last Sprint)",
+      "details": "2/17 tasks: #2095: \"Update App Icon & Splash Screen\", #2096: \"Update In-App Branding\""
+    },
+    {
+      "ruleId": "SPRINT_SCOPE_CREEP",
+      "severity": "CRITICAL",
+      "message": "70.6% of tasks added mid-sprint (Last Sprint)",
+      "details": "12/17 tasks created after sprint started (2026-04-30). This indicates poor sprint planning and scope creep."
+    },
+    {
+      "ruleId": "SINGLE_PERSON_DEPENDENCY",
+      "severity": "WARNING",
+      "message": "Sheza Aejaz carries 47.1% of sprint tasks (Last Sprint)",
+      "details": "8/17 tasks. Consider redistributing work."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2130 \"Write Video Script\" — This is a content creation or marketing task, not a software engineering task.",
+      "details": "This is a content creation or marketing task, not a software engineering task.. Misallocation of engineering resources."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2166 \"Save Assets to Google Drive\" — This is an administrative step, not a unit of work for a sprint.",
+      "details": "This is an administrative step, not a unit of work for a sprint.. Should be part of the 'Definition of Done' for a larger creation task, not tracked separately."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "WARNING",
+      "message": "Task #2153 \"Validate Tags\" — Task is excessively granular and represents micromanagement.",
+      "details": "Task is excessively granular and represents micromanagement.. This should be a sub-point on a checklist for a single 'Review Video Metadata' task, not a standalone engineering task."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2149 \"Report and Track Issues\" — This is a process, not a task.",
+      "details": "This is a process, not a task.. Reporting and tracking issues is an inherent part of any review or testing process, not a deliverable to be estimated and completed."
+    },
+    {
+      "ruleId": "SEMANTIC_UNCLEAR_WORK",
+      "severity": "WARNING",
+      "message": "Task #2129 \"Validate Solution Approach\" — work is unclear",
+      "details": "The 'solution' is not defined. It is unclear if this refers to the video's content, the technical approach for a demo, or the production process. The scope and acceptance criteria are missing."
+    },
+    {
+      "ruleId": "SEMANTIC_UNCLEAR_WORK",
+      "severity": "WARNING",
+      "message": "Task #2165 \"Generate AI Video Using Avatar Character\" — work is unclear",
+      "details": "The task lacks specific requirements. It's unclear what the inputs are (script, voice?), what tools are to be used, and what the acceptance criteria for the generated video are."
+    },
+    {
+      "ruleId": "SEMANTIC_DUPLICATE",
+      "severity": "CRITICAL",
+      "message": "Potential overlap detected: tasks 2145, 2139, 2140, 2141, 2142, 2146, 2147, 2148",
+      "details": "Task #2145 'Review Published Videos' is a parent epic that encompasses all the other granular review tasks. These should be consolidated into a single, comprehensive review task with a checklist."
+    },
+    {
+      "ruleId": "SEMANTIC_DUPLICATE",
+      "severity": "CRITICAL",
+      "message": "Potential overlap detected: tasks 2156, 2158, 2148, 2159",
+      "details": "'Review Thumbnail Design', 'Verify Text Readability', 'Verify Thumbnail Display', and 'Approve Thumbnail' are all micro-steps of a single activity: 'Review and Approve Video Thumbnail'. They should be a single task."
+    },
+    {
+      "ruleId": "SEMANTIC_DUPLICATE",
+      "severity": "CRITICAL",
+      "message": "Potential overlap detected: tasks 2151, 2152, 2153, 2154",
+      "details": "Reviewing the title, description, tags, and hashtags are all part of one activity: 'Review Video SEO and Metadata'. They should not be broken into individual tasks."
+    }
+  ],
+  "deliveryStatus": "sent"
+}

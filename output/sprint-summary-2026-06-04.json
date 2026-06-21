@@ -1,0 +1,299 @@
+{
+  "generatedAt": "2026-06-04T10:06:50.605Z",
+  "grade": "F",
+  "gradeLabel": "F — Failing",
+  "semanticAnalysis": {
+    "sprintSummary": "This sprint is overwhelmingly focused on marketing and content creation, specifically producing a demo video for YouTube. A significant portion of the work involves training on video production and channel management, with very few tasks related to core software engineering.",
+    "taskQuality": "poor",
+    "problematicTasks": [
+      {
+        "id": 2130,
+        "title": "Write Video Script",
+        "issues": [
+          "This is a marketing or content creation task, not software engineering."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2131,
+        "title": "Record Demo Walkthrough",
+        "issues": [
+          "This is a content creation task, not software engineering."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2132,
+        "title": "Record Voiceover / Face Recording",
+        "issues": [
+          "This is a content creation task, not software engineering."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2133,
+        "title": "Video Editing",
+        "issues": [
+          "This is a video production task, not software engineering."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2134,
+        "title": "Upload & Publish Video",
+        "issues": [
+          "This is an administrative or marketing task, not software engineering."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2139,
+        "title": "Learn YouTube Studio",
+        "issues": [
+          "This is a training task, not a development task with a tangible engineering deliverable."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2140,
+        "title": "Learn Video Quality Review Process",
+        "issues": [
+          "This is a training task, not a development task with a tangible engineering deliverable."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2141,
+        "title": "Learn YouTube SEO Fundamentals. Learn Thumbnail Review Best Practices",
+        "issues": [
+          "This is a marketing training task, not a development task with a tangible engineering deliverable."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2142,
+        "title": "Learn YouTube Analytics, Perform Channel Review and Monitoring",
+        "issues": [
+          "This is a marketing analytics and training task, not a development task with a tangible engineering deliverable."
+        ],
+        "severity": "critical"
+      },
+      {
+        "id": 2166,
+        "title": "Save Assets to Google Drive",
+        "issues": [
+          "This is a low-value administrative sub-task, not a complete engineering story."
+        ],
+        "severity": "warning"
+      }
+    ],
+    "duplicateOrOverlapping": [
+      {
+        "ids": [
+          2130,
+          2164
+        ],
+        "reason": "Both tasks involve creating a video script. It is unclear why two different people are assigned to create scripts in the same sprint."
+      }
+    ],
+    "unclearWork": [
+      {
+        "id": 2143,
+        "title": "Document Issues and Recommendations",
+        "problem": "The scope is undefined. It is not clear what is being reviewed to find 'issues' or what the 'recommendations' are for (e.g., the YouTube channel, the video, the app)."
+      },
+      {
+        "id": 2165,
+        "title": "Generate AI Video Using Avatar Character",
+        "problem": "The verb 'Generate' is ambiguous. It is unclear if this involves using a simple third-party tool (a content task) or building a complex AI generation system (a massive engineering task)."
+      }
+    ],
+    "strengths": [
+      "#2162: Create Proposal Submission and Confirmation Workflow - This is a well-defined feature development task.",
+      "#2167: Add Workflow Tracking, Logging, and Error Handling - This is a clear, valuable engineering task that improves system robustness."
+    ]
+  },
+  "summary": {
+    "currentSprint": "aidapp\\Sprint 24",
+    "currentSprintMetrics": {
+      "totalTasks": 16,
+      "activeTasks": 5,
+      "newTasks": 7,
+      "closedTasks": 4,
+      "removedTasks": 0,
+      "completionPct": 25,
+      "newTaskPct": 43.75,
+      "avgDaysInNew": 6.428571428571429,
+      "avgDaysInActive": 0.2,
+      "personBreakdown": {
+        "Sheza Aejaz": 5,
+        "Aejaz Ali": 5,
+        "Anam Saleem": 6
+      }
+    },
+    "lastSprint": "aidapp\\Sprint 23",
+    "lastSprintMetrics": {
+      "totalTasks": 17,
+      "activeTasks": 0,
+      "newTasks": 0,
+      "closedTasks": 17,
+      "removedTasks": 0,
+      "completionPct": 100,
+      "newTaskPct": 0,
+      "avgDaysInNew": 0,
+      "avgDaysInActive": 0,
+      "personBreakdown": {
+        "Sheza Aejaz": 8,
+        "Aejaz Ali": 5,
+        "Anam Saleem": 4
+      }
+    },
+    "totalTasksCurrent": 16,
+    "activeTasksCurrent": 5,
+    "newTasksCurrent": 7,
+    "closedTasksCurrent": 4,
+    "criticalIssues": 13,
+    "warnings": 9,
+    "teamMembers": 3,
+    "personBreakdown": {
+      "Sheza Aejaz": 5,
+      "Aejaz Ali": 5,
+      "Anam Saleem": 6
+    }
+  },
+  "findings": [
+    {
+      "ruleId": "WIP_LIMIT",
+      "severity": "WARNING",
+      "message": "Sheza Aejaz has 2 active tasks (Current Sprint)",
+      "details": "Exceeds warning threshold of 2 active tasks per person."
+    },
+    {
+      "ruleId": "WIP_LIMIT",
+      "severity": "WARNING",
+      "message": "Anam Saleem has 2 active tasks (Current Sprint)",
+      "details": "Exceeds warning threshold of 2 active tasks per person."
+    },
+    {
+      "ruleId": "SPRINT_COMPLETION_RATE",
+      "severity": "WARNING",
+      "message": "Only 25.0% of tasks completed (Current Sprint)",
+      "details": "4/16 tasks closed. Sprint is at risk of not meeting goals."
+    },
+    {
+      "ruleId": "TASK_AGING_NEW",
+      "severity": "WARNING",
+      "message": "Tasks sitting in New state average 6.4 days (Current Sprint)",
+      "details": "Tasks should be picked up faster. Current average: 6.4 days (threshold: 3 days)."
+    },
+    {
+      "ruleId": "SPRINT_SCOPE_CREEP",
+      "severity": "CRITICAL",
+      "message": "68.8% of tasks added mid-sprint (Current Sprint)",
+      "details": "11/16 tasks created after sprint started (2026-05-24). This indicates poor sprint planning and scope creep."
+    },
+    {
+      "ruleId": "TASK_STALENESS",
+      "severity": "CRITICAL",
+      "message": "5 tasks untouched for >5 days (Last Sprint)",
+      "details": "#2094: Design / Select New Logo (16 days, Closed)\n#2095: Update App Icon & Splash Screen (16 days, Closed)\n#2096: Update In-App Branding (16 days, Closed)\n#2099: Regression Testing (16 days, Closed)\n#2101: Prepare for Release (11 days, Closed)"
+    },
+    {
+      "ruleId": "UNCLEAR_TITLES",
+      "severity": "WARNING",
+      "message": "11.8% of tasks have unclear titles (Last Sprint)",
+      "details": "2/17 tasks: #2095: \"Update App Icon & Splash Screen\", #2096: \"Update In-App Branding\""
+    },
+    {
+      "ruleId": "SPRINT_SCOPE_CREEP",
+      "severity": "CRITICAL",
+      "message": "70.6% of tasks added mid-sprint (Last Sprint)",
+      "details": "12/17 tasks created after sprint started (2026-04-30). This indicates poor sprint planning and scope creep."
+    },
+    {
+      "ruleId": "SINGLE_PERSON_DEPENDENCY",
+      "severity": "WARNING",
+      "message": "Sheza Aejaz carries 47.1% of sprint tasks (Last Sprint)",
+      "details": "8/17 tasks. Consider redistributing work."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2130 \"Write Video Script\" — This is a marketing or content creation task, not software engineering.",
+      "details": "This is a marketing or content creation task, not software engineering."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2131 \"Record Demo Walkthrough\" — This is a content creation task, not software engineering.",
+      "details": "This is a content creation task, not software engineering."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2132 \"Record Voiceover / Face Recording\" — This is a content creation task, not software engineering.",
+      "details": "This is a content creation task, not software engineering."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2133 \"Video Editing\" — This is a video production task, not software engineering.",
+      "details": "This is a video production task, not software engineering."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2134 \"Upload & Publish Video\" — This is an administrative or marketing task, not software engineering.",
+      "details": "This is an administrative or marketing task, not software engineering."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2139 \"Learn YouTube Studio\" — This is a training task, not a development task with a tangible engineering deliverable.",
+      "details": "This is a training task, not a development task with a tangible engineering deliverable."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2140 \"Learn Video Quality Review Process\" — This is a training task, not a development task with a tangible engineering deliverable.",
+      "details": "This is a training task, not a development task with a tangible engineering deliverable."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2141 \"Learn YouTube SEO Fundamentals. Learn Thumbnail Review Best Practices\" — This is a marketing training task, not a development task with a tangible engineering deliverable.",
+      "details": "This is a marketing training task, not a development task with a tangible engineering deliverable."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "CRITICAL",
+      "message": "Task #2142 \"Learn YouTube Analytics, Perform Channel Review and Monitoring\" — This is a marketing analytics and training task, not a development task with a tangible engineering deliverable.",
+      "details": "This is a marketing analytics and training task, not a development task with a tangible engineering deliverable."
+    },
+    {
+      "ruleId": "SEMANTIC_QUALITY",
+      "severity": "WARNING",
+      "message": "Task #2166 \"Save Assets to Google Drive\" — This is a low-value administrative sub-task, not a complete engineering story.",
+      "details": "This is a low-value administrative sub-task, not a complete engineering story."
+    },
+    {
+      "ruleId": "SEMANTIC_UNCLEAR_WORK",
+      "severity": "WARNING",
+      "message": "Task #2143 \"Document Issues and Recommendations\" — work is unclear",
+      "details": "The scope is undefined. It is not clear what is being reviewed to find 'issues' or what the 'recommendations' are for (e.g., the YouTube channel, the video, the app)."
+    },
+    {
+      "ruleId": "SEMANTIC_UNCLEAR_WORK",
+      "severity": "WARNING",
+      "message": "Task #2165 \"Generate AI Video Using Avatar Character\" — work is unclear",
+      "details": "The verb 'Generate' is ambiguous. It is unclear if this involves using a simple third-party tool (a content task) or building a complex AI generation system (a massive engineering task)."
+    },
+    {
+      "ruleId": "SEMANTIC_DUPLICATE",
+      "severity": "CRITICAL",
+      "message": "Potential overlap detected: tasks 2130, 2164",
+      "details": "Both tasks involve creating a video script. It is unclear why two different people are assigned to create scripts in the same sprint."
+    }
+  ],
+  "deliveryStatus": "sent"
+}
