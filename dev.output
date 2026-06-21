@@ -1,0 +1,27 @@
+
+> azure-devops-monitor@1.0.0 dev
+> ts-node src/sprint-analyzer.ts
+
+◇ injected env (14) from .env // tip: ⌘ suppress logs { quiet: true }
+═══════════════════════════════════════════
+  🏃 Azure DevOps Sprint Health Monitor   
+  AI-Powered Analysis & Email Report      
+═══════════════════════════════════════════
+
+📡 Fetching sprint data from Azure DevOps...
+   Detected current sprint: aidapp\Sprint 24
+   Detected last sprint:    aidapp\Sprint 23
+✅ Fetched 49 tasks across 2 sprints
+   Current sprint: aidapp\Sprint 24
+   Last sprint: aidapp\Sprint 23
+
+🧠 Running semantic work quality analysis (Gemini 2.5 Pro)...
+
+❌ FATAL ERROR: 402 Insufficient credits. Add more using https://openrouter.ai/settings/credits
+Error: 402 Insufficient credits. Add more using https://openrouter.ai/settings/credits
+    at Function.generate (/Users/takrim/azure-devops-monitor/node_modules/openai/src/core/error.ts:104:12)
+    at OpenAI.makeStatusError (/Users/takrim/azure-devops-monitor/node_modules/openai/src/client.ts:591:28)
+    at OpenAI.makeRequest (/Users/takrim/azure-devops-monitor/node_modules/openai/src/client.ts:875:24)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async analyzeWorkQuality (/Users/takrim/azure-devops-monitor/src/sprint-analyzer.ts:689:20)
+    at async main (/Users/takrim/azure-devops-monitor/src/sprint-analyzer.ts:875:30)

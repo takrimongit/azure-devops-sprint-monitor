@@ -1,0 +1,119 @@
+<%- include('partials/head', { title: 'Sprint Health — Sprint Monitor', page: 'sprint-health' }) %>
+
+<div class="header">
+  <h1>🏥 Sprint Health</h1>
+  <p>Detailed hygiene analysis and findings</p>
+</div>
+
+<%
+const data = locals.data;
+const helpers = locals.helpers;
+if (!data) { %>
+  <div class="card">
+    <div class="empty">
+      <h3>No sprint data available</h3>
+      <p>Run the analyzer to generate sprint health data.</p>
+    </div>
+  </div>
+<% } else { 
+  const summary = data.summary || {};
+  const findings = data.findings || [];
+  const metrics = summary.currentSprintMetrics || {};
+  const semanticAnalysis = data.semanticAnalysis || {};
+  const crits = findings.filter(function(f) { return f.severity === 'CRITICAL'; });
+  const warns = findings.filter(function(f) { return f.severity === 'WARNING'; });
+%>
+
+<div class="grid" style="margin-bottom:16px">
+  <div class="card" style="text-align:center">
+    <div class="grade <%= helpers.gradeClass(data.grade) %>"><%= data.grade %></div>
+    <p style="margin-top:8px;font-weight:600"><%= data.gradeLabel %></p>
+  </div>
+  <div class="card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div><span style="color:#f85149;font-size:20px;font-weight:700"><%= crits.length %></span><br><span style="font-size:11px;color:#8b949e">CRITICAL</span></div>
+      <div><span style="color:#d29922;font-size:20px;font-weight:700"><%= warns.length %></span><br><span style="font-size:11px;color:#8b949e">WARNINGS</span></div>
+      <div><span style="color:#58a6ff;font-size:20px;font-weight:700"><%= summary.totalTasksCurrent || 0 %></span><br><span style="font-size:11px;color:#8b949e">TOTAL TASKS</span></div>
+      <div><span style="color:#3fb950;font-size:20px;font-weight:700"><%= summary.teamMembers || 0 %></span><br><span style="font-size:11px;color:#8b949e">TEAM MEMBERS</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Sprint Breakdown -->
+<div class="card">
+  <h2>📋 Sprint Breakdown</h2>
+  <table class="table">
+    <tr><th></th><th>Current</th><th>Last</th></tr>
+    <tr><td>Name</td><td><%= summary.currentSprint || 'N/A' %></td><td><%= summary.lastSprint || 'N/A' %></td></tr>
+    <tr><td>Total</td><td><%= summary.totalTasksCurrent || 0 %></td><td><%= summary.lastSprintMetrics ? (summary.lastSprintMetrics.totalTasks || 'N/A') : 'N/A' %></td></tr>
+    <tr><td>Active</td><td><%= summary.activeTasksCurrent || 0 %></td><td><%= summary.lastSprintMetrics ? (summary.lastSprintMetrics.activeTasks || 'N/A') : 'N/A' %></td></tr>
+    <tr><td>Closed</td><td><%= summary.closedTasksCurrent || 0 %></td><td><%= summary.lastSprintMetrics ? (summary.lastSprintMetrics.closedTasks || 'N/A') : 'N/A' %></td></tr>
+    <tr><td>Completion</td>
+      <td>
+        <% const cp = metrics.completionPct || 0; %>
+        <div class="progress-bar" style="max-width:160px"><div class="progress-fill <%= cp >= 60 ? 'good' : cp >= 30 ? 'warn' : 'bad' %>" style="width:<%= cp %>%"></div></div>
+        <%= cp.toFixed(0) %>%
+      </td>
+      <td><%= summary.lastSprintMetrics && summary.lastSprintMetrics.completionPct != null ? summary.lastSprintMetrics.completionPct.toFixed(0) + '%' : 'N/A' %></td>
+    </tr>
+  </table>
+</div>
+
+<!-- All Findings -->
+<div class="card">
+  <h2>🔍 All Findings (<%= findings.length %>)</h2>
+  <% if (findings.length === 0) { %>
+    <p style="color:#3fb950">✅ No issues detected.</p>
+  <% } else { %>
+    <% findings.forEach(function(f) { %>
+    <div class="finding <%= f.severity === 'CRITICAL' ? 'critical' : 'warning' %>">
+      <div class="sev <%= helpers.severityClass(f.severity) %>"><%= f.severity %> — <%= f.ruleId %></div>
+      <div class="msg"><%= f.message %></div>
+      <% if (f.details) { %><div class="details"><%= f.details %></div><% } %>
+    </div>
+    <% }); %>
+  <% } %>
+</div>
+
+<!-- Semantic Analysis -->
+<% if (semanticAnalysis && (semanticAnalysis.sprintSummary || (semanticAnalysis.problematicTasks && semanticAnalysis.problematicTasks.length > 0))) { %>
+<div class="card">
+  <h2>🧠 AI Analysis</h2>
+  <% if (semanticAnalysis.sprintSummary) { %>
+    <p style="color:#c9d1d9;line-height:1.6"><%= semanticAnalysis.sprintSummary %></p>
+  <% } %>
+  <% if (semanticAnalysis.problematicTasks && semanticAnalysis.problematicTasks.length > 0) { %>
+    <h3 style="margin-top:16px">⚠️ Problematic Tasks</h3>
+    <% semanticAnalysis.problematicTasks.forEach(function(pt) { %>
+    <div class="finding <%= pt.severity === 'critical' ? 'critical' : 'warning' %>">
+      <div class="msg">#<%= pt.id %>: <%= pt.title %></div>
+      <div class="details"><%= (pt.issues || []).join(', ') %></div>
+    </div>
+    <% }); %>
+  <% } %>
+</div>
+<% } %>
+
+<!-- Person Breakdown -->
+<% const pb = summary.personBreakdown;
+if (pb && Object.keys(pb).length > 0) { 
+  const total = Object.values(pb).reduce(function(a,b){return a+b;}, 0) || 1;
+%>
+<div class="card">
+  <h2>👥 Per-Person Breakdown</h2>
+  <table class="table">
+    <tr><th>Person</th><th>Tasks</th><th>% of Sprint</th></tr>
+    <% Object.entries(pb).sort(function(a,b){return b[1]-a[1];}).forEach(function(entry){ %>
+    <tr>
+      <td><%= entry[0] %></td>
+      <td><%= entry[1] %></td>
+      <td><%= (entry[1] / total * 100).toFixed(0) %>%</td>
+    </tr>
+    <% }); %>
+  </table>
+</div>
+<% } %>
+
+<% } %>
+
+<%- include('partials/foot') %>

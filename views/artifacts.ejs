@@ -1,0 +1,67 @@
+<%- include('partials/head', { title: 'Artifacts — Sprint Monitor', page: 'artifacts' }) %>
+
+<div class="header">
+  <h1>📁 Artifacts</h1>
+  <p>All generated reports, summaries, and outputs</p>
+</div>
+
+<!-- Filter Tags -->
+<div class="tag-row">
+  <a href="/artifacts?type=all" class="tag <%= locals.filter === 'all' ? 'active' : '' %>">All</a>
+  <a href="/artifacts?type=json" class="tag <%= locals.filter === 'json' ? 'active' : '' %>">
+    <span class="badge badge-json">JSON</span> Summaries
+  </a>
+  <a href="/artifacts?type=html" class="tag <%= locals.filter === 'html' ? 'active' : '' %>">
+    <span class="badge badge-html">HTML</span> Reports
+  </a>
+  <a href="/artifacts?type=md" class="tag <%= locals.filter === 'md' ? 'active' : '' %>">
+    <span class="badge badge-md">MD</span> Email Outputs
+  </a>
+</div>
+
+<%
+const helpers = locals.helpers;
+const arts = locals.artifacts || [];
+%>
+
+<div class="card">
+  <h2><%= arts.length %> artifact(s)</h2>
+  
+  <% if (arts.length === 0) { %>
+    <div class="empty" style="padding:32px">
+      <h3>No artifacts yet</h3>
+      <p>Artifacts appear here after the sprint analyzer runs.</p>
+    </div>
+  <% } else { %>
+    <table class="table">
+      <tr>
+        <th>File</th>
+        <th>Type</th>
+        <th>Size</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+      <% arts.forEach(function(a) { %>
+      <tr>
+        <td><a href="/output/<%= a.name %>" target="_blank"><%= a.name %></a></td>
+        <td><span class="badge badge-<%= a.type %>"><%= a.type.toUpperCase() %></span></td>
+        <td><%= helpers.formatSize(a.size) %></td>
+        <td><%= helpers.formatDate(a.date) %></td>
+        <td>
+          <a href="/output/<%= a.name %>" target="_blank" class="btn btn-sm">View</a>
+          <% if (a.type === 'json') { %>
+            <a href="/artifacts/view/<%= a.name %>" class="btn btn-sm">Raw</a>
+          <% } %>
+        </td>
+      </tr>
+      <% }); %>
+    </table>
+  <% } %>
+</div>
+
+<div class="card" style="margin-top:16px; color:#8b949e; font-size:12px">
+  <p>📂 Files are served from <code>output/</code> directory.</p>
+  <p>💡 JSON artifacts can be viewed raw at <code>/artifacts/view/&lt;filename&gt;</code>.</p>
+</div>
+
+<%- include('partials/foot') %>

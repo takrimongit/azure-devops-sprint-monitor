@@ -1,0 +1,15 @@
+2026-06-11T19:26:56: ◇ injected env (14) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+2026-06-11T19:26:56: 
+2026-06-11T19:26:56: 🚀 Sprint Monitor web app running at http://localhost:3000
+2026-06-11T19:26:56:    Open http://localhost:3000 in your browser
+2026-06-11T19:26:56: 
+2026-06-11T19:26:56: ⚠️  Google OAuth not configured — running in dev mode (no auth required).
+2026-06-11T19:26:56:    To enable Google OAuth, set in your .env file:
+2026-06-11T19:26:56:      GOOGLE_CLIENT_ID=your-client-id-here
+2026-06-11T19:26:56:      GOOGLE_CLIENT_KEY=your-client-key-here
+2026-06-11T19:26:56:      GOOGLE_CALLBACK_URL=http://localhost:3000/auth/google/callback
+2026-06-11T19:26:56:    1. Go to https://console.cloud.google.com/apis/credentials
+2026-06-11T19:26:56:    2. Create OAuth 2.0 Client ID (Web application)
+2026-06-11T19:26:56:    3. Add Authorized redirect URI: http://localhost:3000/auth/google/callback
+2026-06-11T19:26:56:    4. Copy credentials to your .env file
+2026-06-11T19:26:56: 

@@ -1,0 +1,161 @@
+<%- include('partials/head', { title: 'Dashboard — Sprint Monitor', page: 'dashboard' }) %>
+
+<div class="header">
+  <h1>📊 Dashboard</h1>
+  <p>Daily sprint health summary</p>
+</div>
+
+<% 
+const latest = locals.latest;
+const helpers = locals.helpers;
+if (!latest) { %>
+  <div class="card">
+    <div class="empty">
+      <h3>No sprint data yet</h3>
+      <p>Run the analyzer or wait for the next cron job to populate data.</p>
+      <form method="POST" action="/api/refresh" style="margin-top:16px">
+        <button type="submit" class="btn btn-primary">Run Analysis Now</button>
+      </form>
+    </div>
+  </div>
+<% } else { 
+  const summary = latest.summary || {};
+  const metrics = summary.currentSprintMetrics || {};
+  const metadata = latest.metadata || {};
+  const findings = latest.findings || [];
+%>
+
+<div class="refresh-indicator">
+  <span class="status">🟢 Last updated: <%= metadata.generatedAt ? helpers.formatDate(metadata.generatedAt) : 'Unknown' %></span>
+  <span style="margin-left:auto">
+    <form method="POST" action="/api/refresh" style="display:inline">
+      <button type="submit" class="btn btn-sm">🔄 Refresh</button>
+    </form>
+  </span>
+</div>
+
+<!-- Health Grade -->
+<div class="card">
+  <div style="display:flex;align-items:center;gap:20px">
+    <div class="grade <%= helpers.gradeClass(latest.grade) %>"><%= latest.grade %></div>
+    <div>
+      <h2><%= latest.gradeLabel || 'No Grade' %></h2>
+      <p style="color:#8b949e;margin-top:4px">
+        <%= summary.currentSprint || 'Unknown Sprint' %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Stats -->
+<div class="grid">
+  <div class="card stat">
+    <div class="stat-value" style="color:#58a6ff"><%= summary.totalTasksCurrent || 0 %></div>
+    <div class="stat-label">Total Tasks</div>
+  </div>
+  <div class="card stat">
+    <div class="stat-value" style="color:#d29922"><%= summary.activeTasksCurrent || 0 %></div>
+    <div class="stat-label">Active</div>
+  </div>
+  <div class="card stat">
+    <div class="stat-value" style="color:#3fb950"><%= summary.closedTasksCurrent || 0 %></div>
+    <div class="stat-label">Closed</div>
+  </div>
+  <div class="card stat">
+    <div class="stat-value" style="color:#58a6ff"><%= summary.newTasksCurrent || 0 %></div>
+    <div class="stat-label">New</div>
+  </div>
+</div>
+
+<!-- Completion Rate -->
+<div class="card">
+  <h2>📈 Sprint Completion</h2>
+  <div style="display:flex;align-items:center;gap:12px;margin-top:12px">
+    <span style="font-size:24px;font-weight:700"><%= (metrics.completionPct || 0).toFixed(0) %>%</span>
+    <div style="flex:1">
+      <div class="progress-bar">
+        <% const cp = metrics.completionPct || 0; %>
+        <div class="progress-fill <%= cp >= 60 ? 'good' : cp >= 30 ? 'warn' : 'bad' %>" style="width:<%= Math.min(cp, 100) %>%"></div>
+      </div>
+    </div>
+  </div>
+  <p style="color:#8b949e;font-size:12px;margin-top:8px">
+    <%= summary.closedTasksCurrent || 0 %> closed of <%= summary.totalTasksCurrent || 0 %> total
+    | <%= summary.criticalIssues || 0 %> critical | <%= summary.warnings || 0 %> warnings
+  </p>
+</div>
+
+<!-- Findings -->
+<div class="card">
+  <h2>🔍 Issues (<%= findings.length %>)</h2>
+  <% if (findings.length === 0) { %>
+    <p style="color:#3fb950">✅ No issues detected.</p>
+  <% } else { %>
+    <% findings.slice(0, 10).forEach(function(f) { %>
+    <div class="finding <%= f.severity === 'CRITICAL' ? 'critical' : 'warning' %>">
+      <div class="sev <%= helpers.severityClass(f.severity) %>"><%= f.severity %></div>
+      <div class="msg"><%= f.message %></div>
+      <% if (f.details) { %><div class="details"><%= f.details %></div><% } %>
+    </div>
+    <% }); %>
+    <% if (findings.length > 10) { %>
+      <p style="margin-top:8px"><a href="/sprint-health">View all <%= findings.length %> findings →</a></p>
+    <% } %>
+  <% } %>
+</div>
+
+<!-- Person Breakdown -->
+<% const pb = summary.personBreakdown;
+if (pb && Object.keys(pb).length > 0) { 
+  const total = Object.values(pb).reduce(function(a, b) { return a + b; }, 0) || 1;
+%>
+<div class="card">
+  <h2>👥 Team Workload</h2>
+  <table class="table">
+    <tr><th>Person</th><th>Tasks</th><th>Share</th></tr>
+    <% Object.entries(pb).sort(function(a, b) { return b[1] - a[1]; }).forEach(function(entry) { 
+      const person = entry[0];
+      const count = entry[1];
+    %>
+    <tr>
+      <td><%= person %></td>
+      <td><%= count %></td>
+      <td>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="progress-bar" style="flex:1;max-width:120px">
+            <div class="progress-fill good" style="width:<%= (count / total * 100).toFixed(0) %>%"></div>
+          </div>
+          <span style="font-size:12px;color:#8b949e"><%= (count / total * 100).toFixed(0) %>%</span>
+        </div>
+      </td>
+    </tr>
+    <% }); %>
+  </table>
+</div>
+<% } %>
+
+<!-- Recent Artifacts -->
+<div class="card">
+  <h2>📁 Recent Artifacts</h2>
+  <% const arts = locals.artifacts || []; %>
+  <% if (arts.length > 0) { %>
+    <table class="table">
+      <tr><th>File</th><th>Type</th><th>Size</th><th>Date</th></tr>
+      <% arts.slice(0, 5).forEach(function(a) { %>
+      <tr>
+        <td><a href="/output/<%= a.name %>"><%= a.name %></a></td>
+        <td><span class="badge badge-<%= a.type %>"><%= a.type.toUpperCase() %></span></td>
+        <td><%= helpers.formatSize(a.size) %></td>
+        <td><%= helpers.formatDate(a.date) %></td>
+      </tr>
+      <% }); %>
+    </table>
+    <p style="margin-top:12px"><a href="/artifacts">View all artifacts →</a></p>
+  <% } else { %>
+    <p style="color:#8b949e">No artifacts yet.</p>
+  <% } %>
+</div>
+
+<% } %>
+
+<%- include('partials/foot') %>

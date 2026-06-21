@@ -9,19 +9,33 @@
     "dev": "ts-node src/sprint-analyzer.ts",
     "monitor": "ts-node src/monitor.ts",
     "analyze": "ts-node src/analyze-sprints.ts",
-    "daily": "ts-node src/sprint-analyzer.ts --daily"
+    "daily": "ts-node src/sprint-analyzer.ts --daily",
+    "web": "ts-node src/web/server.ts",
+    "web:build": "tsc && node dist/web/server.js",
+    "web:dev": "ts-node src/web/server.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "azure-devops-node-api": "^15.1.2",
+    "connect-sqlite3": "^0.9.16",
     "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "nodemailer": "^8.0.10",
-    "openai": "^6.41.0"
+    "openai": "^6.41.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
   },
   "devDependencies": {
+    "@types/connect-sqlite3": "^0.9.6",
+    "@types/express": "^5.0.6",
+    "@types/express-session": "^1.19.0",
     "@types/node": "^20.14.2",
     "@types/nodemailer": "^8.0.0",
+    "@types/passport": "^1.0.17",
+    "@types/passport-google-oauth20": "^2.0.17",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }

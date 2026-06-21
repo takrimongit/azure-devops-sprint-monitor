@@ -1,0 +1,14 @@
+<%- include('partials/head', { title: 'Login — Sprint Monitor', page: 'login' }) %>
+<div class="login-container">
+  <div class="login-card">
+    <h1>🔐 Sprint Monitor</h1>
+    <p>Sign in with your Google account to view sprint health and daily summaries.</p>
+    <a href="/auth/google" class="google-btn">
+      Sign in with Google
+    </a>
+    <% if (locals.query && locals.query.error) { %>
+      <p class="error-msg">Authentication failed. Make sure you use an authorized account.</p>
+    <% } %>
+  </div>
+</div>
+<%- include('partials/foot') %>
