@@ -42,6 +42,9 @@ if (!latest) { %>
       <h2><%= latest.gradeLabel || 'No Grade' %></h2>
       <p style="color:#8b949e;margin-top:4px">
         <%= summary.currentSprint || 'Unknown Sprint' %>
+        <% if (summary.currentSprintStartDate && summary.currentSprintEndDate) { %>
+          (<%= summary.currentSprintStartDate %> – <%= summary.currentSprintEndDate %>)
+        <% } %>
       </p>
     </div>
   </div>

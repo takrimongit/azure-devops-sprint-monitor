@@ -125,6 +125,8 @@ interface HygieneResult {
     warnings: number;
     teamMembers: number;
     personBreakdown: Record<string, number>;
+    currentSprintStartDate: string | null;
+    currentSprintEndDate: string | null;
   };
 }
 
@@ -386,6 +388,8 @@ function evaluateHygiene(data: SprintData): HygieneResult {
         warnings: 0,
         teamMembers: 0,
         personBreakdown: {},
+        currentSprintStartDate: null,
+        currentSprintEndDate: null,
       }
     };
   }
@@ -444,6 +448,8 @@ function evaluateHygiene(data: SprintData): HygieneResult {
       warnings,
       teamMembers: teamMembers.size,
       personBreakdown: allPersonBreakdown,
+      currentSprintStartDate: data.currentSprintStartDate,
+      currentSprintEndDate: data.currentSprintEndDate,
     }
   };
 }
