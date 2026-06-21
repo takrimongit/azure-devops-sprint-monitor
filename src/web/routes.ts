@@ -139,67 +139,55 @@ router.get("/sprint-health", (_req, res) => {
 });
 
 // ============================================================
-// ARTIFACTS — Browse past reports and outputs
+// ARTIFACTS — Work item hierarchy with attachments/links/comments
 // ============================================================
 
-router.get("/artifacts", (req, res) => {
-  const artifacts = getArtifacts();
+function getLatestArtifacts(): Record<string, any> | null {
+  if (!fs.existsSync(OUTPUT_DIR)) return null;
+  const files = fs.readdirSync(OUTPUT_DIR)
+    .filter(f => f.startsWith("sprint-artifacts-") && f.endsWith(".json"))
+    .sort((a, b) => b.localeCompare(a));
+  if (files.length === 0) return null;
+  try {
+    return JSON.parse(fs.readFileSync(path.join(OUTPUT_DIR, files[0]), "utf-8"));
+  } catch {
+    return null;
+  }
+}
 
-  // Filter by type
-  const filter = (req.query.type as string) || "all";
-  const filtered = filter === "all"
-    ? artifacts
-    : artifacts.filter(a => a.type === filter);
+router.get("/artifacts", (req, res) => {
+  const artifactsData = getLatestArtifacts();
+
+  // Also keep legacy file listing for downloads
+  const fileArtifacts = getArtifacts();
 
   res.render("artifacts", {
     title: "Artifacts — Sprint Monitor",
     currentUser: (req as any).currentUser,
-    artifacts: filtered,
-    filter,
+    data: artifactsData,
+    files: fileArtifacts,
     helpers: {
       formatDate: (d: string) => new Date(d).toLocaleDateString("en-US", {
-        weekday: "short", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit",
+        weekday: "short", month: "short", day: "numeric",
       }),
       formatSize: (bytes: number) => {
         if (bytes < 1024) return `${bytes} B`;
         if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
         return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
       },
+      isClosed: (state: string) => state === "Closed" || state === "Done",
+      attachmentIcon: (type: string) => {
+        if (type === "file") return "📎";
+        if (type === "hyperlink") return "🔗";
+        if (type === "workitem-link") return "🔗";
+        return "❓";
+      },
+      commentPreview: (text: string, maxLen: number = 200) => {
+        if (text.length <= maxLen) return text;
+        return text.slice(0, maxLen) + "…";
+      },
     },
   });
-});
-
-// View individual artifact content
-router.get("/artifacts/view/:name", (req, res) => {
-  const filePath = path.join(OUTPUT_DIR, req.params.name);
-
-  // Security: prevent directory traversal
-  if (!filePath.startsWith(OUTPUT_DIR)) {
-    return res.status(403).send("Forbidden");
-  }
-
-  if (!fs.existsSync(filePath)) {
-    return res.status(404).send("Artifact not found");
-  }
-
-  const ext = path.extname(filePath).slice(1).toLowerCase();
-
-  if (ext === "json") {
-    try {
-      const content = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-      return res.json(content);
-    } catch {
-      return res.status(500).send("Failed to parse JSON artifact");
-    }
-  }
-
-  if (ext === "html") {
-    return res.sendFile(filePath);
-  }
-
-  // For .md and others, render as text
-  const content = fs.readFileSync(filePath, "utf-8");
-  res.type("text/plain").send(content);
 });
 
 // ============================================================

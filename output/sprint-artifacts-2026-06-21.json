@@ -1,0 +1,965 @@
+{
+  "generatedAt": "2026-06-21T08:10:13.886Z",
+  "sprint": "Sprint 25",
+  "sprintStartDate": "2026-06-18",
+  "sprintEndDate": "2026-07-05",
+  "userStories": [
+    {
+      "id": 2171,
+      "title": "As a content manager, I want to review and manage LinkedIn content generated through n8n workflows so that I can approve, reject, and publish content efficiently",
+      "state": "Active",
+      "assignedTo": "Sheza Aejaz",
+      "tasks": [
+        {
+          "id": 2179,
+          "title": "Approve or Reject Content Functionality",
+          "state": "Active",
+          "assignedTo": "Sheza Aejaz",
+          "closedDate": null,
+          "attachments": [],
+          "links": [],
+          "comments": [
+            {
+              "author": "Unknown",
+              "text": "<div>New sheet link:&nbsp;<a href=\"https://docs.google.com/spreadsheets/d/1A__1reWKXLVsj2sNZmSZQHUCkTFWHDCEd9N55ybkUP0/edit?usp=sharing\">https://docs.google.com/spreadsheets/d/1A__1reWKXLVsj2sNZmSZQHUCkTFWHDCEd9N55ybkUP0/edit?usp=sharing</a> </div>",
+              "createdDate": "2026-06-17T16:03:57.143Z"
+            },
+            {
+              "author": "Unknown",
+              "text": "<div>testflight:&nbsp;<a href=\"https://appstoreconnect.apple.com/teams/1c9faeaf-068e-4d60-811e-60f2db7f1392/apps/6780266208/testflight/ios\">https://appstoreconnect.apple.com/teams/1c9faeaf-068e-4d60-811e-60f2db7f1392/apps/6780266208/testflight/ios</a></div>",
+              "createdDate": "2026-06-16T04:51:12.300Z"
+            }
+          ]
+        },
+        {
+          "id": 2202,
+          "title": "Add Niche-Based Keyword and Rising Topic Generation to the Content Workflow",
+          "state": "Active",
+          "assignedTo": "Anam Saleem",
+          "closedDate": null,
+          "attachments": [],
+          "links": [],
+          "comments": [
+            {
+              "author": "Unknown",
+              "text": "<div>Link to Daily Keyword generation Workflow :</div><div><a href=\"https://helpables.app.n8n.cloud/workflow/1wYMw4s7d70ojdlZ\">https://helpables.app.n8n.cloud/workflow/1wYMw4s7d70ojdlZ</a><br></div>",
+              "createdDate": "2026-06-17T17:26:34.267Z"
+            }
+          ]
+        },
+        {
+          "id": 2203,
+          "title": "Add Daily Blog Content Generation Using Approved Keywords and Rising Topics",
+          "state": "Active",
+          "assignedTo": "Anam Saleem",
+          "closedDate": null,
+          "attachments": [],
+          "links": [],
+          "comments": []
+        },
+        {
+          "id": 2204,
+          "title": "Add Weekly Blog and Post-Ready Content Generation from Approved Daily Content",
+          "state": "New",
+          "assignedTo": "Anam Saleem",
+          "closedDate": null,
+          "attachments": [],
+          "links": [],
+          "comments": []
+        }
+      ]
+    },
+    {
+      "id": 2181,
+      "title": "As a proposal reviewer, I want to review and manage generated Upwork proposals so that I can quickly approve or reject them",
+      "state": "Active",
+      "assignedTo": "Sheza Aejaz",
+      "tasks": [
+        {
+          "id": 2184,
+          "title": "Setup Worksheet Connectivity",
+          "state": "New",
+          "assignedTo": "Sheza Aejaz",
+          "closedDate": null,
+          "attachments": [],
+          "links": [],
+          "comments": []
+        },
+        {
+          "id": 2185,
+          "title": "Proposal List Screen",
+          "state": "New",
+          "assignedTo": "Sheza Aejaz",
+          "closedDate": null,
+          "attachments": [],
+          "links": [],
+          "comments": []
+        },
+        {
+          "id": 2186,
+          "title": "Proposal Detail Screen",
+          "state": "New",
+          "assignedTo": "Sheza Aejaz",
+          "closedDate": null,
+          "attachments": [],
+          "links": [],
+          "comments": []
+        },
+        {
+          "id": 2187,
+          "title": "Approve or Reject Proposal Functionality",
+          "state": "New",
+          "assignedTo": "Sheza Aejaz",
+          "closedDate": null,
+          "attachments": [],
+          "links": [],
+          "comments": []
+        }
+      ]
+    },
+    {
+      "id": 2192,
+      "title": "As a creator and workflow developer, I want to create a video explaining the Upwork Proposal Automation Workflow so that I can demonstrate the workflow's functionality, business value, and automation capabilities.",
+      "state": "New",
+      "assignedTo": "Anam Saleem",
+      "tasks": [
+        {
+          "id": 2193,
+          "title": "Create Video Script for Upwork Proposal Automation Workflow",
+          "state": "Active",
+          "assignedTo": "Anam Saleem",
+          "closedDate": null,
+          "attachments": [],
+          "links": [],
+          "comments": []
+        },
+        {
+          "id": 2194,
+          "title": "Review Workflow, Identify Recording Scenarios Description and Record Workflow Screen Demonstration",
+          "state": "New",
+          "assignedTo": "Anam Saleem",
+          "closedDate": null,
+          "attachments": [],
+          "links": [],
+          "comments": []
+        },
+        {
+          "id": 2195,
+          "title": "Record Face-Camera Presentation",
+          "state": "New",
+          "assignedTo": "Anam Saleem",
+          "closedDate": null,
+          "attachments": [],
+          "links": [],
+          "comments": []
+        },
+        {
+          "id": 2196,
+          "title": "Review and Validate Recorded Assets, Organize and Upload Assets to Google Drive",
+          "state": "New",
+          "assignedTo": "Anam Saleem",
+          "closedDate": null,
+          "attachments": [],
+          "links": [],
+          "comments": []
+        }
+      ]
+    }
+  ],
+  "orphanTasks": [],
+  "summary": {
+    "totalUserStories": 3,
+    "totalTasks": 12,
+    "closedTasks": 0,
+    "totalAttachments": 0,
+    "totalLinks": 0,
+    "totalComments": 3
+  },
+  "lastSprint": {
+    "generatedAt": "2026-06-21T08:10:13.886Z",
+    "sprint": "Sprint 24",
+    "sprintStartDate": "2026-06-02",
+    "sprintEndDate": "2026-06-17",
+    "userStories": [
+      {
+        "id": 2125,
+        "title": "As a creator, I want to build a demo version of a Vertical Micro Drama App so that I can demonstrate how I would approach a real client project",
+        "state": "Active",
+        "assignedTo": "Sheza Aejaz",
+        "tasks": [
+          {
+            "id": 2130,
+            "title": "Write Video Script",
+            "state": "Closed",
+            "assignedTo": "Sheza Aejaz",
+            "closedDate": "2026-06-04T17:03:57.32Z",
+            "attachments": [
+              {
+                "name": "Sheza script-demo app.pdf",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/53477ae0-365c-4c03-a428-3f9f1af2a503",
+                "type": "file"
+              }
+            ],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div>Link to script document:&nbsp;<a href=\"https://docs.google.com/document/d/1sT7tVwvAVvIsMkSc_F2LoroRkm4lRsv0zwgCpq0OIps/edit?usp=sharing\">https://docs.google.com/document/d/1sT7tVwvAVvIsMkSc_F2LoroRkm4lRsv0zwgCpq0OIps/edit?usp=sharing</a><br></div>",
+                "createdDate": "2026-06-02T18:49:18.463Z"
+              }
+            ]
+          },
+          {
+            "id": 2131,
+            "title": "Record Demo Walkthrough",
+            "state": "Closed",
+            "assignedTo": "Sheza Aejaz",
+            "closedDate": "2026-06-07T05:06:23.617Z",
+            "attachments": [
+              {
+                "name": "Screenshot_1780332115.png",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/c5130edf-bf23-41a3-a7c3-1d600eff9c32",
+                "type": "file"
+              },
+              {
+                "name": "demo app1.mp4",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/16138bf5-6a43-49c4-b406-e6139d1e8f20",
+                "type": "file"
+              },
+              {
+                "name": "Screenshot_1780332060.png",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/7957a43f-ae64-4abe-b3d2-ab6efa804a15",
+                "type": "file"
+              },
+              {
+                "name": "demo app.mp4",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/41b667a4-3280-4432-99db-ba6aad8d3dd0",
+                "type": "file"
+              },
+              {
+                "name": "Screenshot_1780574869.png",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/1bd7fa21-f4bf-4990-983b-e2518529dff9",
+                "type": "file"
+              },
+              {
+                "name": "Screenshot_1780332120.png",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/22006801-a4fd-4832-9895-5bb771fb2aaa",
+                "type": "file"
+              },
+              {
+                "name": "Screenshot_1780332046.png",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/b4aab782-0743-46b4-b36c-ea41c4b8f800",
+                "type": "file"
+              },
+              {
+                "name": "Screenshot_1780332110.png",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/10eb2eb6-5a8e-40fc-b5c4-d7cf94f30536",
+                "type": "file"
+              }
+            ],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div>Videos and pictures added in attachments.&nbsp;<br></div><div>video:&nbsp;<a href=\"https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/16138bf5-6a43-49c4-b406-e6139d1e8f20?fileName=demo%20app1.mp4&amp;download=true\" tabindex=0 style=\"box-sizing:border-box;color:rgb(0, 90, 158);border-radius:2px;cursor:pointer;outline:transparent;text-decoration:underline;transition:color 80ms cubic-bezier(0.165, 0.84, 0.44, 1), background 80ms linear;\">demo app1.mp4</a></div>",
+                "createdDate": "2026-06-07T05:25:55.790Z"
+              }
+            ]
+          },
+          {
+            "id": 2132,
+            "title": "Record Voiceover / Face Recording",
+            "state": "Closed",
+            "assignedTo": "Sheza Aejaz",
+            "closedDate": "2026-06-08T15:43:17.78Z",
+            "attachments": [
+              {
+                "name": "IMG_1426.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/83378e77-3fee-4787-9806-26417b335958",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1471.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/d67f34a3-e544-4db1-b3df-14e86a84c0b1",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1442.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/4cdab234-a59a-462c-b583-d1da1aa8663c",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1482.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/950cf92c-bdcf-49df-8cb2-2f9ed432a0a5",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1447.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/e68aee7e-5f84-4caf-83de-6d1dfbc3ae63",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1385.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/0cb89023-cb91-48db-8f6a-e7e04d312330",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1481.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/08dcf254-66b5-423e-a3e5-a34a88d0096e",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1433.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/50f50ab8-b419-4438-8794-6778b776fa15",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1382.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/0655de70-48e4-452a-adc1-0fc9e12b9b45",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1378.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/1a9b71ee-7199-4619-92e7-6ed84b0abf8e",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1452.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/a8bd6f19-d086-4d9c-b20b-de1654792147",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1448.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/7144d4c3-a194-4fc4-bffd-74de809a3fc7",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1439.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/f9c566c5-4034-41de-8d4c-a4fbf04dde0e",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1371.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/d4b79900-78a7-4bf4-82aa-3f3d3e1caf9b",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1391.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/da84befe-a3ed-402a-ab9d-d69f6baccb52",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1386.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/a9dfd729-e58d-4604-af94-0cb972325158",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1404.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/786cac1e-1037-4a01-baa0-970bffa989a5",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1445.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/867be577-ce61-4762-9239-f5b54b3bd682",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1422.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/22e98b1d-b3d1-4a1a-868a-f43be9913104",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1450.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/c7a0eecf-89ad-4780-a356-f09da0cab785",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1448.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/a2647f66-fd63-4e02-b3da-958d20e899f6",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1462.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/9d339d4e-0aca-4536-aa93-28e8506c0d15",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1436.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/8926a4ac-5930-441b-8cd7-97b458c19425",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1418.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/f6329f23-b47b-4a78-91d6-dff800b744b2",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1476.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/34f71fb5-6d4e-4742-b1f4-f7acace2cfe9",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1373.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/20a35a4f-e399-496c-b5b9-779ae58e58ba",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1430.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/2be50030-4597-49f6-89df-1d8b3d4f4550",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1457.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/3a38abd2-fe4d-4cd3-a854-9976cccf9839",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1409.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/d1eec969-ae8d-42f1-b0bd-b4c361186840",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1461.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/a52ca110-74a7-4a8d-87c8-f785e670688c",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1438.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/b86876f4-2a72-4b72-b261-25ab53170dc3",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1446.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/3e099335-62c1-4084-8756-3986098a7d97",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1451.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/9b321e6b-55c7-44ac-b002-57dbb40ef693",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1432.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/dba813a3-17bd-463b-aa85-cce6526b8a0b",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1461.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/73703ad3-4c06-4b16-a55b-7a5ef068d700",
+                "type": "file"
+              },
+              {
+                "name": "IMG_1399.MOV",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/bd22f324-c62e-403d-aa6a-ada24e84bc15",
+                "type": "file"
+              }
+            ],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div>Videos uploaded to attachments, links(all video links cannot be uploaded as there are 36 attachments which can only be pasted here manually one by one):<br></div><div><span><a href=\"https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/d67f34a3-e544-4db1-b3df-14e86a84c0b1?fileName=IMG_1471.MOV&amp;download=true\" tabindex=0 style=\"box-sizing:border-box;color:rgb(0, 90, 158);border-radius:2px;cursor:pointer;outline:transparent;text-decoration:underline;transition:color 80ms cubic-bezier(0.165, 0.84, 0.44, 1), background 80ms linear;\">IMG_1471.MOV</a><br></span><div><a href=\"https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/83378e77-3fee-4787-9806-26417b335958?fileName=IMG_1426.MOV&amp;download=true\" tabindex=0 style=\"box-sizing:border-box;color:rgb(0, 90, 158);border-radius:2px;cursor:pointer;outline:transparent;text-decoration:underline;transition:color 80ms cubic-bezier(0.165, 0.84, 0.44, 1), background 80ms linear;\">IMG_1426.MOV</a><br></div><div><a href=\"https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/4cdab234-a59a-462c-b583-d1da1aa8663c?fileName=IMG_1442.MOV&amp;download=true\" tabindex=0 style=\"box-sizing:border-box;color:rgb(0, 90, 158);border-radius:2px;cursor:pointer;outline:transparent;text-decoration:underline;transition:color 80ms cubic-bezier(0.165, 0.84, 0.44, 1), background 80ms linear;\">IMG_1442.MOV</a><br></div><div><a href=\"https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/950cf92c-bdcf-49df-8cb2-2f9ed432a0a5?fileName=IMG_1482.MOV&amp;download=true\" tabindex=0 style=\"box-sizing:border-box;color:rgb(0, 90, 158);border-radius:2px;cursor:pointer;outline:transparent;text-decoration:underline;transition:color 80ms cubic-bezier(0.165, 0.84, 0.44, 1), background 80ms linear;\">IMG_1482.MOV</a><br></div><div><a href=\"https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/e68aee7e-5f84-4caf-83de-6d1dfbc3ae63?fileName=IMG_1447.MOV&amp;download=true\" tabindex=0 style=\"box-sizing:border-box;color:rgb(0, 90, 158);border-radius:2px;cursor:pointer;outline:transparent;text-decoration:underline;transition:color 80ms cubic-bezier(0.165, 0.84, 0.44, 1), background 80ms linear;\">IMG_1447.MOV</a><br></div><div><a href=\"https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/0cb89023-cb91-48db-8f6a-e7e04d312330?fileName=IMG_1385.MOV&amp;download=true\" tabindex=0 style=\"box-sizing:border-box;color:rgb(0, 90, 158);border-radius:2px;cursor:pointer;outline:transparent;text-decoration:underline;transition:color 80ms cubic-bezier(0.165, 0.84, 0.44, 1), background 80ms linear;\">IMG_1385.MOV</a><br></div><div><a href=\"https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/08dcf254-66b5-423e-a3e5-a34a88d0096e?fileName=IMG_1481.MOV&amp;download=true\" tabindex=0 style=\"box-sizing:border-box;color:rgb(0, 90, 158);border-radius:2px;cursor:pointer;outline:transparent;text-decoration:underline;transition:color 80ms cubic-bezier(0.165, 0.84, 0.44, 1), background 80ms linear;\">IMG_1481.MOV</a><br></div><div><a href=\"https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/50f50ab8-b419-4438-8794-6778b776fa15?fileName=IMG_1433.MOV&amp;download=true\" tabindex=0 style=\"box-sizing:border-box;color:rgb(0, 90, 158);border-radius:2px;cursor:pointer;outline:transparent;text-decoration:underline;transition:color 80ms cubic-bezier(0.165, 0.84, 0.44, 1), background 80ms linear;\">IMG_1433.MOV</a><br></div><div><a href=\"https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/0655de70-48e4-452a-adc1-0fc9e12b9b45?fileName=IMG_1382.MOV&amp;download=true\" tabindex=0 style=\"box-sizing:border-box;color:rgb(0, 90, 158);border-radius:2px;cursor:pointer;outline:transparent;text-decoration:underline;transition:color 80ms cubic-bezier(0.165, 0.84, 0.44, 1), background 80ms linear;\">IMG_1382.MOV</a><br></div><div><a href=\"https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/1a9b71ee-7199-4619-92e7-6ed84b0abf8e?fileName=IMG_1378.MOV&amp;download=true\" tabindex=0 style=\"box-sizing:border-box;color:rgb(0, 90, 158);border-radius:2px;cursor:pointer;outline:transparent;text-decoration:underline;transition:color 80ms cubic-bezier(0.165, 0.84, 0.44, 1), background 80ms linear;\">IMG_1378.MOV</a><br></div><span></span><br></div>",
+                "createdDate": "2026-06-08T15:12:24.680Z"
+              }
+            ]
+          },
+          {
+            "id": 2133,
+            "title": "Video Editing",
+            "state": "New",
+            "assignedTo": "Sheza Aejaz",
+            "closedDate": null,
+            "attachments": [],
+            "links": [],
+            "comments": []
+          },
+          {
+            "id": 2134,
+            "title": "Upload & Publish Video",
+            "state": "New",
+            "assignedTo": "Sheza Aejaz",
+            "closedDate": null,
+            "attachments": [],
+            "links": [],
+            "comments": []
+          }
+        ]
+      },
+      {
+        "id": 2138,
+        "title": "As a YouTube Channel Manager, I want to learn YouTube channel management processes, tools, and best practices so that I can effectively monitor channel performance, and support the company's YouTube growth objectives.",
+        "state": "New",
+        "assignedTo": "Aejaz Ali",
+        "tasks": [
+          {
+            "id": 2139,
+            "title": "Learn YouTube Studio",
+            "state": "Closed",
+            "assignedTo": "Aejaz Ali",
+            "closedDate": "2026-06-04T16:09:40.173Z",
+            "attachments": [],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div>Link to Youtube Creators&nbsp;</div>",
+                "createdDate": "2026-06-04T04:47:26.237Z"
+              },
+              {
+                "author": "Unknown",
+                "text": "<div><a href=\"https://www.youtube.com/watch?v=-dHIjmQyjFQ&amp;list=PLpjK416fmKwQ42eDY75Q05uM0g3N9WNXU\">https://www.youtube.com/watch?v=-dHIjmQyjFQ&amp;list=PLpjK416fmKwQ42eDY75Q05uM0g3N9WNXU</a><br></div><div> </div>",
+                "createdDate": "2026-06-04T04:43:43.340Z"
+              }
+            ]
+          },
+          {
+            "id": 2140,
+            "title": "Learn Video Quality Review Process",
+            "state": "Closed",
+            "assignedTo": "Aejaz Ali",
+            "closedDate": "2026-06-06T15:27:38.817Z",
+            "attachments": [],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div><p style=\"margin:0cm 0cm 8pt;font-size:12pt;font-family:Aptos, sans-serif;\"><b><span style=\"font-size:13.5pt;font-family:&quot;Times New Roman&quot;,serif;\">Implementation\nArtifacts</span></b> </p><ul style=\"margin-bottom:0cm;\">\n <li style=\"margin:0cm 0cm 8pt;font-size:12pt;font-family:Aptos, sans-serif;\"><span style=\"font-family:&quot;Times New Roman&quot;,serif;\">Watched:\n     YouTube Video for Captions and Subtitles. - <span style=\"\">&nbsp;</span>https://www.youtube.com/watch?v=RrlBcbPrrnA</span> </li>\n <li style=\"margin:0cm 0cm 8pt;font-size:12pt;font-family:Aptos, sans-serif;\"><span style=\"font-family:&quot;Times New Roman&quot;,serif;\">Watched:\n     YouTube Video for Intro and Outro - https://www.youtube.com/watch?v=VT5Ufi-Solo</span> </li> </ul><span style=\"font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;\">Watched\nYouTube video for Branding -&nbsp;&nbsp;&nbsp;<a href=\"https://www.youtube.com/watch?v=t_q_hnlVqUg\">https://www.youtube.com/watch?v=t_q_hnlVqUg</a></span><br> </div>",
+                "createdDate": "2026-06-06T15:27:18.147Z"
+              }
+            ]
+          },
+          {
+            "id": 2141,
+            "title": "Learn YouTube SEO Fundamentals. Learn Thumbnail Review Best Practices",
+            "state": "Closed",
+            "assignedTo": "Aejaz Ali",
+            "closedDate": "2026-06-08T04:37:04.787Z",
+            "attachments": [],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div><span style=\"display:inline !important;\">Implementation Artifacts</span><br> </div><div><span style=\"display:inline !important;\"><br></span> </div><div><span style=\"display:inline !important;\">Watched following YouTube videos to learn above</span> </div><div><ol><li><span style=\"display:inline !important;\">&nbsp;<a href=\"https://www.youtube.com/shorts/aOxcHY0pgOo\">https://www.youtube.com/shorts/aOxcHY0pgOo</a></span> </li><li><a href=\"https://www.youtube.com/watch?v=1t4SWButaXU\">https://www.youtube.com/watch?v=1t4SWButaXU</a><br> </li> </ol><span style=\"display:inline !important;\"></span> </div><div><span style=\"display:inline !important;\"><br></span> </div><div><span style=\"display:inline !important;\"><br></span> </div>",
+                "createdDate": "2026-06-07T15:38:56.333Z"
+              }
+            ]
+          },
+          {
+            "id": 2142,
+            "title": "Learn YouTube Analytics, Perform Channel Review and Monitoring",
+            "state": "Closed",
+            "assignedTo": "Aejaz Ali",
+            "closedDate": "2026-06-09T04:23:45.777Z",
+            "attachments": [],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div>YouTube Video -&nbsp;<a href=\"https://www.youtube.com/watch?v=2g6hbhclpKo\">https://www.youtube.com/watch?v=2g6hbhclpKo</a> </div>",
+                "createdDate": "2026-06-09T04:22:29.223Z"
+              }
+            ]
+          },
+          {
+            "id": 2143,
+            "title": "Document Issues and Recommendations",
+            "state": "Closed",
+            "assignedTo": "Aejaz Ali",
+            "closedDate": "2026-06-09T14:37:52.98Z",
+            "attachments": [
+              {
+                "name": "Helpables_YouTube_Channel_Improvement Suggestions.docx",
+                "url": "https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/87ba9ad4-8e6d-4b45-86db-2f63819b9e83",
+                "type": "file"
+              }
+            ],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div><b style=\"box-sizing:border-box;font-family:Aptos, sans-serif;font-size:16px;\"><span style=\"box-sizing:border-box;font-size:13.5pt;font-family:&quot;Times New Roman&quot;, serif;\">Implementation Artifacts:&nbsp;<a href=\"https://dev.azure.com/HelpablesOrg/3dbd7e9d-ac8d-4d4e-81ea-20dce116bcef/_apis/wit/attachments/87ba9ad4-8e6d-4b45-86db-2f63819b9e83?fileName=Helpables_YouTube_Channel_Improvement%20Suggestions.docx&amp;download=true\" tabindex=0 style=\"box-sizing:border-box;color:rgb(0, 90, 158);border-radius:2px;cursor:pointer;outline:transparent;text-decoration:underline;transition:color 80ms cubic-bezier(0.165, 0.84, 0.44, 1), background 80ms linear;font-size:14px;font-weight:400;\">Helpables_YouTube_Channel_Improvement Suggestions.docx</a></span></b><br></div><div> </div><div><b style=\"box-sizing:border-box;font-family:Aptos, sans-serif;font-size:16px;\"><span style=\"box-sizing:border-box;font-size:13.5pt;font-family:&quot;Times New Roman&quot;, serif;\"><br></span></b> </div><div><b style=\"box-sizing:border-box;font-family:Aptos, sans-serif;font-size:16px;\"><span style=\"box-sizing:border-box;font-size:13.5pt;font-family:&quot;Times New Roman&quot;, serif;\"></span></b> </div><div><b style=\"box-sizing:border-box;font-family:Aptos, sans-serif;font-size:16px;\"><span style=\"box-sizing:border-box;font-size:13.5pt;font-family:&quot;Times New Roman&quot;, serif;\"><br></span></b> </div>",
+                "createdDate": "2026-06-09T14:35:59.387Z"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 2161,
+        "title": "As a workflow automation developer, I want an Upwork proposal to automatically generate a real-world use case, create a video explanation, send it for approval, and store approved assets in Google Drive so that proposal delivery becomes fully automated.",
+        "state": "New",
+        "assignedTo": "Anam Saleem",
+        "tasks": [
+          {
+            "id": 2162,
+            "title": "Create Proposal Submission and Confirmation Workflow",
+            "state": "Closed",
+            "assignedTo": "Anam Saleem",
+            "closedDate": "2026-06-02T05:00:28.167Z",
+            "attachments": [],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div><span>Artifact Repository<br></span><div><br></div><div>Google Drive Folder:<br></div><div>https://drive.google.com/drive/folders/1tJwG_Q-PvMjVx9ZEiURyvazNbwbCRGFu<br></div><div><br></div><div>Contains:<br></div><div>- Job Details<br></div><div>- Proposal Data<br></div><div>- Real World Use Cases<br></div><div>- Generated Scripts<br></div><div>- Video Assets<br></div><div>- Workflow Outputs<br></div><div><br></div><span>Used for proposal intake, validation, proposal ID generation, and confirmation workflow testing.</span><br></div>",
+                "createdDate": "2026-06-02T18:02:20.613Z"
+              }
+            ]
+          },
+          {
+            "id": 2163,
+            "title": "Generate Real-World Use Case from Approved Proposal",
+            "state": "Closed",
+            "assignedTo": "Anam Saleem",
+            "closedDate": "2026-06-02T05:00:30.133Z",
+            "attachments": [],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div><span>Implementation Artifacts<br></span><div><br></div><div>Google Drive Repository:<br></div><div>https://drive.google.com/drive/folders/1tJwG_Q-PvMjVx9ZEiURyvazNbwbCRGFu<br></div><div><br></div><div>n8n Workflow:<br></div><div>https://helpables.app.n8n.cloud/workflow/i60UPy7OFxk9bbor?projectId=7pegi7C7viXXjzYB&amp;parentFolderId=Q0p8aUswZtAavHBY<br></div><div><br></div><div>Purpose:<br></div><div>- Processes approved proposal information.<br></div><div>- Generates a relevant real-world business use case.<br></div><div>- Stores generated use case data for subsequent workflow stages.<br></div><div><br></div><span>Generated outputs are available in the linked repository.</span><br></div>",
+                "createdDate": "2026-06-02T18:05:21.387Z"
+              }
+            ]
+          },
+          {
+            "id": 2164,
+            "title": "Generate Video Script from Proposal and Use Case",
+            "state": "Closed",
+            "assignedTo": "Anam Saleem",
+            "closedDate": "2026-06-02T05:00:31.957Z",
+            "attachments": [],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div><span>Implementation Artifacts<br></span><div><br></div><div>Google Drive Repository:<br></div><div>https://drive.google.com/drive/folders/1tJwG_Q-PvMjVx9ZEiURyvazNbwbCRGFu<br></div><div><br></div><div>n8n Workflow:<br></div><div>https://helpables.app.n8n.cloud/workflow/i60UPy7OFxk9bbor?projectId=7pegi7C7viXXjzYB&amp;parentFolderId=Q0p8aUswZtAavHBY<br></div><div><br></div><div>Purpose:<br></div><div>- Uses proposal details and generated use cases.<br></div><div>- Creates a video-ready script.<br></div><div>- Stores generated script content for video production.<br></div><div><br></div><span>Supporting documents and generated scripts are maintained in the linked repository.</span><br></div>",
+                "createdDate": "2026-06-02T18:05:54.927Z"
+              }
+            ]
+          },
+          {
+            "id": 2165,
+            "title": "Generate AI Video Using Avatar Character",
+            "state": "Closed",
+            "assignedTo": "Anam Saleem",
+            "closedDate": "2026-06-03T17:42:37.913Z",
+            "attachments": [],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div><span>Implementation Artifacts<br></span></div><div><div>Google drive link to generated video :&nbsp;</div><div><a href=\"https://drive.google.com/drive/folders/1HVinGidlb8gb_-xtaUcrzgfOOkamAY-f\">https://drive.google.com/drive/folders/1HVinGidlb8gb_-xtaUcrzgfOOkamAY-f</a></div><div><br></div><div>n8n Workflow:<br></div><div>https://helpables.app.n8n.cloud/workflow/i60UPy7OFxk9bbor?projectId=7pegi7C7viXXjzYB&amp;parentFolderId=Q0p8aUswZtAavHBY<br></div><div><br></div><div>Purpose:<br></div><div>- Uses generated video scripts.<br></div><div>- Produces AI-generated video content using avatar-based presentation.<br></div><div>- Supports automated content generation workflow.<br></div><div><br></div><span>Generated assets and supporting files are stored in the linked repository.</span><br></div>",
+                "createdDate": "2026-06-02T18:09:05.070Z"
+              }
+            ]
+          },
+          {
+            "id": 2166,
+            "title": "Save Assets to Google Drive",
+            "state": "Closed",
+            "assignedTo": "Anam Saleem",
+            "closedDate": "2026-06-07T16:41:13.013Z",
+            "attachments": [],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div><span>Implementation Artifacts<br></span><div><br></div><div>Google Drive Repository:<br></div><div></div>https://drive.google.com/drive/folders/1HVinGidlb8gb_-xtaUcrzgfOOkamAY-f<div><br></div><div>n8n Workflow:<br></div><div>https://helpables.app.n8n.cloud/workflow/i60UPy7OFxk9bbor?projectId=7pegi7C7viXXjzYB&amp;parentFolderId=Q0p8aUswZtAavHBY<br></div><div><br></div><div>Purpose:<br></div><div>- Stores generated use cases.<br></div><div>- Stores generated scripts.<br></div><div>- Stores generated video assets.<br></div><div>- Maintains project outputs and supporting documents in a centralized repository.<br></div><div><br></div><span>This Google Drive folder serves as the primary artifact repository for the workflow.</span><br></div>",
+                "createdDate": "2026-06-02T18:09:39.767Z"
+              }
+            ]
+          },
+          {
+            "id": 2167,
+            "title": "Add Workflow Tracking, Logging, and Error Handling",
+            "state": "Closed",
+            "assignedTo": "Anam Saleem",
+            "closedDate": "2026-06-14T05:16:19.29Z",
+            "attachments": [],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div><br></div><div><span>Implementation Artifacts<br></span><div><br></div><div>Google Sheets link :<br></div><div><a href=\"https://docs.google.com/spreadsheets/d/1t3dCB8h183IA6DWA8czYpO4ih7OdWMEjiTIt3NBOmcM/edit?gid=0#gid=0\" style=\"box-sizing:border-box;color:rgb(0, 90, 158);text-decoration:underline;cursor:pointer;\">https://docs.google.com/spreadsheets/d/1t3dCB8h183IA6DWA8czYpO4ih7OdWMEjiTIt3NBOmcM/edit?gid=0#gid=0</a><br></div><div><br></div><div>n8n Workflow:<br></div><div>https://helpables.app.n8n.cloud/workflow/i60UPy7OFxk9bbor?projectId=7pegi7C7viXXjzYB&amp;parentFolderId=Q0p8aUswZtAavHBY<br></div><div><br></div><div>Purpose:<br></div><div>- Tracks proposal processing status throughout the workflow.<br></div><div>- Records use case generation status.<br></div><div>- Records script generation status.<br></div><div>- Tracks AI video generation progress.<br></div><div>- Monitors Google Drive upload completion.<br></div><div>- Captures workflow execution results and processing timestamps.<br></div><div>- Provides visibility into workflow state and generated outputs.<br></div><div><br></div><div>Tracking Data Includes:<br></div><div>- Job Title<br></div><div>- Client Information<br></div><div>- Proposal Status<br></div><div>- Use Case Status<br></div><div>- Script Status<br></div><div>- Video Generation Status<br></div><div>- Google Drive Upload Status<br></div><div>- Approval Status<br></div><div>- Output Links<br></div><div>- Processing Dates<br></div><div><br></div><span>The Google Sheet serves as the central tracking and monitoring repository for workflow execution, status updates, and generated deliverables.</span><br></div>",
+                "createdDate": "2026-06-08T16:03:57.980Z"
+              }
+            ]
+          },
+          {
+            "id": 2168,
+            "title": "Merge AI-Generated Video Segments into a Single Final Video within n8n",
+            "state": "Closed",
+            "assignedTo": "Anam Saleem",
+            "closedDate": "2026-06-07T16:24:46.477Z",
+            "attachments": [],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div><span>Implementation Artifacts<br></span><div><br></div><div>Google Drive Repository:<br></div><div>https://drive.google.com/drive/folders/1AIEthPXl01pIpOUuZqzjLxZc-N1ExDSe<br></div><div><br></div><div>n8n Workflow:<br></div><div>https://helpables.app.n8n.cloud/workflow/i60UPy7OFxk9bbor?projectId=7pegi7C7viXXjzYB&amp;parentFolderId=Q0p8aUswZtAavHBY<br></div><div><br></div><div>Purpose:<br></div><div>- Receives multiple AI-generated video scene outputs.<br></div><div>- Maintains correct scene ordering based on generated script sequence.<br></div><div>- Merges individual video clips into a single continuous video.<br></div><div>- Validates scene availability before merge execution.<br></div><div>- Stores the final merged video and related outputs.<br></div><div>- Logs merge status, processing results, and error details.<br></div><div><br></div><div>Artifacts Repository Contents:</div><div>- Final merged video output<br></div><div><br></div><div><br></div><span>The linked repository serves as the artifact storage location for video merge inputs, outputs, and workflow-generated assets.</span><br></div>",
+                "createdDate": "2026-06-04T18:14:49.710Z"
+              }
+            ]
+          },
+          {
+            "id": 2191,
+            "title": "Add Approval and Revision Workflow for Proposal and Video Script Before Video Generation",
+            "state": "Closed",
+            "assignedTo": "Anam Saleem",
+            "closedDate": "2026-06-15T05:19:59.427Z",
+            "attachments": [],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div>n8n Workflow Link :</div><div><a href=\"https://helpables.app.n8n.cloud/workflow/i60UPy7OFxk9bbor\">https://helpables.app.n8n.cloud/workflow/i60UPy7OFxk9bbor</a><br></div><div><br></div><div>n8n form link :</div><div><a href=\"https://helpables.app.n8n.cloud/form-test/08118bf1-9264-4993-94de-2d4b99decd3e\">https://helpables.app.n8n.cloud/form-test/08118bf1-9264-4993-94de-2d4b99decd3e</a><br></div>",
+                "createdDate": "2026-06-15T05:20:46.110Z"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 2198,
+        "title": "Optimize Helpables YouTube Channel Content and Presentation",
+        "state": "Active",
+        "assignedTo": "Aejaz Ali",
+        "tasks": [
+          {
+            "id": 2199,
+            "title": "Channel Structure and Home Tab Optimization",
+            "state": "Closed",
+            "assignedTo": "Aejaz Ali",
+            "closedDate": "2026-06-15T09:54:47.633Z",
+            "attachments": [],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div>Helpables Youtube Channel optimized:&nbsp;&nbsp;<a href=\"https://www.youtube.com/@Helpables/featured\">https://www.youtube.com/@Helpables/featured</a></div>",
+                "createdDate": "2026-06-15T09:54:40.607Z"
+              }
+            ]
+          },
+          {
+            "id": 2200,
+            "title": "Thumbnail and Video Content Optimization",
+            "state": "Closed",
+            "assignedTo": "Aejaz Ali",
+            "closedDate": "2026-06-17T04:53:53.79Z",
+            "attachments": [],
+            "links": [],
+            "comments": [
+              {
+                "author": "Unknown",
+                "text": "<div><a href=\"https://www.youtube.com/@Helpables\">https://www.youtube.com/@Helpables</a><br> </div>",
+                "createdDate": "2026-06-17T04:53:53.790Z"
+              }
+            ]
+          },
+          {
+            "id": 2201,
+            "title": "Channel Branding and SEO Enhancement",
+            "state": "New",
+            "assignedTo": "Aejaz Ali",
+            "closedDate": null,
+            "attachments": [],
+            "links": [],
+            "comments": []
+          }
+        ]
+      }
+    ],
+    "orphanTasks": [
+      {
+        "id": 2173,
+        "title": "Create App Flow & Screen Requirements, Design Screens in Stitch and Review & Finalize them",
+        "state": "Closed",
+        "assignedTo": "Sheza Aejaz",
+        "closedDate": "2026-06-10T10:45:16.707Z",
+        "attachments": [],
+        "links": [],
+        "comments": [
+          {
+            "author": "Unknown",
+            "text": "<div>Link to Stitch design:&nbsp;<a href=\"https://stitch.withgoogle.com/projects/15633381323324971325\">https://stitch.withgoogle.com/projects/15633381323324971325</a></div>",
+            "createdDate": "2026-06-09T16:24:53.813Z"
+          }
+        ]
+      },
+      {
+        "id": 2174,
+        "title": "Setup Google Sheets API Integration",
+        "state": "Closed",
+        "assignedTo": "Sheza Aejaz",
+        "closedDate": "2026-06-15T05:07:01.887Z",
+        "attachments": [],
+        "links": [],
+        "comments": [
+          {
+            "author": "Unknown",
+            "text": "<div>June 10th 2026:<br>Actual stitch design being used:&nbsp;<a href=\"https://stitch.withgoogle.com/projects/620339698562138585\" target=_blank style=\"color:rgb(17, 85, 204);font-family:Arial, Helvetica, sans-serif;\">https://stitch.withgoogle.com/<wbr>projects/620339698562138585</a></div><div><br></div><div>The project is underway, I have created the dummy screens for now, the actual data will be added later. I do not have permission to create a google cloud project for the app so i have asked Anam to do it, she hasn't received permission for it yet. When it's done I will be able to fetch the data and display it. I have also started working on the other app so I can finish both apps sooner.</div>",
+            "createdDate": "2026-06-10T16:14:10.433Z"
+          }
+        ]
+      },
+      {
+        "id": 2175,
+        "title": "Fetch Keywords, Daily Content and Weekly Content",
+        "state": "Closed",
+        "assignedTo": "Sheza Aejaz",
+        "closedDate": "2026-06-15T05:07:10.093Z",
+        "attachments": [],
+        "links": [],
+        "comments": [
+          {
+            "author": "Unknown",
+            "text": "<div>new sheet link:&nbsp;<a href=\"https://docs.google.com/spreadsheets/d/1A__1reWKXLVsj2sNZmSZQHUCkTFWHDCEd9N55ybkUP0/edit?usp=sharing\">https://docs.google.com/spreadsheets/d/1A__1reWKXLVsj2sNZmSZQHUCkTFWHDCEd9N55ybkUP0/edit?usp=sharing</a> </div>",
+            "createdDate": "2026-06-17T16:00:58.550Z"
+          },
+          {
+            "author": "Unknown",
+            "text": "<div>The fetching had been successfully done, through apps script extension of google sheets. Although this did not change the status of the keywords in the sheets itself as i had intended it to. I am trying to deploy firebase functions through connecting the google sheet to google cloud console. Although the deployment has been held up because it requires a firebase blaze plan. After I receive sufficient permissions, the deployment will be complete and&nbsp; the rest of the app will be completed after that.&nbsp;<br>Link to google sheets:&nbsp;<a href=\"https://docs.google.com/spreadsheets/d/1VXceVTjhzvC71vYIGs8FoT9mZqsDnyBG2ZB4Y3VnfYQ/edit?usp=sharing\">https://docs.google.com/spreadsheets/d/1VXceVTjhzvC71vYIGs8FoT9mZqsDnyBG2ZB4Y3VnfYQ/edit?usp=sharing</a><br>Link to google cloud platform:&nbsp;<a href=\"https://console.cloud.google.com/welcome?project=diu-app\">https://console.cloud.google.com/welcome?project=diu-app</a></div>",
+            "createdDate": "2026-06-11T17:40:36.590Z"
+          }
+        ]
+      },
+      {
+        "id": 2176,
+        "title": "Keywords Management Screen",
+        "state": "Closed",
+        "assignedTo": "Sheza Aejaz",
+        "closedDate": "2026-06-15T20:00:35.727Z",
+        "attachments": [],
+        "links": [],
+        "comments": [
+          {
+            "author": "Unknown",
+            "text": "<div>New sheet link:&nbsp;<a href=\"https://docs.google.com/spreadsheets/d/1A__1reWKXLVsj2sNZmSZQHUCkTFWHDCEd9N55ybkUP0/edit?usp=sharing\">https://docs.google.com/spreadsheets/d/1A__1reWKXLVsj2sNZmSZQHUCkTFWHDCEd9N55ybkUP0/edit?usp=sharing</a> </div>",
+            "createdDate": "2026-06-17T16:02:30.800Z"
+          },
+          {
+            "author": "Unknown",
+            "text": "<div>google sheets link:&nbsp;<a href=\"https://docs.google.com/spreadsheets/d/1VXceVTjhzvC71vYIGs8FoT9mZqsDnyBG2ZB4Y3VnfYQ/edit?usp=sharing\">https://docs.google.com/spreadsheets/d/1VXceVTjhzvC71vYIGs8FoT9mZqsDnyBG2ZB4Y3VnfYQ/edit?usp=sharing</a></div>",
+            "createdDate": "2026-06-16T04:49:33.277Z"
+          }
+        ]
+      },
+      {
+        "id": 2177,
+        "title": "Daily Content Review Screen",
+        "state": "Closed",
+        "assignedTo": "Sheza Aejaz",
+        "closedDate": "2026-06-15T20:00:41.557Z",
+        "attachments": [],
+        "links": [],
+        "comments": [
+          {
+            "author": "Unknown",
+            "text": "<div>New sheet link:&nbsp;<a href=\"https://docs.google.com/spreadsheets/d/1A__1reWKXLVsj2sNZmSZQHUCkTFWHDCEd9N55ybkUP0/edit?usp=sharing\">https://docs.google.com/spreadsheets/d/1A__1reWKXLVsj2sNZmSZQHUCkTFWHDCEd9N55ybkUP0/edit?usp=sharing</a> </div>",
+            "createdDate": "2026-06-17T16:02:42.137Z"
+          },
+          {
+            "author": "Unknown",
+            "text": "<div>sheets link:&nbsp;<a href=\"https://docs.google.com/spreadsheets/d/1VXceVTjhzvC71vYIGs8FoT9mZqsDnyBG2ZB4Y3VnfYQ/edit?usp=sharing\">https://docs.google.com/spreadsheets/d/1VXceVTjhzvC71vYIGs8FoT9mZqsDnyBG2ZB4Y3VnfYQ/edit?usp=sharing</a></div>",
+            "createdDate": "2026-06-16T04:49:50.653Z"
+          }
+        ]
+      },
+      {
+        "id": 2178,
+        "title": "Weekly Content Review Screen",
+        "state": "Closed",
+        "assignedTo": "Sheza Aejaz",
+        "closedDate": "2026-06-15T20:00:47.377Z",
+        "attachments": [],
+        "links": [],
+        "comments": [
+          {
+            "author": "Unknown",
+            "text": "<div>new sheet link:&nbsp;<a href=\"https://docs.google.com/spreadsheets/d/1A__1reWKXLVsj2sNZmSZQHUCkTFWHDCEd9N55ybkUP0/edit?usp=sharing\">https://docs.google.com/spreadsheets/d/1A__1reWKXLVsj2sNZmSZQHUCkTFWHDCEd9N55ybkUP0/edit?usp=sharing</a> </div>",
+            "createdDate": "2026-06-17T16:03:46.067Z"
+          },
+          {
+            "author": "Unknown",
+            "text": "<div>sheets link:&nbsp;<a href=\"https://docs.google.com/spreadsheets/d/1VXceVTjhzvC71vYIGs8FoT9mZqsDnyBG2ZB4Y3VnfYQ/edit?usp=sharing\">https://docs.google.com/spreadsheets/d/1VXceVTjhzvC71vYIGs8FoT9mZqsDnyBG2ZB4Y3VnfYQ/edit?usp=sharing</a></div><div><br></div><div>testflight:&nbsp;<a href=\"https://appstoreconnect.apple.com/teams/1c9faeaf-068e-4d60-811e-60f2db7f1392/apps/6780266208/testflight/ios\">https://appstoreconnect.apple.com/teams/1c9faeaf-068e-4d60-811e-60f2db7f1392/apps/6780266208/testflight/ios</a></div>",
+            "createdDate": "2026-06-16T04:50:57.403Z"
+          }
+        ]
+      },
+      {
+        "id": 2183,
+        "title": "Define Proposal Review Workflow, Create, review & Finalize Stitch Designs",
+        "state": "Closed",
+        "assignedTo": "Sheza Aejaz",
+        "closedDate": "2026-06-10T10:45:01.13Z",
+        "attachments": [],
+        "links": [],
+        "comments": [
+          {
+            "author": "Unknown",
+            "text": "<div>Link to Stitch design:&nbsp;<a href=\"https://stitch.withgoogle.com/projects/14447515256592184828\">https://stitch.withgoogle.com/projects/14447515256592184828</a></div>",
+            "createdDate": "2026-06-09T16:24:29.827Z"
+          }
+        ]
+      },
+      {
+        "id": 2188,
+        "title": "Enhance and Optimize LinkedIn Post Generation Prompt for Weekly",
+        "state": "Closed",
+        "assignedTo": "Anam Saleem",
+        "closedDate": "2026-06-15T05:33:09.04Z",
+        "attachments": [],
+        "links": [],
+        "comments": [
+          {
+            "author": "Unknown",
+            "text": "<div>Weekly blog content workflow link&nbsp;<br><br><a href=\"https://helpables.app.n8n.cloud/workflow/yeKmovmER3gLW5M3\">https://helpables.app.n8n.cloud/workflow/yeKmovmER3gLW5M3</a><br><br><br> </div>",
+            "createdDate": "2026-06-09T15:24:08.710Z"
+          }
+        ]
+      },
+      {
+        "id": 2189,
+        "title": "Analyze Automation Workflows, Define Application Requirements, and Review Generated App Designs",
+        "state": "Closed",
+        "assignedTo": "Anam Saleem",
+        "closedDate": "2026-06-09T15:35:47.543Z",
+        "attachments": [],
+        "links": [],
+        "comments": [
+          {
+            "author": "Unknown",
+            "text": "<div>Stitch design for Blog content workflow :</div><div><a href=\"https://stitch.withgoogle.com/projects/15633381323324971325\">Stitch - Projects</a><br></div><div><span style=\"display:inline !important;\">Stitch design for Upwork Proposal workflow :</span><br></div><div><span style=\"display:inline !important;\"><a href=\"https://stitch.withgoogle.com/projects/14447515256592184828\">Stitch - Projects</a><br><br>Upwork Proposal workflow link&nbsp;<span><br><br></span><a href=\"https://helpables.app.n8n.cloud/workflow/i60UPy7OFxk9bbor\">https://helpables.app.n8n.cloud/workflow/i60UPy7OFxk9bbor</a><br><br>Blog content workflows:</span></div><div><span style=\"display:inline !important;\"><br></span></div><div><span style=\"display:inline !important;\"><a href=\"https://helpables.app.n8n.cloud/projects/7pegi7C7viXXjzYB/folders/o4OGMX00bKqgDCGv/workflows\">https://helpables.app.n8n.cloud/projects/7pegi7C7viXXjzYB/folders/o4OGMX00bKqgDCGv/workflows</a><br></span></div>",
+            "createdDate": "2026-06-09T15:35:35.410Z"
+          }
+        ]
+      },
+      {
+        "id": 2190,
+        "title": "Create Daily Content Revision Workflow for App-Initiated Content Updates",
+        "state": "Closed",
+        "assignedTo": "Anam Saleem",
+        "closedDate": "2026-06-16T05:15:39.477Z",
+        "attachments": [],
+        "links": [],
+        "comments": [
+          {
+            "author": "Unknown",
+            "text": "<div>Daily content revision workflow link :</div><div><a href=\"https://helpables.app.n8n.cloud/workflow/gBozQBSI5g9k3MkA\">https://helpables.app.n8n.cloud/workflow/gBozQBSI5g9k3MkA</a><br></div>",
+            "createdDate": "2026-06-17T17:17:58.087Z"
+          }
+        ]
+      }
+    ],
+    "summary": {
+      "totalUserStories": 4,
+      "totalTasks": 31,
+      "closedTasks": 28,
+      "totalAttachments": 46,
+      "totalLinks": 0,
+      "totalComments": 33
+    }
+  }
+}

@@ -1,67 +1,410 @@
 <%- include('partials/head', { title: 'Artifacts — Sprint Monitor', page: 'artifacts' }) %>
 
 <div class="header">
-  <h1>📁 Artifacts</h1>
-  <p>All generated reports, summaries, and outputs</p>
-</div>
-
-<!-- Filter Tags -->
-<div class="tag-row">
-  <a href="/artifacts?type=all" class="tag <%= locals.filter === 'all' ? 'active' : '' %>">All</a>
-  <a href="/artifacts?type=json" class="tag <%= locals.filter === 'json' ? 'active' : '' %>">
-    <span class="badge badge-json">JSON</span> Summaries
-  </a>
-  <a href="/artifacts?type=html" class="tag <%= locals.filter === 'html' ? 'active' : '' %>">
-    <span class="badge badge-html">HTML</span> Reports
-  </a>
-  <a href="/artifacts?type=md" class="tag <%= locals.filter === 'md' ? 'active' : '' %>">
-    <span class="badge badge-md">MD</span> Email Outputs
-  </a>
+  <h1>📎 Sprint Artifacts</h1>
+  <p>Work item hierarchy — attachments, links, and completion comments</p>
 </div>
 
 <%
+const data = locals.data;
 const helpers = locals.helpers;
-const arts = locals.artifacts || [];
+if (!data) { %>
+  <div class="card">
+    <div class="empty">
+      <h3>No artifact data yet</h3>
+      <p>Run the artifact fetcher to collect work item attachments and links.</p>
+      <form method="POST" action="/api/refresh" style="margin-top:16px">
+        <button type="submit" class="btn btn-primary">Fetch Artifacts Now</button>
+      </form>
+    </div>
+  </div>
+<% } else {
+  const sprint = data.sprint || 'Unknown Sprint';
+  const sprintStart = data.sprintStartDate;
+  const sprintEnd = data.sprintEndDate;
+  const userStories = data.userStories || [];
+  const orphanTasks = data.orphanTasks || [];
+  const summary = data.summary || {};
+  const generatedAt = data.generatedAt;
 %>
 
+<div class="refresh-indicator">
+  <span class="status">🟢 Generated: <%= helpers.formatDate(generatedAt) %></span>
+  <span style="margin-left:auto">
+    <form method="POST" action="/api/refresh" style="display:inline">
+      <button type="submit" class="btn btn-sm">🔄 Refresh</button>
+    </form>
+  </span>
+</div>
+
+<!-- Sprint Info -->
 <div class="card">
-  <h2><%= arts.length %> artifact(s)</h2>
-  
-  <% if (arts.length === 0) { %>
-    <div class="empty" style="padding:32px">
-      <h3>No artifacts yet</h3>
-      <p>Artifacts appear here after the sprint analyzer runs.</p>
-    </div>
-  <% } else { %>
-    <table class="table">
-      <tr>
-        <th>File</th>
-        <th>Type</th>
-        <th>Size</th>
-        <th>Date</th>
-        <th>Actions</th>
-      </tr>
-      <% arts.forEach(function(a) { %>
-      <tr>
-        <td><a href="/output/<%= a.name %>" target="_blank"><%= a.name %></a></td>
-        <td><span class="badge badge-<%= a.type %>"><%= a.type.toUpperCase() %></span></td>
-        <td><%= helpers.formatSize(a.size) %></td>
-        <td><%= helpers.formatDate(a.date) %></td>
-        <td>
-          <a href="/output/<%= a.name %>" target="_blank" class="btn btn-sm">View</a>
-          <% if (a.type === 'json') { %>
-            <a href="/artifacts/view/<%= a.name %>" class="btn btn-sm">Raw</a>
-          <% } %>
-        </td>
-      </tr>
-      <% }); %>
-    </table>
+  <h2><%= sprint %></h2>
+  <% if (sprintStart && sprintEnd) { %>
+    <p style="color:#8b949e"><%= sprintStart %> – <%= sprintEnd %></p>
   <% } %>
 </div>
 
-<div class="card" style="margin-top:16px; color:#8b949e; font-size:12px">
-  <p>📂 Files are served from <code>output/</code> directory.</p>
-  <p>💡 JSON artifacts can be viewed raw at <code>/artifacts/view/&lt;filename&gt;</code>.</p>
+<!-- Summary Stats -->
+<div class="grid">
+  <div class="card stat">
+    <div class="stat-value" style="color:#58a6ff"><%= summary.totalUserStories || 0 %></div>
+    <div class="stat-label">User Stories</div>
+  </div>
+  <div class="card stat">
+    <div class="stat-value" style="color:#d29922"><%= summary.totalTasks || 0 %></div>
+    <div class="stat-label">Total Tasks</div>
+  </div>
+  <div class="card stat">
+    <div class="stat-value" style="color:#3fb950"><%= summary.closedTasks || 0 %></div>
+    <div class="stat-label">Closed Tasks</div>
+  </div>
+  <div class="card stat">
+    <div class="stat-value" style="color:#58a6ff"><%= summary.totalAttachments || 0 %></div>
+    <div class="stat-label">Attachments</div>
+  </div>
+  <div class="card stat">
+    <div class="stat-value" style="color:#d29922"><%= summary.totalLinks || 0 %></div>
+    <div class="stat-label">Links</div>
+  </div>
+  <div class="card stat">
+    <div class="stat-value" style="color:#3fb950"><%= summary.totalComments || 0 %></div>
+    <div class="stat-label">Comments</div>
+  </div>
 </div>
+
+<!-- Hierarchy: User Story → Task → Artifacts -->
+<% userStories.forEach(function(story) { %>
+<div class="card">
+  <div style="display:flex;align-items:center;gap:8px">
+    <span style="font-size:20px">📘</span>
+    <h2 style="margin:0">#<%= story.id %> <%= story.title %></h2>
+  </div>
+  <p style="color:#8b949e;margin-top:4px">
+    User Story · <%= story.state %> · Assigned: <%= story.assignedTo %>
+  </p>
+
+  <% if (story.tasks.length === 0) { %>
+    <p style="color:#8b949e;margin-top:12px">No tasks in this sprint.</p>
+  <% } else { %>
+  <div style="margin-top:16px">
+    <% story.tasks.forEach(function(task) { %>
+    <div style="border-left:3px solid <%= helpers.isClosed(task.state) ? '#3fb950' : '#d29922' %>;padding-left:16px;margin-bottom:16px">
+      <!-- Task Header -->
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:16px"><%= helpers.isClosed(task.state) ? '✅' : '⏳' %></span>
+        <strong>#<%= task.id %> <%= task.title %></strong>
+        <span class="badge badge-<%= helpers.isClosed(task.state) ? 'md' : 'json' %>" style="font-size:10px"><%= task.state %></span>
+      </div>
+      <p style="color:#8b949e;font-size:12px;margin-top:2px">
+        Task · Assigned: <%= task.assignedTo %>
+        <% if (task.closedDate) { %>
+          · Closed: <%= helpers.formatDate(task.closedDate) %>
+        <% } %>
+      </p>
+
+      <!-- Attachments -->
+      <% if (task.attachments.length > 0) { %>
+      <div style="margin-top:8px">
+        <h4 style="font-size:13px;margin:0 0 4px">📎 Attachments (<%= task.attachments.length %>)</h4>
+        <% task.attachments.forEach(function(att) { %>
+        <div style="font-size:12px;padding:4px 0;border-bottom:1px solid #21262d">
+          <span><%= helpers.attachmentIcon(att.type) %></span>
+          <a href="<%= att.url %>" target="_blank" style="color:#58a6ff"><%= att.name %></a>
+          <span style="color:#8b949e"> [<%= att.type %>]</span>
+        </div>
+        <% }); %>
+      </div>
+      <% } %>
+
+      <!-- Links -->
+      <% if (task.links.length > 0) { %>
+      <div style="margin-top:8px">
+        <h4 style="font-size:13px;margin:0 0 4px">🔗 Links (<%= task.links.length %>)</h4>
+        <% task.links.forEach(function(link) { %>
+        <div style="font-size:12px;padding:4px 0;border-bottom:1px solid #21262d">
+          <span><%= helpers.attachmentIcon(link.type) %></span>
+          <% if (link.relatedWorkItemId) { %>
+            <a href="<%= link.url %>" target="_blank" style="color:#58a6ff">
+              <%= link.name %>
+            </a>
+            <% if (link.relatedWorkItemState) { %>
+              <span class="badge badge-<%= helpers.isClosed(link.relatedWorkItemState) ? 'md' : 'json' %>" style="font-size:9px"><%= link.relatedWorkItemState %></span>
+            <% } %>
+          <% } else { %>
+            <a href="<%= link.url %>" target="_blank" style="color:#58a6ff"><%= link.name %></a>
+          <% } %>
+          <% if (link.linkType) { %>
+            <span style="color:#8b949e"> [<%= link.linkType %>]</span>
+          <% } %>
+        </div>
+        <% }); %>
+      </div>
+      <% } %>
+
+      <!-- Comments -->
+      <% if (task.comments.length > 0) { %>
+      <div style="margin-top:8px">
+        <h4 style="font-size:13px;margin:0 0 4px">💬 Comments (<%= task.comments.length %>)</h4>
+        <% task.comments.forEach(function(comment) { %>
+        <div style="font-size:12px;padding:6px 8px;background:#161b22;border-radius:4px;margin-bottom:4px">
+          <div style="color:#8b949e;margin-bottom:2px">
+            <strong><%= comment.author %></strong>
+            <% if (comment.createdDate) { %>
+              · <%= helpers.formatDate(comment.createdDate) %>
+            <% } %>
+          </div>
+          <div style="color:#c9d1d9;white-space:pre-wrap"><%= helpers.commentPreview(comment.text) %></div>
+        </div>
+        <% }); %>
+      </div>
+      <% } %>
+
+      <!-- No artifacts -->
+      <% if (task.attachments.length === 0 && task.links.length === 0 && task.comments.length === 0) { %>
+      <p style="color:#8b949e;font-size:12px;margin-top:8px;font-style:italic">No attachments, links, or comments.</p>
+      <% } %>
+    </div>
+    <% }); %>
+  </div>
+  <% } %>
+</div>
+<% }); %>
+
+<!-- Orphan Tasks (no parent user story in sprint) -->
+<% if (orphanTasks.length > 0) { %>
+<div class="card">
+  <h2>🧩 Tasks without parent User Story</h2>
+  <p style="color:#8b949e">These tasks are in the sprint but not linked to a User Story in the same sprint.</p>
+  <% orphanTasks.forEach(function(task) { %>
+  <div style="border-left:3px solid <%= helpers.isClosed(task.state) ? '#3fb950' : '#d29922' %>;padding-left:16px;margin-bottom:16px">
+    <div style="display:flex;align-items:center;gap:8px">
+      <span style="font-size:16px"><%= helpers.isClosed(task.state) ? '✅' : '⏳' %></span>
+      <strong>#<%= task.id %> <%= task.title %></strong>
+      <span class="badge badge-<%= helpers.isClosed(task.state) ? 'md' : 'json' %>" style="font-size:10px"><%= task.state %></span>
+    </div>
+    <p style="color:#8b949e;font-size:12px;margin-top:2px">Task · Assigned: <%= task.assignedTo %></p>
+
+    <% if (task.attachments.length > 0) { %>
+    <div style="margin-top:8px">
+      <h4 style="font-size:13px;margin:0 0 4px">📎 Attachments (<%= task.attachments.length %>)</h4>
+      <% task.attachments.forEach(function(att) { %>
+      <div style="font-size:12px;padding:4px 0">
+        <span><%= helpers.attachmentIcon(att.type) %></span>
+        <a href="<%= att.url %>" target="_blank" style="color:#58a6ff"><%= att.name %></a>
+      </div>
+      <% }); %>
+    </div>
+    <% } %>
+
+    <% if (task.links.length > 0) { %>
+    <div style="margin-top:8px">
+      <h4 style="font-size:13px;margin:0 0 4px">🔗 Links (<%= task.links.length %>)</h4>
+      <% task.links.forEach(function(link) { %>
+      <div style="font-size:12px;padding:4px 0">
+        <span><%= helpers.attachmentIcon(link.type) %></span>
+        <a href="<%= link.url %>" target="_blank" style="color:#58a6ff"><%= link.name %></a>
+      </div>
+      <% }); %>
+    </div>
+    <% } %>
+
+    <% if (task.comments.length > 0) { %>
+    <div style="margin-top:8px">
+      <h4 style="font-size:13px;margin:0 0 4px">💬 Comments (<%= task.comments.length %>)</h4>
+      <% task.comments.forEach(function(comment) { %>
+      <div style="font-size:12px;padding:6px 8px;background:#161b22;border-radius:4px;margin-bottom:4px">
+        <div style="color:#8b949e"><strong><%= comment.author %></strong> · <%= helpers.formatDate(comment.createdDate) %></div>
+        <div style="color:#c9d1d9;white-space:pre-wrap"><%= helpers.commentPreview(comment.text) %></div>
+      </div>
+      <% }); %>
+    </div>
+    <% } %>
+
+    <% if (task.attachments.length === 0 && task.links.length === 0 && task.comments.length === 0) { %>
+    <p style="color:#8b949e;font-size:12px;margin-top:8px;font-style:italic">No attachments, links, or comments.</p>
+    <% } %>
+  </div>
+  <% }); %>
+</div>
+<% } %>
+
+<% } /* end else */ %>
+
+<!-- Last Sprint Artifacts (completed tasks) -->
+<%
+if (data && data.lastSprint) {
+  const lastData = data.lastSprint;
+  const lastUserStories = lastData.userStories || [];
+  const lastOrphanTasks = lastData.orphanTasks || [];
+  const lastSummary = lastData.summary || {};
+  const lastClosedTasks = (lastUserStories.flatMap(us => us.tasks).concat(lastOrphanTasks)).filter(t => helpers.isClosed(t.state));
+%>
+
+<div class="card" style="border-top:3px solid #d29922;margin-top:24px">
+  <div style="display:flex;align-items:center;gap:8px">
+    <span style="font-size:20px">📦</span>
+    <h2 style="margin:0">Last Sprint: <%= lastData.sprint %></h2>
+  </div>
+  <% if (lastData.sprintStartDate && lastData.sprintEndDate) { %>
+    <p style="color:#8b949e"><%= lastData.sprintStartDate %> – <%= lastData.sprintEndDate %></p>
+  <% } %>
+  <p style="color:#8b949e;font-size:13px">
+    <%= lastSummary.totalTasks || 0 %> tasks · <%= lastClosedTasks.length %> closed ·
+    <%= lastSummary.totalAttachments || 0 %> attachments ·
+    <%= lastSummary.totalLinks || 0 %> links ·
+    <%= lastSummary.totalComments || 0 %> comments
+  </p>
+</div>
+
+<% lastUserStories.forEach(function(story) {
+  const closedTasks = story.tasks.filter(t => helpers.isClosed(t.state));
+  if (closedTasks.length === 0 && story.tasks.length > 0) return; // skip stories with no closed tasks
+%>
+<div class="card">
+  <div style="display:flex;align-items:center;gap:8px">
+    <span style="font-size:20px">📘</span>
+    <h2 style="margin:0">#<%= story.id %> <%= story.title %></h2>
+  </div>
+  <p style="color:#8b949e;margin-top:4px">
+    User Story · <%= story.state %> · Assigned: <%= story.assignedTo %>
+  </p>
+
+  <div style="margin-top:16px">
+    <% (closedTasks.length > 0 ? closedTasks : story.tasks).forEach(function(task) { %>
+    <div style="border-left:3px solid <%= helpers.isClosed(task.state) ? '#3fb950' : '#d29922' %>;padding-left:16px;margin-bottom:16px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:16px"><%= helpers.isClosed(task.state) ? '✅' : '⏳' %></span>
+        <strong>#<%= task.id %> <%= task.title %></strong>
+        <span class="badge badge-<%= helpers.isClosed(task.state) ? 'md' : 'json' %>" style="font-size:10px"><%= task.state %></span>
+      </div>
+      <p style="color:#8b949e;font-size:12px;margin-top:2px">
+        Task · Assigned: <%= task.assignedTo %>
+        <% if (task.closedDate) { %>
+          · Closed: <%= helpers.formatDate(task.closedDate) %>
+        <% } %>
+      </p>
+
+      <% if (task.attachments.length > 0) { %>
+      <div style="margin-top:8px">
+        <h4 style="font-size:13px;margin:0 0 4px">📎 Attachments (<%= task.attachments.length %>)</h4>
+        <% task.attachments.forEach(function(att) { %>
+        <div style="font-size:12px;padding:4px 0;border-bottom:1px solid #21262d">
+          <span><%= helpers.attachmentIcon(att.type) %></span>
+          <a href="<%= att.url %>" target="_blank" style="color:#58a6ff"><%= att.name %></a>
+          <span style="color:#8b949e"> [<%= att.type %>]</span>
+        </div>
+        <% }); %>
+      </div>
+      <% } %>
+
+      <% if (task.links.length > 0) { %>
+      <div style="margin-top:8px">
+        <h4 style="font-size:13px;margin:0 0 4px">🔗 Links (<%= task.links.length %>)</h4>
+        <% task.links.forEach(function(link) { %>
+        <div style="font-size:12px;padding:4px 0;border-bottom:1px solid #21262d">
+          <span><%= helpers.attachmentIcon(link.type) %></span>
+          <% if (link.relatedWorkItemId) { %>
+            <a href="<%= link.url %>" target="_blank" style="color:#58a6ff"><%= link.name %></a>
+            <% if (link.relatedWorkItemState) { %>
+              <span class="badge badge-<%= helpers.isClosed(link.relatedWorkItemState) ? 'md' : 'json' %>" style="font-size:9px"><%= link.relatedWorkItemState %></span>
+            <% } %>
+          <% } else { %>
+            <a href="<%= link.url %>" target="_blank" style="color:#58a6ff"><%= link.name %></a>
+          <% } %>
+          <% if (link.linkType) { %>
+            <span style="color:#8b949e"> [<%= link.linkType %>]</span>
+          <% } %>
+        </div>
+        <% }); %>
+      </div>
+      <% } %>
+
+      <% if (task.comments.length > 0) { %>
+      <div style="margin-top:8px">
+        <h4 style="font-size:13px;margin:0 0 4px">💬 Comments (<%= task.comments.length %>)</h4>
+        <% task.comments.forEach(function(comment) { %>
+        <div style="font-size:12px;padding:6px 8px;background:#161b22;border-radius:4px;margin-bottom:4px">
+          <div style="color:#8b949e;margin-bottom:2px">
+            <strong><%= comment.author %></strong>
+            <% if (comment.createdDate) { %>
+              · <%= helpers.formatDate(comment.createdDate) %>
+            <% } %>
+          </div>
+          <div style="color:#c9d1d9;white-space:pre-wrap"><%= helpers.commentPreview(comment.text) %></div>
+        </div>
+        <% }); %>
+      </div>
+      <% } %>
+
+      <% if (task.attachments.length === 0 && task.links.length === 0 && task.comments.length === 0) { %>
+      <p style="color:#8b949e;font-size:12px;margin-top:8px;font-style:italic">No attachments, links, or comments.</p>
+      <% } %>
+    </div>
+    <% }); %>
+  </div>
+</div>
+<% }); %>
+
+<% if (lastOrphanTasks.length > 0) {
+  const lastClosedOrphans = lastOrphanTasks.filter(t => helpers.isClosed(t.state));
+  if (lastClosedOrphans.length > 0) { %>
+<div class="card">
+  <h2>🧩 Last Sprint — Tasks without parent User Story</h2>
+  <% lastClosedOrphans.forEach(function(task) { %>
+  <div style="border-left:3px solid #3fb950;padding-left:16px;margin-bottom:16px">
+    <div style="display:flex;align-items:center;gap:8px">
+      <span style="font-size:16px">✅</span>
+      <strong>#<%= task.id %> <%= task.title %></strong>
+      <span class="badge badge-md" style="font-size:10px"><%= task.state %></span>
+    </div>
+    <p style="color:#8b949e;font-size:12px;margin-top:2px">Task · Assigned: <%= task.assignedTo %></p>
+
+    <% if (task.attachments.length > 0) { %>
+    <div style="margin-top:8px">
+      <h4 style="font-size:13px;margin:0 0 4px">📎 Attachments (<%= task.attachments.length %>)</h4>
+      <% task.attachments.forEach(function(att) { %>
+      <div style="font-size:12px;padding:4px 0">
+        <span><%= helpers.attachmentIcon(att.type) %></span>
+        <a href="<%= att.url %>" target="_blank" style="color:#58a6ff"><%= att.name %></a>
+      </div>
+      <% }); %>
+    </div>
+    <% } %>
+
+    <% if (task.links.length > 0) { %>
+    <div style="margin-top:8px">
+      <h4 style="font-size:13px;margin:0 0 4px">🔗 Links (<%= task.links.length %>)</h4>
+      <% task.links.forEach(function(link) { %>
+      <div style="font-size:12px;padding:4px 0">
+        <span><%= helpers.attachmentIcon(link.type) %></span>
+        <a href="<%= link.url %>" target="_blank" style="color:#58a6ff"><%= link.name %></a>
+      </div>
+      <% }); %>
+    </div>
+    <% } %>
+
+    <% if (task.comments.length > 0) { %>
+    <div style="margin-top:8px">
+      <h4 style="font-size:13px;margin:0 0 4px">💬 Comments (<%= task.comments.length %>)</h4>
+      <% task.comments.forEach(function(comment) { %>
+      <div style="font-size:12px;padding:6px 8px;background:#161b22;border-radius:4px;margin-bottom:4px">
+        <div style="color:#8b949e"><strong><%= comment.author %></strong> · <%= helpers.formatDate(comment.createdDate) %></div>
+        <div style="color:#c9d1d9;white-space:pre-wrap"><%= helpers.commentPreview(comment.text) %></div>
+      </div>
+      <% }); %>
+    </div>
+    <% } %>
+
+    <% if (task.attachments.length === 0 && task.links.length === 0 && task.comments.length === 0) { %>
+    <p style="color:#8b949e;font-size:12px;margin-top:8px;font-style:italic">No attachments, links, or comments.</p>
+    <% } %>
+  </div>
+  <% }); %>
+</div>
+<% } %>
+<% } %>
+
+<% } /* end lastSprint */ %>
 
 <%- include('partials/foot') %>
