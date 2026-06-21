@@ -44,7 +44,7 @@ if (!data) { %>
   <h2>📋 Sprint Breakdown</h2>
   <table class="table">
     <tr><th></th><th>Current</th><th>Last</th></tr>
-    <tr><td>Name</td><td><%= summary.currentSprint || 'N/A' %></td><td><%= summary.lastSprint || 'N/A' %></td></tr>
+    <tr><td>Name</td><td><%= summary.currentSprint || 'N/A' %><% if (summary.currentSprintStartDate && summary.currentSprintEndDate) { %><br><span style="font-size:11px;color:#8b949e"><%= summary.currentSprintStartDate %> – <%= summary.currentSprintEndDate %></span><% } %></td><td><%= summary.lastSprint || 'N/A' %><% if (summary.lastSprintStartDate && summary.lastSprintEndDate) { %><br><span style="font-size:11px;color:#8b949e"><%= summary.lastSprintStartDate %> – <%= summary.lastSprintEndDate %></span><% } %></td></tr>
     <tr><td>Total</td><td><%= summary.totalTasksCurrent || 0 %></td><td><%= summary.lastSprintMetrics ? (summary.lastSprintMetrics.totalTasks || 'N/A') : 'N/A' %></td></tr>
     <tr><td>Active</td><td><%= summary.activeTasksCurrent || 0 %></td><td><%= summary.lastSprintMetrics ? (summary.lastSprintMetrics.activeTasks || 'N/A') : 'N/A' %></td></tr>
     <tr><td>Closed</td><td><%= summary.closedTasksCurrent || 0 %></td><td><%= summary.lastSprintMetrics ? (summary.lastSprintMetrics.closedTasks || 'N/A') : 'N/A' %></td></tr>

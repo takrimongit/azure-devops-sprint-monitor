@@ -81,6 +81,8 @@ interface SprintData {
   people: Person[];
   currentSprintStartDate: string | null;
   currentSprintEndDate: string | null;
+  lastSprintStartDate: string | null;
+  lastSprintEndDate: string | null;
   metadata: {
     totalTasks: number;
     totalSprints: number;
@@ -127,6 +129,8 @@ interface HygieneResult {
     personBreakdown: Record<string, number>;
     currentSprintStartDate: string | null;
     currentSprintEndDate: string | null;
+    lastSprintStartDate: string | null;
+    lastSprintEndDate: string | null;
   };
 }
 
@@ -198,6 +202,8 @@ async function fetchSprintData(): Promise<SprintData> {
   let lastSprintPath: string | null = null;
   let currentSprintStartDate: string | null = null;
   let currentSprintEndDate: string | null = null;
+  let lastSprintStartDate: string | null = null;
+  let lastSprintEndDate: string | null = null;
 
   if (team?.id) {
     const teamContext = { project, team: team.id };
@@ -247,13 +253,19 @@ async function fetchSprintData(): Promise<SprintData> {
     currentSprintEndDate = (currentIter as any)?.attributes?.finishDate
       ? new Date((currentIter as any).attributes.finishDate).toISOString().split("T")[0]
       : null;
+    lastSprintStartDate = (lastIter as any)?.attributes?.startDate
+      ? new Date((lastIter as any).attributes.startDate).toISOString().split("T")[0]
+      : null;
+    lastSprintEndDate = (lastIter as any)?.attributes?.finishDate
+      ? new Date((lastIter as any).attributes.finishDate).toISOString().split("T")[0]
+      : null;
 
     console.log(`   Detected current sprint: ${currentSprintPath ?? "none"}`);
     console.log(`   Detected last sprint:    ${lastSprintPath ?? "none"}`);
   }
 
   if (!currentSprintPath) {
-    return { tasks: [], sprints: [], currentSprint: null, lastSprint: null, people: [], currentSprintStartDate: null, currentSprintEndDate: null, metadata: { totalTasks: 0, totalSprints: 0, generatedAt: new Date().toISOString(), project } };
+    return { tasks: [], sprints: [], currentSprint: null, lastSprint: null, people: [], currentSprintStartDate: null, currentSprintEndDate: null, lastSprintStartDate: null, lastSprintEndDate: null, metadata: { totalTasks: 0, totalSprints: 0, generatedAt: new Date().toISOString(), project } };
   }
 
   // Step 2: fetch tasks scoped to only the current and last sprint
@@ -273,7 +285,7 @@ async function fetchSprintData(): Promise<SprintData> {
 
   const wiqlResult = await witApi.queryByWiql(wiql, { project });
   if (!wiqlResult.workItems || wiqlResult.workItems.length === 0) {
-    return { tasks: [], sprints: [], currentSprint: null, lastSprint: null, people: [], currentSprintStartDate: null, currentSprintEndDate: null, metadata: { totalTasks: 0, totalSprints: 0, generatedAt: new Date().toISOString(), project } };
+    return { tasks: [], sprints: [], currentSprint: null, lastSprint: null, people: [], currentSprintStartDate: null, currentSprintEndDate: null, lastSprintStartDate: null, lastSprintEndDate: null, metadata: { totalTasks: 0, totalSprints: 0, generatedAt: new Date().toISOString(), project } };
   }
 
   // Fetch batch details
@@ -353,6 +365,8 @@ async function fetchSprintData(): Promise<SprintData> {
     people: Array.from(personMap.values()),
     currentSprintStartDate,
     currentSprintEndDate,
+    lastSprintStartDate,
+    lastSprintEndDate,
     metadata: {
       totalTasks: allWorkItems.length,
       totalSprints: sprints.length,
@@ -390,6 +404,8 @@ function evaluateHygiene(data: SprintData): HygieneResult {
         personBreakdown: {},
         currentSprintStartDate: null,
         currentSprintEndDate: null,
+        lastSprintStartDate: null,
+        lastSprintEndDate: null,
       }
     };
   }
@@ -450,6 +466,8 @@ function evaluateHygiene(data: SprintData): HygieneResult {
       personBreakdown: allPersonBreakdown,
       currentSprintStartDate: data.currentSprintStartDate,
       currentSprintEndDate: data.currentSprintEndDate,
+      lastSprintStartDate: data.lastSprintStartDate,
+      lastSprintEndDate: data.lastSprintEndDate,
     }
   };
 }
