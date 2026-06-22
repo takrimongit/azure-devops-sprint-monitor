@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-06-21T01:30:44.001Z",
+  "generatedAt": "2026-06-21T09:53:09.342Z",
   "grade": "F",
   "gradeLabel": "F — Failing",
   "semanticAnalysis": {
-    "sprintSummary": "This sprint appears to have two distinct goals. The first is building out an application feature for reviewing and approving proposals and other content. The second is a mix of enhancing an automated content generation workflow and producing a marketing or demonstration video about a separate automation.",
+    "sprintSummary": "This sprint appears to have two distinct, unrelated goals. One part focuses on standard application development for a content and proposal approval system. The other, larger part is dedicated to producing marketing video content, a task outside the scope of typical software engineering.",
     "taskQuality": "poor",
     "problematicTasks": [
       {
         "id": 2193,
         "title": "Create Video Script for Upwork Proposal Automation Workflow",
         "issues": [
-          "This is a content creation/scriptwriting task, not a software engineering task.",
-          "Assigning non-engineering work to an engineer in a sprint backlog is a misuse of resources and indicates poor planning."
+          "This is a content creation/marketing task, not software engineering.",
+          "The team has repeatedly logged video production tasks in previous sprints (e.g., #2130, #2164), indicating a systemic issue of misclassifying work."
         ],
         "severity": "critical"
       },
@@ -19,7 +19,7 @@
         "id": 2194,
         "title": "Review Workflow, Identify Recording Scenarios Description and Record Workflow Screen Demonstration",
         "issues": [
-          "This is a quality assurance and content production task, not a software engineering task."
+          "This is video production and quality assurance for marketing content, not software engineering."
         ],
         "severity": "critical"
       },
@@ -27,7 +27,7 @@
         "id": 2195,
         "title": "Record Face-Camera Presentation",
         "issues": [
-          "This is a video production task, not a software engineering task."
+          "This is a marketing/content creation task, not software engineering."
         ],
         "severity": "critical"
       },
@@ -35,7 +35,7 @@
         "id": 2196,
         "title": "Review and Validate Recorded Assets, Organize and Upload Assets to Google Drive",
         "issues": [
-          "This is a media management or administrative task, not a software engineering task."
+          "This is asset management and administrative work, not software engineering."
         ],
         "severity": "critical"
       }
@@ -43,22 +43,33 @@
     "duplicateOrOverlapping": [
       {
         "ids": [
-          2179,
-          2187
+          2193,
+          2194,
+          2195
         ],
-        "reason": "Task #2179 'Approve or Reject Content Functionality' and #2187 'Approve or Reject Proposal Functionality' describe nearly identical logic. This functionality should likely be built as a single, generic approval/rejection module that can be applied to different data types like 'Content' and 'Proposals' to avoid code duplication."
+        "reason": "These tasks represent a video production workflow that is nearly identical to tasks from the previous sprint (#2130, #2131, #2132, #2164). This indicates a recurring, non-engineering process is being repeatedly logged as new engineering work each sprint."
       }
     ],
     "unclearWork": [
       {
         "id": 2184,
         "title": "Setup Worksheet Connectivity",
-        "problem": "This task is too vague. It doesn't specify which worksheet, what technology (e.g., Google Sheets API, Excel library), the purpose of the connection (read/write), or which feature it supports. It is not actionable as written."
+        "problem": "The task is extremely vague. It doesn't specify which worksheet technology (Google Sheets, Excel), the purpose of the connection, or the technical approach (API, library), making the scope and effort impossible to determine."
+      },
+      {
+        "id": 2202,
+        "title": "Add Niche-Based Keyword and Rising Topic Generation to the Content Workflow",
+        "problem": "This describes a desired feature but not the engineering work required. It lacks any technical detail on implementation, such as which APIs (e.g., OpenAI, Google Trends) or methods will be used."
+      },
+      {
+        "id": 2203,
+        "title": "Add Daily Blog Content Generation Using Approved Keywords and Rising Topics",
+        "problem": "Similar to #2202, this task describes an outcome without defining the work. It is unclear if this is a prompt engineering task, building a new microservice, or integrating a third-party tool."
       }
     ],
     "strengths": [
-      "The breakdown of the proposal feature into separate front-end screens (#2185, #2186) and back-end functionality (#2187) is a good separation of concerns.",
-      "The content workflow tasks (#2202, #2203, #2204) represent a clear, logical progression for building a single, larger feature, showing good incremental planning for that specific feature."
+      "Tasks #2185 (Proposal List Screen) and #2186 (Proposal Detail Screen) are well-defined, standard UI development tasks.",
+      "Feature implementation tasks like #2179 (Approve or Reject Content Functionality) and #2187 (Approve or Reject Proposal Functionality) are clear and represent tangible engineering deliverables."
     ]
   },
   "summary": {
@@ -71,8 +82,8 @@
       "removedTasks": 0,
       "completionPct": 0,
       "newTaskPct": 66.66666666666666,
-      "avgDaysInNew": 7.75,
-      "avgDaysInActive": 2,
+      "avgDaysInNew": 8.125,
+      "avgDaysInActive": 3,
       "personBreakdown": {
         "Sheza Aejaz": 5,
         "Anam Saleem": 7
@@ -87,7 +98,7 @@
       "removedTasks": 0,
       "completionPct": 90.32258064516128,
       "newTaskPct": 9.67741935483871,
-      "avgDaysInNew": 19.666666666666668,
+      "avgDaysInNew": 20.666666666666668,
       "avgDaysInActive": 0,
       "personBreakdown": {
         "Sheza Aejaz": 12,
@@ -100,14 +111,16 @@
     "newTasksCurrent": 8,
     "closedTasksCurrent": 0,
     "criticalIssues": 13,
-    "warnings": 2,
+    "warnings": 4,
     "teamMembers": 3,
     "personBreakdown": {
       "Sheza Aejaz": 5,
       "Anam Saleem": 7
     },
     "currentSprintStartDate": "2026-06-18",
-    "currentSprintEndDate": "2026-07-05"
+    "currentSprintEndDate": "2026-07-05",
+    "lastSprintStartDate": "2026-06-02",
+    "lastSprintEndDate": "2026-06-17"
   },
   "findings": [
     {
@@ -131,8 +144,8 @@
     {
       "ruleId": "TASK_AGING_NEW",
       "severity": "CRITICAL",
-      "message": "Tasks sitting in New state average 7.8 days (Current Sprint)",
-      "details": "Tasks are not being picked up. Current average: 7.8 days (threshold: 7 days)."
+      "message": "Tasks sitting in New state average 8.1 days (Current Sprint)",
+      "details": "Tasks are not being picked up. Current average: 8.1 days (threshold: 7 days)."
     },
     {
       "ruleId": "SPRINT_SCOPE_CREEP",
@@ -149,14 +162,14 @@
     {
       "ruleId": "TASK_STALENESS",
       "severity": "CRITICAL",
-      "message": "20 tasks untouched for >5 days (Last Sprint)",
-      "details": "#2130: Write Video Script (16 days, Closed)\n#2131: Record Demo Walkthrough (13 days, Closed)\n#2132: Record Voiceover / Face Recording (12 days, Closed)\n#2133: Video Editing (11 days, New)\n#2134: Upload & Publish Video (18 days, New)\n#2139: Learn YouTube Studio (16 days, Closed)\n#2140: Learn Video Quality Review Process (14 days, Closed)\n#2141: Learn YouTube SEO Fundamentals. Learn Thumbnail Review Best Practices (12 days, Closed)\n#2142: Learn YouTube Analytics, Perform Channel Review and Monitoring (11 days, Closed)\n#2143: Document Issues and Recommendations (11 days, Closed)"
+      "message": "24 tasks untouched for >5 days (Last Sprint)",
+      "details": "#2130: Write Video Script (16 days, Closed)\n#2131: Record Demo Walkthrough (13 days, Closed)\n#2132: Record Voiceover / Face Recording (12 days, Closed)\n#2133: Video Editing (11 days, New)\n#2134: Upload & Publish Video (19 days, New)\n#2139: Learn YouTube Studio (16 days, Closed)\n#2140: Learn Video Quality Review Process (14 days, Closed)\n#2141: Learn YouTube SEO Fundamentals. Learn Thumbnail Review Best Practices (13 days, Closed)\n#2142: Learn YouTube Analytics, Perform Channel Review and Monitoring (12 days, Closed)\n#2143: Document Issues and Recommendations (11 days, Closed)"
     },
     {
       "ruleId": "TASK_AGING_NEW",
       "severity": "CRITICAL",
-      "message": "Tasks sitting in New state average 19.7 days (Last Sprint)",
-      "details": "Tasks are not being picked up. Current average: 19.7 days (threshold: 7 days)."
+      "message": "Tasks sitting in New state average 20.7 days (Last Sprint)",
+      "details": "Tasks are not being picked up. Current average: 20.7 days (threshold: 7 days)."
     },
     {
       "ruleId": "SPRINT_SCOPE_CREEP",
@@ -167,38 +180,50 @@
     {
       "ruleId": "SEMANTIC_QUALITY",
       "severity": "CRITICAL",
-      "message": "Task #2193 \"Create Video Script for Upwork Proposal Automation Workflow\" — This is a content creation/scriptwriting task, not a software engineering task.",
-      "details": "This is a content creation/scriptwriting task, not a software engineering task.. Assigning non-engineering work to an engineer in a sprint backlog is a misuse of resources and indicates poor planning."
+      "message": "Task #2193 \"Create Video Script for Upwork Proposal Automation Workflow\" — This is a content creation/marketing task, not software engineering.",
+      "details": "This is a content creation/marketing task, not software engineering.. The team has repeatedly logged video production tasks in previous sprints (e.g., #2130, #2164), indicating a systemic issue of misclassifying work."
     },
     {
       "ruleId": "SEMANTIC_QUALITY",
       "severity": "CRITICAL",
-      "message": "Task #2194 \"Review Workflow, Identify Recording Scenarios Description and Record Workflow Screen Demonstration\" — This is a quality assurance and content production task, not a software engineering task.",
-      "details": "This is a quality assurance and content production task, not a software engineering task."
+      "message": "Task #2194 \"Review Workflow, Identify Recording Scenarios Description and Record Workflow Screen Demonstration\" — This is video production and quality assurance for marketing content, not software engineering.",
+      "details": "This is video production and quality assurance for marketing content, not software engineering."
     },
     {
       "ruleId": "SEMANTIC_QUALITY",
       "severity": "CRITICAL",
-      "message": "Task #2195 \"Record Face-Camera Presentation\" — This is a video production task, not a software engineering task.",
-      "details": "This is a video production task, not a software engineering task."
+      "message": "Task #2195 \"Record Face-Camera Presentation\" — This is a marketing/content creation task, not software engineering.",
+      "details": "This is a marketing/content creation task, not software engineering."
     },
     {
       "ruleId": "SEMANTIC_QUALITY",
       "severity": "CRITICAL",
-      "message": "Task #2196 \"Review and Validate Recorded Assets, Organize and Upload Assets to Google Drive\" — This is a media management or administrative task, not a software engineering task.",
-      "details": "This is a media management or administrative task, not a software engineering task."
+      "message": "Task #2196 \"Review and Validate Recorded Assets, Organize and Upload Assets to Google Drive\" — This is asset management and administrative work, not software engineering.",
+      "details": "This is asset management and administrative work, not software engineering."
     },
     {
       "ruleId": "SEMANTIC_UNCLEAR_WORK",
       "severity": "WARNING",
       "message": "Task #2184 \"Setup Worksheet Connectivity\" — work is unclear",
-      "details": "This task is too vague. It doesn't specify which worksheet, what technology (e.g., Google Sheets API, Excel library), the purpose of the connection (read/write), or which feature it supports. It is not actionable as written."
+      "details": "The task is extremely vague. It doesn't specify which worksheet technology (Google Sheets, Excel), the purpose of the connection, or the technical approach (API, library), making the scope and effort impossible to determine."
+    },
+    {
+      "ruleId": "SEMANTIC_UNCLEAR_WORK",
+      "severity": "WARNING",
+      "message": "Task #2202 \"Add Niche-Based Keyword and Rising Topic Generation to the Content Workflow\" — work is unclear",
+      "details": "This describes a desired feature but not the engineering work required. It lacks any technical detail on implementation, such as which APIs (e.g., OpenAI, Google Trends) or methods will be used."
+    },
+    {
+      "ruleId": "SEMANTIC_UNCLEAR_WORK",
+      "severity": "WARNING",
+      "message": "Task #2203 \"Add Daily Blog Content Generation Using Approved Keywords and Rising Topics\" — work is unclear",
+      "details": "Similar to #2202, this task describes an outcome without defining the work. It is unclear if this is a prompt engineering task, building a new microservice, or integrating a third-party tool."
     },
     {
       "ruleId": "SEMANTIC_DUPLICATE",
       "severity": "CRITICAL",
-      "message": "Potential overlap detected: tasks 2179, 2187",
-      "details": "Task #2179 'Approve or Reject Content Functionality' and #2187 'Approve or Reject Proposal Functionality' describe nearly identical logic. This functionality should likely be built as a single, generic approval/rejection module that can be applied to different data types like 'Content' and 'Proposals' to avoid code duplication."
+      "message": "Potential overlap detected: tasks 2193, 2194, 2195",
+      "details": "These tasks represent a video production workflow that is nearly identical to tasks from the previous sprint (#2130, #2131, #2132, #2164). This indicates a recurring, non-engineering process is being repeatedly logged as new engineering work each sprint."
     }
   ],
   "deliveryStatus": "sent"

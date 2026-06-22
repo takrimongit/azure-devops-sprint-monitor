@@ -2,13 +2,59 @@
 <div class="login-container">
   <div class="login-card">
     <h1>🔐 Sprint Monitor</h1>
-    <p>Sign in with your Google account to view sprint health and daily summaries.</p>
-    <a href="/auth/google" class="google-btn">
-      Sign in with Google
-    </a>
+    <p>Sign in to view sprint health, daily summaries, and work item artifacts.</p>
+
+    <% if (locals.msAuthOk) { %>
+      <a href="/auth/microsoft" class="ms-btn">
+        <svg width="20" height="20" viewBox="0 0 23 23" style="vertical-align: middle; margin-right: 10px;">
+          <rect x="1" y="1" width="10" height="10" fill="#F25022"/>
+          <rect x="12" y="1" width="10" height="10" fill="#7FBA00"/>
+          <rect x="1" y="12" width="10" height="10" fill="#00A4EF"/>
+          <rect x="12" y="12" width="10" height="10" fill="#FFB900"/>
+        </svg>
+        Sign in with Microsoft
+      </a>
+    <% } %>
+
+    <% if (locals.googleAuthOk) { %>
+      <a href="/auth/google" class="google-btn">
+        Sign in with Google
+      </a>
+    <% } %>
+
+    <% if (locals.msAuthOk && locals.googleAuthOk) { %>
+      <p style="margin-top: 12px; font-size: 12px; color: #888;">Use either provider — both grant access.</p>
+    <% } %>
+
     <% if (locals.query && locals.query.error) { %>
       <p class="error-msg">Authentication failed. Make sure you use an authorized account.</p>
     <% } %>
+
+    <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #333; font-size: 11px; color: #666;">
+      <strong>API Access:</strong> After login, use your session cookie to call:<br>
+      <code>GET /api/status</code> · <code>GET /api/summary</code><br>
+      <code>GET /api/sprint-health</code> · <code>GET /api/artifacts</code><br>
+      <code>GET /api/summaries</code> · <code>GET /api/trending</code><br>
+      <code>POST /api/refresh</code>
+    </div>
   </div>
 </div>
+<style>
+.ms-btn {
+  display: inline-block;
+  background: #2b2b2b;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid #555;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+.ms-btn:hover { background: #383838; }
+</style>
 <%- include('partials/foot') %>

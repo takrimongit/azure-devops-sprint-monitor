@@ -225,9 +225,13 @@ router.post("/api/refresh", async (_req, res) => {
 });
 
 // ============================================================
-// API — Status (for health checks and quick status)
+// JSON API ENDPOINTS — programmatic access to sprint data
+// All routes under /api/ are protected by requireAuth middleware
+// (applied in server.ts). After Microsoft/Google OAuth login,
+// the session cookie authenticates these calls.
 // ============================================================
 
+// GET /api/status — health check + quick status
 router.get("/api/status", (_req, res) => {
   const latest = getLatestSummary();
   res.json({
@@ -236,6 +240,77 @@ router.get("/api/status", (_req, res) => {
     lastRun: latest ? (latest as any).metadata?.generatedAt : null,
     grade: latest ? (latest as any).grade : null,
   });
+});
+
+// GET /api/summary — latest sprint summary (grade, metrics, findings)
+router.get("/api/summary", (_req, res) => {
+  const latest = getLatestSummary();
+  if (!latest) {
+    return res.status(404).json({ status: "error", message: "No sprint summary data found." });
+  }
+  res.json(latest);
+});
+
+// GET /api/summaries — all sprint summaries (historical)
+router.get("/api/summaries", (_req, res) => {
+  const summaries = getAllSummaries();
+  res.json({
+    status: "ok",
+    count: summaries.length,
+    summaries: summaries.map(s => ({
+      date: s.date,
+      ...s.data,
+    })),
+  });
+});
+
+// GET /api/sprint-health — detailed sprint hygiene findings
+router.get("/api/sprint-health", (_req, res) => {
+  const latest = getLatestSummary();
+  if (!latest) {
+    return res.status(404).json({ status: "error", message: "No sprint health data found." });
+  }
+  res.json({
+    status: "ok",
+    sprint: (latest as any).summary?.currentSprintName ?? "unknown",
+    grade: (latest as any).grade,
+    findings: (latest as any).findings ?? [],
+    summary: (latest as any).summary ?? {},
+    metadata: (latest as any).metadata ?? {},
+  });
+});
+
+// GET /api/artifacts — work item hierarchy with attachments/links/comments
+// Returns the latest sprint-artifacts JSON: user stories → tasks → attachments
+router.get("/api/artifacts", (_req, res) => {
+  const artifactsData = getLatestArtifacts();
+  if (!artifactsData) {
+    return res.status(404).json({ status: "error", message: "No artifact data found. Run the artifact fetcher first." });
+  }
+  res.json(artifactsData);
+});
+
+// GET /api/artifacts/:sprint — get artifacts for a specific sprint by name
+router.get("/api/artifacts/:sprintName", (req, res) => {
+  const sprintName = req.params.sprintName;
+  if (!fs.existsSync(OUTPUT_DIR)) {
+    return res.status(404).json({ status: "error", message: "No output directory." });
+  }
+  const files = fs.readdirSync(OUTPUT_DIR)
+    .filter(f => f.startsWith("sprint-artifacts-") && f.endsWith(".json"));
+  for (const f of files) {
+    try {
+      const data = JSON.parse(fs.readFileSync(path.join(OUTPUT_DIR, f), "utf-8"));
+      const current = data?.sprint ?? data?.currentSprint?.name ?? "";
+      const last = data?.lastSprint?.sprint ?? data?.lastSprint?.name ?? "";
+      if (current === sprintName || last === sprintName) {
+        return res.json(data);
+      }
+    } catch {
+      continue;
+    }
+  }
+  res.status(404).json({ status: "error", message: `No artifacts found for sprint "${sprintName}".` });
 });
 
 // ============================================================

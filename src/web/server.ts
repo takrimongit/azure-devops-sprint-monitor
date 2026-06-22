@@ -2,6 +2,7 @@ import express from "express";
 import session from "express-session";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import { Strategy as MicrosoftStrategy } from "passport-microsoft";
 import * as path from "path";
 import * as fs from "fs";
 import dotenv from "dotenv";
@@ -13,17 +14,6 @@ const envPath = path.resolve(__dirname, "..", "..", ".env");
 if (fs.existsSync(envPath)) {
   dotenv.config({ path: envPath });
 }
-// Also load from Hermes env
-const hermesEnvPath = path.join(process.env.HOME ?? "~", ".hermes", ".env");
-if (fs.existsSync(hermesEnvPath)) {
-  const hermesEnv = fs.readFileSync(hermesEnvPath, "utf-8");
-  hermesEnv.split("\n").forEach(line => {
-    const match = line.match(/^([^#=]+)=(.*)$/);
-    if (match && !process.env[match[1].trim()]) {
-      process.env[match[1].trim()] = match[2].trim();
-    }
-  });
-}
 
 // Helper to avoid credential filter mangling
 function env(key: string, fallback: string = ""): string {
@@ -34,32 +24,50 @@ const app = express();
 const PORT = parseInt(env("WEB_PORT", "3000"), 10);
 
 // ============================================================
-// CONFIG
+// CONFIG — Google OAuth
 // ============================================================
 
 const googleOAuthId = env("GOOGLE_CLIENT_ID");
 const googleOAuthKey = env("GOOGLE_CLIENT_KEY", "");
 const googleCallbackUrl = env("GOOGLE_CALLBACK_URL", `http://localhost:${PORT}/auth/google/callback`);
 const allowedDomain = env("ALLOWED_GOOGLE_DOMAIN", "helpables.org");
-const sessionKey = env("SESSION_KEY", "dev-session-" + Date.now());
 const googleAuthOk = !!(googleOAuthId && googleOAuthKey);
+
+// ============================================================
+// CONFIG — Microsoft (Azure AD) OAuth
+// ============================================================
+
+const msClientId = env("MICROSOFT_CLIENT_ID");
+const msClientSecret = env("MICROSOFT_CLIENT_SECRET", "");
+const msTenant = env("MICROSOFT_TENANT", "common");
+const msCallbackUrl = env("MICROSOFT_CALLBACK_URL", `http://localhost:${PORT}/auth/microsoft/callback`);
+const msAuthOk = !!(msClientId && msClientSecret);
+
+// Any auth configured?
+const authOk = googleAuthOk || msAuthOk;
+
+const sessionKey = env("SESSION_KEY", "dev-session-" + Date.now());
 
 // Session store using SQLite (persists across server restarts)
 const SQLiteStore = ConnectSqlite3(session);
 
-// Simple in-memory user records
-interface GoogleUser {
+// Generic user store
+interface AppUser {
   id: string;
   displayName: string;
   email: string;
   picture?: string;
+  provider: "google" | "microsoft";
 }
 
-const users = new Map<string, GoogleUser>();
+const users = new Map<string, AppUser>();
 
-// Google OAuth — only configure if credentials are provided
+// ============================================================
+// GOOGLE OAUTH STRATEGY
+// ============================================================
+
 if (googleAuthOk) {
-  passport.use(new GoogleStrategy(
+  passport.use("google", new GoogleStrategy(
     {
       clientID: googleOAuthId,
       clientSecret: googleOAuthKey,
@@ -69,16 +77,16 @@ if (googleAuthOk) {
       const email = profile.emails?.[0]?.value ?? "";
       const domain = email.split("@")[1] ?? "";
 
-      // Restrict to allowed domain
       if (allowedDomain && domain !== allowedDomain) {
         return done(null, false, { message: `Only @${allowedDomain} accounts are allowed.` });
       }
 
-      const user: GoogleUser = {
-        id: profile.id,
+      const user: AppUser = {
+        id: `google:${profile.id}`,
         displayName: profile.displayName,
         email,
         picture: profile.photos?.[0]?.value,
+        provider: "google",
       };
 
       users.set(user.id, user);
@@ -87,8 +95,44 @@ if (googleAuthOk) {
   ));
 }
 
+// ============================================================
+// MICROSOFT (AZURE AD) OAUTH STRATEGY
+// ============================================================
+// passport-microsoft uses the Microsoft identity platform v2.0 endpoint.
+// Tenant can be "common" (all accounts), "organizations" (work/school only),
+// or a specific tenant GUID for single-tenant apps.
+
+if (msAuthOk) {
+  passport.use("microsoft", new MicrosoftStrategy(
+    {
+      clientID: msClientId,
+      clientSecret: msClientSecret,
+      callbackURL: msCallbackUrl,
+      tenant: msTenant,
+    } as any,
+    (_accessToken: string, _refreshToken: string, profile: any, done: any) => {
+      const email = profile?.emails?.[0]?.value ?? profile?.upn ?? "";
+      const displayName = profile?.displayName ?? profile?.name?.familyName ?? "Microsoft User";
+
+      const user: AppUser = {
+        id: `microsoft:${profile?.id ?? email}`,
+        displayName,
+        email,
+        provider: "microsoft",
+      };
+
+      users.set(user.id, user);
+      return done(null, user);
+    }
+  ));
+}
+
+// ============================================================
+// PASSPORT SERIALIZE / DESERIALIZE
+// ============================================================
+
 passport.serializeUser((user: any, done) => {
-  done(null, (user as GoogleUser).id);
+  done(null, (user as AppUser).id);
 });
 
 passport.deserializeUser((id: string, done) => {
@@ -103,7 +147,6 @@ passport.deserializeUser((id: string, done) => {
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "..", "..", "views"));
 
-// Session
 const sessionsDir = path.join(__dirname, "..", "..", ".sessions");
 if (!fs.existsSync(sessionsDir)) {
   fs.mkdirSync(sessionsDir, { recursive: true });
@@ -135,12 +178,19 @@ app.use(express.urlencoded({ extended: true }));
 // ============================================================
 
 function requireAuth(req: express.Request, res: express.Response, next: express.NextFunction) {
-  // If Google OAuth isn't configured, allow access (dev mode)
-  if (!googleAuthOk) {
+  // If no auth is configured at all, allow access (dev mode)
+  if (!authOk) {
     return next();
   }
   if (req.isAuthenticated()) {
     return next();
+  }
+  // For API requests, return 401 JSON instead of redirecting
+  if (req.path.startsWith("/api/")) {
+    return res.status(401).json({
+      status: "error",
+      message: "Authentication required. Login via /auth/microsoft or /auth/google first.",
+    });
   }
   res.redirect("/login");
 }
@@ -148,8 +198,8 @@ function requireAuth(req: express.Request, res: express.Response, next: express.
 // Make user available to all views
 app.use((req, _res, next) => {
   (req as any).currentUser = req.user || {
-    displayName: googleAuthOk ? undefined : "Dev Mode",
-    email: googleAuthOk ? undefined : "local",
+    displayName: authOk ? undefined : "Dev Mode",
+    email: authOk ? undefined : "local",
     picture: undefined,
   };
   next();
@@ -159,22 +209,41 @@ app.use((req, _res, next) => {
 // AUTH ROUTES
 // ============================================================
 
-if (googleAuthOk) {
+if (authOk) {
   app.get("/login", (req, res) => {
-    res.render("login", { title: "Login — Sprint Monitor", query: { error: req.query.error } });
+    res.render("login", {
+      title: "Login — Sprint Monitor",
+      query: { error: req.query.error },
+      googleAuthOk,
+      msAuthOk,
+    });
   });
 
-  app.get("/auth/google", passport.authenticate("google", {
-    scope: ["profile", "email"],
-    prompt: "select_account",
-  }));
+  // --- Google ---
+  if (googleAuthOk) {
+    app.get("/auth/google", passport.authenticate("google", {
+      scope: ["profile", "email"],
+      prompt: "select_account",
+    }));
 
-  app.get("/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/login?error=auth_failed" }),
-    (_req, res) => {
-      res.redirect("/");
-    }
-  );
+    app.get("/auth/google/callback",
+      passport.authenticate("google", { failureRedirect: "/login?error=auth_failed" }),
+      (_req, res) => { res.redirect("/"); }
+    );
+  }
+
+  // --- Microsoft (Azure AD) ---
+  if (msAuthOk) {
+    app.get("/auth/microsoft", passport.authenticate("microsoft", {
+      scope: ["user.read", "openid", "profile", "email"],
+      prompt: "select_account",
+    }));
+
+    app.get("/auth/microsoft/callback",
+      passport.authenticate("microsoft", { failureRedirect: "/login?error=ms_auth_failed" }),
+      (_req, res) => { res.redirect("/"); }
+    );
+  }
 
   app.get("/logout", (req, res, next) => {
     req.logout((err) => {
@@ -185,18 +254,18 @@ if (googleAuthOk) {
     });
   });
 } else {
-  // Dev mode: redirect /login to home
+  // Dev mode: no auth required
   app.get("/login", (_req, res) => res.redirect("/"));
   app.get("/logout", (_req, res) => res.redirect("/"));
 }
 
 // ============================================================
-// PROTECTED ROUTES
+// PROTECTED ROUTES (web UI + JSON APIs)
 // ============================================================
 
 app.use("/", requireAuth, webRouter);
 
-// Health check (unprotected)
+// Health check (unprotected — for uptime monitoring)
 app.get("/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
@@ -209,20 +278,22 @@ app.get("/health", (_req, res) => {
 if (!process.env.VERCEL && !process.env.NOW_REGION) {
   app.listen(PORT, () => {
     console.log(`\n🚀 Sprint Monitor web app running at http://localhost:${PORT}`);
-    console.log(`   Open http://localhost:${PORT} in your browser`);
 
-    if (!googleAuthOk) {
-      console.log(`\n⚠️  Google OAuth not configured — running in dev mode (no auth required).`);
-      console.log(`   To enable Google OAuth, set in your .env file:`);
-      console.log(`     GOOGLE_CLIENT_ID=your-client-id-here`);
-      console.log(`     GOOGLE_CLIENT_KEY=your-client-key-here`);
-      console.log(`     GOOGLE_CALLBACK_URL=${googleCallbackUrl}`);
-      console.log(`   1. Go to https://console.cloud.google.com/apis/credentials`);
-      console.log(`   2. Create OAuth 2.0 Client ID (Web application)`);
-      console.log(`   3. Add Authorized redirect URI: ${googleCallbackUrl}`);
-      console.log(`   4. Copy credentials to your .env file\n`);
+    if (!authOk) {
+      console.log(`\n⚠️  No OAuth configured — running in dev mode (no auth required).`);
+      console.log(`   To enable Microsoft (Azure AD) OAuth, set in your .env file:`);
+      console.log(`     MICROSOFT_CLIENT_ID=your-app-id`);
+      console.log(`     MICROSOFT_CLIENT_SECRET=your-secret`);
+      console.log(`     MICROSOFT_TENANT=common-or-tenant-guid`);
+      console.log(`     MICROSOFT_CALLBACK_URL=http://localhost:${PORT}/auth/microsoft/callback`);
+      console.log(`   1. Go to https://portal.azure.com → App registrations → New registration`);
+      console.log(`   2. Add Redirect URI: http://localhost:${PORT}/auth/microsoft/callback`);
+      console.log(`   3. API permissions: Microsoft Graph → User.Read, openid, profile, email`);
+      console.log(`   4. Certificates & secrets → New client secret → copy value`);
+      console.log(`   5. Copy credentials to .env\n`);
     } else {
-      console.log(`   ✅ Google OAuth configured — @${allowedDomain} accounts only\n`);
+      if (msAuthOk) console.log(`   ✅ Microsoft OAuth configured — tenant: ${msTenant}`);
+      if (googleAuthOk) console.log(`   ✅ Google OAuth configured — @${allowedDomain} only`);
     }
   });
 }

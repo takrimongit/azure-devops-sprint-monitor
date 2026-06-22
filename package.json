@@ -26,7 +26,8 @@
     "nodemailer": "^8.0.10",
     "openai": "^6.41.0",
     "passport": "^0.7.0",
-    "passport-google-oauth20": "^2.0.0"
+    "passport-google-oauth20": "^2.0.0",
+    "passport-microsoft": "^2.1.0"
   },
   "devDependencies": {
     "@types/connect-sqlite3": "^0.9.6",
@@ -36,6 +37,7 @@
     "@types/nodemailer": "^8.0.0",
     "@types/passport": "^1.0.17",
     "@types/passport-google-oauth20": "^2.0.17",
+    "@types/passport-microsoft": "^2.1.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }
