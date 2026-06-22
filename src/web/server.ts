@@ -1,12 +1,11 @@
 import express from "express";
-import session from "express-session";
+import cookieSession from "cookie-session";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { Strategy as MicrosoftStrategy } from "passport-microsoft";
 import * as path from "path";
 import * as fs from "fs";
 import dotenv from "dotenv";
-import ConnectSqlite3 from "connect-sqlite3";
 import { router as webRouter } from "./routes";
 
 const isServerless = !!(process.env.VERCEL || process.env.NOW_REGION);
@@ -48,14 +47,13 @@ const msAuthOk = !!(msClientId && msClientSecret);
 // Any auth configured?
 const authOk = googleAuthOk || msAuthOk;
 
-const sessionKey = env("SESSION_KEY", "dev-session-" + Date.now());
+// Session secret — must be a stable string, not Date.now()
+const sessionKey = env("SESSION_KEY", "dev-session-key-change-me");
 
-// Session store: use SQLite locally (persists across restarts),
-// but on Vercel/serverless use default MemoryStore (filesystem is read-only).
-// To survive across serverless invocations we serialize the FULL user object
-// into the session cookie, not just an ID lookup into the in-memory Map.
+// ============================================================
+// USER TYPE
+// ============================================================
 
-// Generic user store (only used in non-serverless mode)
 interface AppUser {
   id: string;
   displayName: string;
@@ -64,10 +62,8 @@ interface AppUser {
   provider: "google" | "microsoft";
 }
 
-const users = new Map<string, AppUser>();
-
 // ============================================================
-// GOOGLE OAUTH STRATEGY
+// OAUTH STRATEGIES
 // ============================================================
 
 if (googleAuthOk) {
@@ -93,18 +89,10 @@ if (googleAuthOk) {
         provider: "google",
       };
 
-      users.set(user.id, user);
       return done(null, user);
     }
   ));
 }
-
-// ============================================================
-// MICROSOFT (AZURE AD) OAUTH STRATEGY
-// ============================================================
-// passport-microsoft uses the Microsoft identity platform v2.0 endpoint.
-// Tenant can be "common" (all accounts), "organizations" (work/school only),
-// or a specific tenant GUID for single-tenant apps.
 
 if (msAuthOk) {
   passport.use("microsoft", new MicrosoftStrategy(
@@ -115,8 +103,8 @@ if (msAuthOk) {
       tenant: msTenant,
     } as any,
     (_accessToken: string, _refreshToken: string, profile: any, done: any) => {
-      const email = profile?.emails?.[0]?.value ?? profile?.upn ?? "";
-      const displayName = profile?.displayName ?? profile?.name?.familyName ?? "Microsoft User";
+      const email = profile?.emails?.[0]?.value ?? profile?._json?.upn ?? "";
+      const displayName = profile?.displayName ?? profile?._json?.displayName ?? "Microsoft User";
 
       const user: AppUser = {
         id: `microsoft:${profile?.id ?? email}`,
@@ -125,7 +113,6 @@ if (msAuthOk) {
         provider: "microsoft",
       };
 
-      users.set(user.id, user);
       return done(null, user);
     }
   ));
@@ -135,18 +122,13 @@ if (msAuthOk) {
 // PASSPORT SERIALIZE / DESERIALIZE
 // ============================================================
 
-// Serialize the FULL user object into the session.
-// On serverless (Vercel) the in-memory Map is lost between invocations,
-// so we can't do an ID lookup — store everything in the session.
+// With cookie-session, the full user object is serialized into the cookie.
+// Passport stores whatever we pass to done(null, ...) in req.session.passport.user.
 passport.serializeUser((user: any, done) => {
   done(null, user as AppUser);
 });
 
 passport.deserializeUser((user: AppUser, done) => {
-  // On non-serverless, also update the in-memory store
-  if (!isServerless && user?.id) {
-    users.set(user.id, user);
-  }
   done(null, user ?? null);
 });
 
@@ -157,28 +139,19 @@ passport.deserializeUser((user: AppUser, done) => {
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "..", "..", "views"));
 
-// Session configuration
-const sessionConfig: session.SessionOptions = {
-  secret: sessionKey,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: isServerless, // HTTPS on Vercel, HTTP locally
-    maxAge: 24 * 60 * 60 * 1000, // 24 hours
-    httpOnly: true,
-  },
-};
+// cookie-session stores the entire session in an encrypted HTTP-only cookie.
+// This is essential for Vercel serverless — no server-side storage needed,
+// sessions survive across cold starts and different function instances.
+app.use(cookieSession({
+  name: "sprint-session",
+  keys: [sessionKey],
+  maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  httpOnly: true,
+  secure: isServerless, // HTTPS on Vercel, HTTP locally
+  sameSite: "lax", // Allow cookie on redirect back from OAuth provider
+}));
 
-if (!isServerless) {
-  // Local: use SQLite store for persistence across restarts
-  const sessionsDir = path.join(__dirname, "..", "..", ".sessions");
-  if (!fs.existsSync(sessionsDir)) {
-    fs.mkdirSync(sessionsDir, { recursive: true });
-  }
-  sessionConfig.store = new (ConnectSqlite3(session))({ dir: sessionsDir }) as any;
-}
-
-app.use(session(sessionConfig));
+// Passport needs to read/write the session — register after cookie-session
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -264,9 +237,9 @@ if (authOk) {
   app.get("/logout", (req, res, next) => {
     req.logout((err) => {
       if (err) return next(err);
-      req.session.destroy(() => {
-        res.redirect("/login");
-      });
+      // Clear the cookie-session
+      res.clearCookie("sprint-session");
+      res.redirect("/login");
     });
   });
 } else {
@@ -291,26 +264,17 @@ app.get("/health", (_req, res) => {
 app.use("/", requireAuth, webRouter);
 
 // ============================================================
-// START SERVER
+// START SERVER (local only — Vercel uses serverless function)
 // ============================================================
 
-// Only start listening if not in a serverless environment (Vercel, etc.)
-if (!process.env.VERCEL && !process.env.NOW_REGION) {
+if (!isServerless) {
   app.listen(PORT, () => {
     console.log(`\n🚀 Sprint Monitor web app running at http://localhost:${PORT}`);
 
     if (!authOk) {
       console.log(`\n⚠️  No OAuth configured — running in dev mode (no auth required).`);
-      console.log(`   To enable Microsoft (Azure AD) OAuth, set in your .env file:`);
-      console.log(`     MICROSOFT_CLIENT_ID=your-app-id`);
-      console.log(`     MICROSOFT_CLIENT_SECRET=your-secret`);
-      console.log(`     MICROSOFT_TENANT=common-or-tenant-guid`);
-      console.log(`     MICROSOFT_CALLBACK_URL=http://localhost:${PORT}/auth/microsoft/callback`);
-      console.log(`   1. Go to https://portal.azure.com → App registrations → New registration`);
-      console.log(`   2. Add Redirect URI: http://localhost:${PORT}/auth/microsoft/callback`);
-      console.log(`   3. API permissions: Microsoft Graph → User.Read, openid, profile, email`);
-      console.log(`   4. Certificates & secrets → New client secret → copy value`);
-      console.log(`   5. Copy credentials to .env\n`);
+      console.log(`   Set MICROSOFT_CLIENT_ID, MICROSOFT_CLIENT_SECRET, MICROSOFT_TENANT,`);
+      console.log(`   MICROSOFT_CALLBACK_URL in .env to enable Microsoft OAuth.\n`);
     } else {
       if (msAuthOk) console.log(`   ✅ Microsoft OAuth configured — tenant: ${msTenant}`);
       if (googleAuthOk) console.log(`   ✅ Google OAuth configured — @${allowedDomain} only`);
