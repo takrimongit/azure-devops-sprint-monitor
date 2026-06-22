@@ -9,6 +9,8 @@ import dotenv from "dotenv";
 import ConnectSqlite3 from "connect-sqlite3";
 import { router as webRouter } from "./routes";
 
+const isServerless = !!(process.env.VERCEL || process.env.NOW_REGION);
+
 // Load environment variables
 const envPath = path.resolve(__dirname, "..", "..", ".env");
 if (fs.existsSync(envPath)) {
@@ -48,10 +50,12 @@ const authOk = googleAuthOk || msAuthOk;
 
 const sessionKey = env("SESSION_KEY", "dev-session-" + Date.now());
 
-// Session store using SQLite (persists across server restarts)
-const SQLiteStore = ConnectSqlite3(session);
+// Session store: use SQLite locally (persists across restarts),
+// but on Vercel/serverless use default MemoryStore (filesystem is read-only).
+// To survive across serverless invocations we serialize the FULL user object
+// into the session cookie, not just an ID lookup into the in-memory Map.
 
-// Generic user store
+// Generic user store (only used in non-serverless mode)
 interface AppUser {
   id: string;
   displayName: string;
@@ -131,12 +135,18 @@ if (msAuthOk) {
 // PASSPORT SERIALIZE / DESERIALIZE
 // ============================================================
 
+// Serialize the FULL user object into the session.
+// On serverless (Vercel) the in-memory Map is lost between invocations,
+// so we can't do an ID lookup — store everything in the session.
 passport.serializeUser((user: any, done) => {
-  done(null, (user as AppUser).id);
+  done(null, user as AppUser);
 });
 
-passport.deserializeUser((id: string, done) => {
-  const user = users.get(id);
+passport.deserializeUser((user: AppUser, done) => {
+  // On non-serverless, also update the in-memory store
+  if (!isServerless && user?.id) {
+    users.set(user.id, user);
+  }
   done(null, user ?? null);
 });
 
@@ -147,22 +157,28 @@ passport.deserializeUser((id: string, done) => {
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "..", "..", "views"));
 
-const sessionsDir = path.join(__dirname, "..", "..", ".sessions");
-if (!fs.existsSync(sessionsDir)) {
-  fs.mkdirSync(sessionsDir, { recursive: true });
-}
-
-app.use(session({
-  store: new SQLiteStore({ dir: sessionsDir }) as any,
+// Session configuration
+const sessionConfig: session.SessionOptions = {
   secret: sessionKey,
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false,
+    secure: isServerless, // HTTPS on Vercel, HTTP locally
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
     httpOnly: true,
   },
-}));
+};
+
+if (!isServerless) {
+  // Local: use SQLite store for persistence across restarts
+  const sessionsDir = path.join(__dirname, "..", "..", ".sessions");
+  if (!fs.existsSync(sessionsDir)) {
+    fs.mkdirSync(sessionsDir, { recursive: true });
+  }
+  sessionConfig.store = new (ConnectSqlite3(session))({ dir: sessionsDir }) as any;
+}
+
+app.use(session(sessionConfig));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -260,15 +276,19 @@ if (authOk) {
 }
 
 // ============================================================
+// HEALTH CHECK (unprotected — for uptime monitoring)
+// Registered BEFORE requireAuth so it's always accessible.
+// ============================================================
+
+app.get("/health", (_req, res) => {
+  res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+// ============================================================
 // PROTECTED ROUTES (web UI + JSON APIs)
 // ============================================================
 
 app.use("/", requireAuth, webRouter);
-
-// Health check (unprotected — for uptime monitoring)
-app.get("/health", (_req, res) => {
-  res.json({ status: "ok", timestamp: new Date().toISOString() });
-});
 
 // ============================================================
 // START SERVER
