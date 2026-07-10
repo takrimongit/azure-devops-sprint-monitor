@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "Sprint Health",
+    "slug": "sprint-monitor-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#02292E",
+    "splash": {
+      "backgroundColor": "#02292E",
+      "resizeMode": "contain"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "io.helpables.sprinthealth"
+    },
+    "android": {
+      "package": "io.helpables.sprinthealth"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
